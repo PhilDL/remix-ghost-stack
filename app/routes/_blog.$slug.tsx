@@ -159,7 +159,7 @@ export async function loader({ request, params }: LoaderArgs) {
   const res = await getPostOrPage(
     {
       slug: params.slug,
-      transform: "html", 
+      transform: "html",
       // you can also ask for the markdown version
     } as const,
     await auth.isAuthenticated(request)
@@ -264,7 +264,7 @@ export default function PostOrPage() {
                 ) : (
                   <>
                     <LinkButton
-                      to="/signup"
+                      to="/join"
                       variant={"codingdodo"}
                       className="no-underline"
                     >

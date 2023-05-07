@@ -8,6 +8,7 @@ import invariant from "tiny-invariant";
 import * as z from "zod";
 import { env } from "~/env";
 
+import { getMemberActiveSubscriptions } from "../services/ghost.server";
 import {
   convertPostToMarkdown,
   membersContentParser,
@@ -21,13 +22,7 @@ export const inputGetPostOrPage = z.object({
 
 export const optionalUser = z
   .object({
-    subscriptions: z.array(
-      z.object({
-        tier: z.object({
-          slug: z.string(),
-        }),
-      })
-    ),
+    id: z.string().nonempty(),
   })
   .nullable();
 
@@ -88,12 +83,13 @@ export const getPostOrPage = makeDomainFunction(
       if (!optionalUser) {
         restricted = true;
       } else {
+        const subscriptions = await getMemberActiveSubscriptions(
+          optionalUser.id
+        );
         if (
-          optionalUser.subscriptions.length > 0 &&
+          subscriptions.length > 0 &&
           post.tiers.filter((tier) =>
-            optionalUser.subscriptions
-              .map((s) => s.tier?.slug)
-              .includes(tier.slug)
+            subscriptions.map((s) => s.tier?.slug).includes(tier.slug)
           )
         ) {
           restricted = false;
