@@ -1,7 +1,7 @@
 import { Tag } from "./tag";
 import { Link } from "@remix-run/react";
 import type { Tag as TTag } from "@ts-ghost/content-api";
-import { ArrowRight } from "react-feather";
+import { ArrowRight } from "lucide-react";
 
 export type TagsSectionProps = {
   className?: string;

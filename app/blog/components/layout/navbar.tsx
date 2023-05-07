@@ -53,6 +53,15 @@ import type { MemberSession } from "~/blog/services/auth.server";
 
 const themes = [Theme.LIGHT, Theme.DARK];
 
+const mainMenu = {
+  label: "OWL",
+  image: "https://codingdodo.com/content/images/2021/05/tag-owl.png",
+  description: "Compilation of articles about OWL the Odoo Web Library starting from Odoo 14 onwards."
+}
+const menus = [
+
+]
+
 export const Navbar = ({
   settings,
   user,
@@ -103,15 +112,14 @@ export const Navbar = ({
                           className="flex w-full items-center justify-center"
                         >
                           <img
-                            src="https://codingdodo.com/content/images/2021/05/tag-owl.png"
-                            alt="OWL"
+                            src={mainMenu.image}
+                            alt={mainMenu.label}
                             className="max-h-24"
                           />
                         </AspectRatio>
-                        <div className="mb-2 mt-4 text-lg font-medium">OWL</div>
+                        <div className="mb-2 mt-4 text-lg font-medium">{mainMenu.label}</div>
                         <p className="text-sm leading-tight text-muted-foreground">
-                          Compilation of articles about OWL the Odoo Web Library
-                          starting from Odoo 14 onwards.
+                          {mainMenu.description}
                         </p>
                       </NavLink>
                     </NavigationMenuLink>
@@ -164,7 +172,7 @@ export const Navbar = ({
           </SheetTrigger>
           <SheetContent position="right" size={"xl"}>
             <SheetHeader>
-              <SheetTitle>CodingDodo</SheetTitle>
+              <SheetTitle>{settings.title}</SheetTitle>
               <SheetDescription>{settings.description}</SheetDescription>
             </SheetHeader>
             <ScrollArea className="h-[80%] w-full">
@@ -177,15 +185,14 @@ export const Navbar = ({
                     >
                       <div className="flex items-center justify-center">
                         <img
-                          src="https://codingdodo.com/content/images/2021/05/tag-owl.png"
-                          alt="OWL"
-                          className="max-h-24"
-                        />
+                            src={mainMenu.image}
+                            alt={mainMenu.label}
+                            className="max-h-24"
+                          />
                       </div>
-                      <div className="mb-2 mt-4 text-lg font-medium">OWL</div>
+                      <div className="mb-2 mt-4 text-lg font-medium">{mainMenu.label}</div>
                       <p className="text-sm leading-tight text-muted-foreground">
-                        Compilation of articles about OWL the Odoo Web Library
-                        starting from Odoo 14 onwards.
+                        {mainMenu.description}
                       </p>
                     </NavLink>
                   </div>

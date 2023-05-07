@@ -1,4 +1,5 @@
 import React from "react";
+import { Button, Input } from "~/ui/components";
 import { cn } from "~/ui/utils";
 
 export type HeroProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -6,13 +7,13 @@ export type HeroProps = React.HTMLAttributes<HTMLDivElement> & {
   description: string;
   showForm?: boolean;
   backdropBlur?: boolean;
+  image?: string;
 };
 const Hero = React.forwardRef<HTMLDivElement, HeroProps>(
   (
-    { className, title, showForm, backdropBlur, description, ...props },
+    { className, title, showForm, backdropBlur, description, image, ...props },
     ref
   ) => {
-    // let bgClassName = "bg-gradient-to-br from-cornflower-500 to-pink-500";
     return (
       <div
         className={cn(
@@ -21,6 +22,9 @@ const Hero = React.forwardRef<HTMLDivElement, HeroProps>(
         )}
         ref={ref}
         {...props}
+        style={image && {
+          backgroundImage: `url(${image})`,
+        } || {}}
       >
         <div
           className={cn(
@@ -29,23 +33,23 @@ const Hero = React.forwardRef<HTMLDivElement, HeroProps>(
           )}
         >
           <h1 className="text-center text-2xl font-extrabold">{title}</h1>
-          <p className="max-w-[25rem] text-center">{description}</p>
+          <p className="text-center">{description}</p>
           {showForm && (
             <form className="flex flex-col justify-center gap-3 rounded bg-white p-2 sm:flex-row sm:justify-between">
-              <input
+              <Input
                 type="text"
-                className="rounded border-none px-3 py-2 text-gray-500 outline-none"
+                className="w-full rounded border-none"
                 placeholder="Your email address"
               />
-              <button
-                className="rounded bg-gradient-to-r from-cornflower-500 to-pink-500 
-            px-6 py-3 text-sm 
-             font-semibold uppercase
+              <Button
+                className="w-52 rounded bg-gradient-to-r from-cornflower-500 
+            to-pink-500 px-6 py-3 
+             text-sm font-semibold uppercase
             text-white hover:from-pink-500 hover:to-cornflower-500 hover:transition-all hover:duration-300 sm:px-12"
                 type="submit"
               >
                 Join Now
-              </button>
+              </Button>
             </form>
           )}
         </div>

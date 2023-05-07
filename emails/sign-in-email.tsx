@@ -24,12 +24,12 @@ interface SignInEmailProps {
 }
 
 export const SignInEmail = ({
-  appName = "Sign in to Coding Dodo - Odoo, Python & JavaScript Tutorials",
+  appName = "Remix Ghost Stack",
   magicLink = "https://codingdodo.com",
   loginCode = "GV4FQG",
   accentColor = "#c61bb2",
   logo = "https://codingdodo.com/content/images/size/w300/2021/04/Coding-Dodo.png",
-  appDescription = "CodingDodo is a platform for developers to share their knowledge and connect with other developers.",
+  appDescription = "Remix Ghost Stack is a platform for developers to share their knowledge and connect with other developers.",
 }: SignInEmailProps) => (
   <Html>
     <Head />

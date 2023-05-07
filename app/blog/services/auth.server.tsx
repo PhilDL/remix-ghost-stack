@@ -54,11 +54,11 @@ auth.use(
         });
       },
       sendCode: async ({ email, code, magicLink, user, form, request }) => {
-        const sender = {
-          name: "CodingDodo",
-          email: "contact@codingdodo.com",
-        };
         const settings = await getSiteSettings();
+        const sender = {
+          name: settings.title,
+          email: settings.members_support_address,
+        };
         const to = [{ email }];
         let subject = "";
         let htmlContent = "";

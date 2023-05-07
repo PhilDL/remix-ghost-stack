@@ -36,6 +36,7 @@ export default function Index() {
         title={`Sign up to ${settings.title}!`}
         description={settings.description}
         showForm={true}
+        image={settings.cover_image ?? undefined}
       />
       <div className="flex flex-col gap-8 lg:flex lg:flex-row">
         <PostsList posts={posts} pagination={pagination} />

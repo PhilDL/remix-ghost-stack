@@ -1,7 +1,7 @@
 import { Author } from "./author";
 import { Link } from "@remix-run/react";
 import type { Author as TAuthor } from "@ts-ghost/content-api";
-import { ArrowRight } from "react-feather";
+import { ArrowRight } from "lucide-react";
 
 export type AuthorsSectionProps = {
   className?: string;

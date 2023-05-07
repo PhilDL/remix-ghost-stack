@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import { Facebook, GitHub, Linkedin, Rss, Twitter } from "react-feather";
+import { Facebook, Github, Linkedin, Rss, Twitter } from "lucide-react";
 
 export type SocialLinksProps = {
   className?: string;
@@ -52,7 +52,7 @@ export const SocialLinks = ({
           to={github}
           className="flex h-8 w-8 items-center justify-center rounded bg-gray-800 hover:bg-gray-600"
         >
-          <GitHub className="h-4 w-4 text-white" />
+          <Github className="h-4 w-4 text-white" />
           <span className="sr-only">GitHub Organization</span>
         </Link>
       )}

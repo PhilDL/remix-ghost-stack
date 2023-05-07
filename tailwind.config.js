@@ -10,7 +10,7 @@ module.exports = {
         current: 'current="page"',
       },
       fontFamily: {
-        sans: ["Inter", ...defaultTheme.fontFamily.sans],
+        sans: ["Rubik", ...defaultTheme.fontFamily.sans],
       },
       keyframes: {
         "accordion-down": {

@@ -67,7 +67,7 @@ export const PostPreview = ({ post }: { post: TPostPreview }) => {
         {post.primary_author && (
           <Link
             to={`/author/${post.primary_author.slug}`}
-            className="group flex"
+            className="group flex justify-self-end"
           >
             <img
               src={post.primary_author.profile_image || ""}
