@@ -1,0 +1,14 @@
+.react-email
+node_modules
+ingest
+/ingest
+/build
+/public/build
+.env
+
+/prisma/data.db
+/prisma/data.db-journal
+
+/app/styles/tailwind.css
+
+/playwright-report
