@@ -14,7 +14,7 @@ kill_timeout = "5s"
   auto_rollback = true
 
 [[mounts]]
-  source = "data_machines"
+  source = "data"
   destination = "/data"
   processes = ["app"]
 
