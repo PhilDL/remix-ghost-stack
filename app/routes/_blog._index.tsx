@@ -40,7 +40,7 @@ export default function Index() {
       />
       <div className="flex flex-col gap-8 lg:flex lg:flex-row">
         <PostsList posts={posts} pagination={pagination} />
-        <aside className="flex flex-col gap-8 lg:max-w-[25%] lg:flex-col">
+        <aside className="flex flex-col gap-8 lg:min-w-[25%] lg:max-w-[25%] lg:flex-col xl:min-w-[25%]">
           <SiteDescription
             settings={settings}
             className="lg:mt-8"

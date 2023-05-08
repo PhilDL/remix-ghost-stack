@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, Input } from "~/ui/components";
 import { cn } from "~/ui/utils";
+
+import { Button, Input } from "~/ui/components";
 
 export type HeroProps = React.HTMLAttributes<HTMLDivElement> & {
   title: string;
@@ -17,14 +18,17 @@ const Hero = React.forwardRef<HTMLDivElement, HeroProps>(
     return (
       <div
         className={cn(
-          "align-center flex flex-col items-center justify-center rounded  px-4 py-12 bg-gradient-to-br via-cornflower-500 from-saffron-500 to-pink-500",
+          "align-center flex flex-col items-center justify-center rounded  px-4 py-12 bg-gradient-to-br via-blue-800 from-saffron-500 to-pink-500",
           className
         )}
         ref={ref}
         {...props}
-        style={image && {
-          backgroundImage: `url(${image})`,
-        } || {}}
+        style={
+          (image && {
+            backgroundImage: `url(${image})`,
+          }) ||
+          {}
+        }
       >
         <div
           className={cn(
@@ -42,10 +46,10 @@ const Hero = React.forwardRef<HTMLDivElement, HeroProps>(
                 placeholder="Your email address"
               />
               <Button
-                className="w-52 rounded bg-gradient-to-r from-cornflower-500 
-            to-pink-500 px-6 py-3 
+                className="w-52 rounded bg-gradient-to-r from-blue-900 
+            to-teal-300 px-6 py-3 
              text-sm font-semibold uppercase
-            text-white hover:from-pink-500 hover:to-cornflower-500 hover:transition-all hover:duration-300 sm:px-12"
+            text-white hover:from-teal-300 hover:to-blue-900 hover:transition-all hover:duration-300 sm:px-12"
                 type="submit"
               >
                 Join Now

@@ -55,7 +55,7 @@ export const Footer = ({
               <ul className="flex-1 text-slate-400">
                 {settings.navigation.map((item) => (
                   <li key={item.url}>
-                    <Link to={item.url} className="hover:text-cornflower-500">
+                    <Link to={item.url} className="hover:text-blue-800">
                       {item.label}
                     </Link>
                   </li>
@@ -64,7 +64,7 @@ export const Footer = ({
               <ul className="flex-1 text-slate-400">
                 {settings.secondary_navigation.map((item) => (
                   <li key={item.url}>
-                    <Link to={item.url} className="hover:text-cornflower-500">
+                    <Link to={item.url} className="hover:text-blue-800">
                       {item.label}
                     </Link>
                   </li>
@@ -126,7 +126,7 @@ export const Footer = ({
                           navigation.formAction === "/join" &&
                           navigation.state === "submitting"
                         }
-                        className="rounded bg-gradient-to-r from-cornflower-500 to-pink-500 py-3 text-sm font-semibold uppercase text-white"
+                        className="rounded bg-gradient-to-r from-blue-900 to-teal-300 py-3 text-sm font-semibold uppercase text-white"
                       >
                         Join now
                       </Button>

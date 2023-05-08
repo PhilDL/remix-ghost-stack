@@ -42,7 +42,7 @@ export const ContextualPostsList = ({
               }}
             ></div>
             <div className="flex flex-1 flex-col justify-between gap-2">
-              <h3 className="text-md font-bold text-slate-600 group-hover:text-cornflower-500 dark:text-slate-300">
+              <h3 className="text-md font-bold text-accent-foreground group-hover:text-blue-800">
                 {post.title}
               </h3>
               <PublishedAt date={post.published_at || ""} />

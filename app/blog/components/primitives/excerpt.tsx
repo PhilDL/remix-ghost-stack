@@ -10,7 +10,7 @@ const Excerpt = React.forwardRef<HTMLParagraphElement, ExcerptProps>(
     const exerpt = `${custom_excerpt ?? excerpt.slice(0, 100)}...`;
     return (
       <p
-        className={cn("text-md text-slate-600 dark:text-slate-300", className)}
+        className={cn("text-md text-muted-foreground", className)}
         {...props}
         ref={ref}
       >

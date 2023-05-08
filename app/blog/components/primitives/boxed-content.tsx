@@ -6,10 +6,7 @@ export const BoxedContent = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => {
   return (
-    <section
-      className={cn("text-slate-500 dark:text-slate-300", className)}
-      {...props}
-    >
+    <section className={cn(className)} {...props}>
       {children}
     </section>
   );
@@ -31,7 +28,7 @@ export const BoxedContentTitle = ({
   return (
     <HeadingTag
       className={cn(
-        "rounded-t border-x border-t border-slate-200 py-3 text-center text-lg font-extrabold text-slate-600 dark:border-slate-800 dark:text-slate-100",
+        "rounded-t border-x border-t border-slate-100 py-3 text-center text-lg font-extrabold dark:border-slate-900 ",
         className
       )}
       {...props}
@@ -53,7 +50,7 @@ export const BoxedContentBody = ({
   return (
     <div
       className={cn(
-        "flex flex-col divide-y divide-slate-200 rounded-b border border-slate-200 dark:divide-slate-800 dark:border-slate-800",
+        "flex flex-col divide-y divide-slate-100 rounded-b border border-slate-100 dark:divide-slate-900 dark:border-slate-900 text-muted-foreground",
         className
       )}
       {...props}

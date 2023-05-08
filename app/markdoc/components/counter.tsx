@@ -15,7 +15,7 @@ export function Counter({ initialValue }: CounterProps) {
         <button
           onClick={() => setCount((current) => current - 1)}
           type="button"
-          className="border-bg-cornflower-600 rounded-lg bg-cornflower-500 px-4 py-1 text-white"
+          className="border-bg-cornflower-600 rounded-lg bg-blue-800 px-4 py-1 text-white"
         >
           Decrement
         </button>
@@ -25,7 +25,7 @@ export function Counter({ initialValue }: CounterProps) {
         <button
           onClick={() => setCount((current) => current + 1)}
           type="button"
-          className="border-bg-cornflower-600 rounded-lg bg-cornflower-500 px-3 py-1 text-white"
+          className="border-bg-cornflower-600 rounded-lg bg-blue-800 px-3 py-1 text-white"
         >
           Increment
         </button>

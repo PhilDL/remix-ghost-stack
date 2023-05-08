@@ -17,8 +17,6 @@ import {
 import { nameInitials } from "~/ui/utils";
 import { Theme, useTheme } from "~/ui/utils/theme-provider";
 
-import { ThemeToggle } from "~/ui/components/theme-toggle";
-import ThemeToggleIcon from "~/ui/components/theme-toggle-icon";
 import { Button } from "~/ui/components";
 import { Avatar, AvatarFallback, AvatarImage } from "~/ui/components/avatar";
 import {
@@ -48,19 +46,37 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "~/ui/components/sheet";
+import { ThemeToggle } from "~/ui/components/theme-toggle";
+import ThemeToggleIcon from "~/ui/components/theme-toggle-icon";
 
 import type { MemberSession } from "~/blog/services/auth.server";
 
 const themes = [Theme.LIGHT, Theme.DARK];
 
-const mainMenu = {
-  label: "OWL",
-  image: "https://codingdodo.com/content/images/2021/05/tag-owl.png",
-  description: "Compilation of articles about OWL the Odoo Web Library starting from Odoo 14 onwards."
-}
 const menus = [
-
-]
+  {
+    label: "TypeScript",
+    href: "/tag/typescript",
+    image:
+      "https://digitalpress.fra1.cdn.digitaloceanspaces.com/0bwz1yk/2023/05/ts-logo-512.png",
+    description: "Compilation of articles about TypeScript.",
+  },
+  {
+    label: "@ts-ghost",
+    href: "/tag/ts-ghost",
+    description: "@ts-ghost are Fully type safe tools for Ghost CMS.",
+  },
+  {
+    label: "Remix",
+    href: "/tag/remix",
+    description: "Remix is a modern React web framework.",
+  },
+  {
+    label: "JavaScript",
+    href: "/tag/javascript",
+    description: "Always bet on JavaScript",
+  },
+];
 
 export const Navbar = ({
   settings,
@@ -101,49 +117,55 @@ export const Navbar = ({
               <NavigationMenuTrigger>Collection</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                  <li className="row-span-3">
-                    <NavigationMenuLink asChild>
-                      <NavLink
-                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                        to="/tag/owl"
-                      >
-                        <AspectRatio
-                          ratio={4 / 3}
-                          className="flex w-full items-center justify-center"
+                  {menus.map((menu) => (
+                    <>
+                      {menu.image ? (
+                        <li className="row-span-3">
+                          <NavigationMenuLink asChild>
+                            <NavLink
+                              className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                              to={menu.href}
+                            >
+                              <AspectRatio
+                                ratio={4 / 3}
+                                className="flex w-full items-center justify-center"
+                              >
+                                <img
+                                  src={menu.image}
+                                  alt={menu.label}
+                                  className="max-h-24"
+                                />
+                              </AspectRatio>
+                              <div className="mb-2 mt-4 text-lg font-medium">
+                                {menu.label}
+                              </div>
+                              <p className="text-sm leading-tight text-muted-foreground">
+                                {menu.description}
+                              </p>
+                            </NavLink>
+                          </NavigationMenuLink>
+                        </li>
+                      ) : (
+                        <NavbarListItem
+                          to={menu.href}
+                          title="Odoo 16"
+                          key={menu.href}
                         >
-                          <img
-                            src={mainMenu.image}
-                            alt={mainMenu.label}
-                            className="max-h-24"
-                          />
-                        </AspectRatio>
-                        <div className="mb-2 mt-4 text-lg font-medium">{mainMenu.label}</div>
-                        <p className="text-sm leading-tight text-muted-foreground">
-                          {mainMenu.description}
-                        </p>
-                      </NavLink>
-                    </NavigationMenuLink>
-                  </li>
-                  <NavbarListItem to="/tag/odoo-16" title="Odoo 16">
-                    Articles about the latest Odoo version
-                  </NavbarListItem>
-                  <NavbarListItem to="/tag/javascript" title="JavaScript">
-                    Using the Odoo JavaScript Framework to build custom views
-                    and widgets.
-                  </NavbarListItem>
-                  <NavbarListItem to="/tag/odoo-15" title="Odoo 15">
-                    Articles about Odoo version 15
-                  </NavbarListItem>
+                          {menu.description}
+                        </NavbarListItem>
+                      )}
+                    </>
+                  ))}
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavLink to="/courses">
+              <NavLink to="/about">
                 <NavigationMenuLink
                   className={navigationMenuTriggerStyle()}
                   asChild
                 >
-                  <span>Courses</span>
+                  <span>About</span>
                 </NavigationMenuLink>
               </NavLink>
             </NavigationMenuItem>
@@ -177,42 +199,38 @@ export const Navbar = ({
             </SheetHeader>
             <ScrollArea className="h-[80%] w-full">
               <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                <li className="row-span-3">
-                  <div>
-                    <NavLink
-                      className="flex w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                      to="/tag/owl"
-                    >
-                      <div className="flex items-center justify-center">
-                        <img
-                            src={mainMenu.image}
-                            alt={mainMenu.label}
-                            className="max-h-24"
-                          />
-                      </div>
-                      <div className="mb-2 mt-4 text-lg font-medium">{mainMenu.label}</div>
-                      <p className="text-sm leading-tight text-muted-foreground">
-                        {mainMenu.description}
-                      </p>
-                    </NavLink>
-                  </div>
-                </li>
-                <NavbarListItemMobile to="/tag/odoo-16" title="Odoo 16">
-                  Articles about the latest Odoo version
-                </NavbarListItemMobile>
-                <NavbarListItemMobile to="/tag/javascript" title="JavaScript">
-                  Using the Odoo JavaScript Framework to build custom views and
-                  widgets.
-                </NavbarListItemMobile>
-                <NavbarListItemMobile to="/tag/odoo-15" title="Odoo 15">
-                  Articles about Odoo version 15
-                </NavbarListItemMobile>
-                <NavbarListItemMobile to="/courses" title="Courses">
-                  Full courses about OWL, JavaScript Odoo development
-                </NavbarListItemMobile>
-                <NavbarListItemMobile to="/contact" title="Contact">
-                  For business inquiries or just to say hello.
-                </NavbarListItemMobile>
+                {menus.map((menu) => (
+                  <>
+                    {menu.image ? (
+                      <li className="row-span-3">
+                        <div>
+                          <NavLink
+                            className="flex w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                            to={menu.href}
+                          >
+                            <div className="flex items-center justify-center">
+                              <img
+                                src={menu.image}
+                                alt={menu.label}
+                                className="max-h-24"
+                              />
+                            </div>
+                            <div className="mb-2 mt-4 text-lg font-medium">
+                              {menu.label}
+                            </div>
+                            <p className="text-sm leading-tight text-muted-foreground">
+                              {menu.description}
+                            </p>
+                          </NavLink>
+                        </div>
+                      </li>
+                    ) : (
+                      <NavbarListItemMobile to={menu.href} title={menu.label}>
+                        {menu.description}
+                      </NavbarListItemMobile>
+                    )}
+                  </>
+                ))}
               </ul>
             </ScrollArea>
 
