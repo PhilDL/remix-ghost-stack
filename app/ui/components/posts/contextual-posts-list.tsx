@@ -30,7 +30,7 @@ export const ContextualPostsList = ({
           <Link
             key={post.slug}
             to={`/${post.slug}`}
-            className="group flex flex-row gap-2 p-4 hover:bg-slate-50 dark:hover:bg-slate-900"
+            className="group flex flex-row gap-2 py-4 hover:bg-slate-50 dark:hover:bg-slate-900 lg:px-4"
           >
             <div
               className="h-20 w-20 rounded bg-cover bg-center"

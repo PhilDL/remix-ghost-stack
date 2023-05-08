@@ -50,6 +50,29 @@ export const Footer = ({
               rss="#"
             />
           </div>
+          <div className="text-left lg:flex lg:flex-1 lg:flex-col lg:gap-4">
+            <h3 className="font-bold text-white">Navigation</h3>
+            <div className="flex">
+              <ul className="flex-1 text-slate-400">
+                {settings.navigation.map((item) => (
+                  <li key={item.url}>
+                    <Link to={item.url} className="hover:text-link">
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <ul className="flex-1 text-slate-400">
+                {settings.secondary_navigation.map((item) => (
+                  <li key={item.url}>
+                    <Link to={item.url} className="hover:text-link">
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
           <div className="lg:flex-1">
             {!user && (
               <div className="flex">
@@ -114,29 +137,6 @@ export const Footer = ({
                 <div className="flex-1 lg:grow-0"></div>
               </div>
             )}
-          </div>
-          <div className="items-end text-right lg:flex lg:flex-1 lg:flex-col lg:gap-4">
-            <h3 className="font-bold text-white">Navigation</h3>
-            <div className="flex">
-              <ul className="flex-1 text-slate-400">
-                {settings.navigation.map((item) => (
-                  <li key={item.url}>
-                    <Link to={item.url} className="hover:text-link">
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <ul className="flex-1 text-slate-400">
-                {settings.secondary_navigation.map((item) => (
-                  <li key={item.url}>
-                    <Link to={item.url} className="hover:text-link">
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
         </div>
       </div>
