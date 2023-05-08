@@ -1,6 +1,6 @@
 import { type ActionArgs, type LoaderArgs } from "@remix-run/node";
 
-import { auth } from "~/blog/services/auth.server";
+import { auth } from "~/services/auth.server";
 
 export async function loader({ request }: LoaderArgs) {
   await auth.logout(request, { redirectTo: "/" });

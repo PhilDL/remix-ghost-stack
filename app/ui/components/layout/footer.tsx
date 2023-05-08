@@ -1,4 +1,3 @@
-import { SocialLinks } from "../primitives/social-links";
 import { Form, Link, useNavigation } from "@remix-run/react";
 import type { Settings } from "@ts-ghost/content-api";
 import { CheckCircle } from "lucide-react";
@@ -12,8 +11,9 @@ import {
   Input,
   Label,
 } from "~/ui/components";
+import { SocialLinks } from "~/ui/components/social-links";
 
-import type { MemberSession } from "~/blog/services/auth.server";
+import type { MemberSession } from "~/services/auth.server";
 
 export type FooterProps = {
   settings: Settings;
@@ -55,7 +55,7 @@ export const Footer = ({
               <ul className="flex-1 text-slate-400">
                 {settings.navigation.map((item) => (
                   <li key={item.url}>
-                    <Link to={item.url} className="hover:text-blue-800">
+                    <Link to={item.url} className="hover:text-link">
                       {item.label}
                     </Link>
                   </li>
@@ -64,7 +64,7 @@ export const Footer = ({
               <ul className="flex-1 text-slate-400">
                 {settings.secondary_navigation.map((item) => (
                   <li key={item.url}>
-                    <Link to={item.url} className="hover:text-blue-800">
+                    <Link to={item.url} className="hover:text-link">
                       {item.label}
                     </Link>
                   </li>

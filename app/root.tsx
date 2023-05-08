@@ -1,5 +1,5 @@
-import draculaStylesheetUrl from "./styles/dracula.css";
 import fontStylesheet from "./styles/fonts.css";
+import nordthemeStylesheet from "./styles/nordtheme.css";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import {
   json,
@@ -32,7 +32,7 @@ export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: fontStylesheet },
     { rel: "stylesheet", href: tailwindStylesheetUrl },
-    { rel: "stylesheet", href: draculaStylesheetUrl },
+    { rel: "stylesheet", href: nordthemeStylesheet },
     {
       rel: "icon",
       href: "https://codingdodo-staging.digitalpress.blog/content/images/size/w256h256/2021/04/small-logo.png",

@@ -1,8 +1,8 @@
 import { Link } from "@remix-run/react";
 import { ghostImage } from "~/ui/utils";
 
-import { BoxedContent } from "~/blog/components/primitives/boxed-content";
-import { PublishedAt } from "~/blog/components/primitives/published-at";
+import { BoxedContent } from "~/ui/components/boxed-content";
+import { PublishedAt } from "~/ui/components/published-at";
 
 export type ContextualPostsListProps = {
   className?: string;
@@ -42,7 +42,7 @@ export const ContextualPostsList = ({
               }}
             ></div>
             <div className="flex flex-1 flex-col justify-between gap-2">
-              <h3 className="text-md font-bold text-accent-foreground group-hover:text-blue-800">
+              <h3 className="text-md font-bold text-accent-foreground group-hover:text-link">
                 {post.title}
               </h3>
               <PublishedAt date={post.published_at || ""} />

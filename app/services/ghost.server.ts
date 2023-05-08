@@ -4,7 +4,7 @@ import { cachified, verboseReporter } from "cachified";
 import invariant from "tiny-invariant";
 import { env } from "~/env";
 
-import { cache } from "~/shared/cache.server";
+import { cache } from "~/services/cache.server";
 
 const api = new TSGhostContentAPI(
   env.GHOST_URL,

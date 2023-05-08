@@ -9,7 +9,7 @@ import {
 import type { Post } from "@ts-ghost/content-api";
 import { NodeHtmlMarkdown } from "node-html-markdown";
 
-import { scheme as counter } from "~/markdoc/components/counter";
+import { scheme as counter } from "~/services/markdoc/components/counter";
 
 const config = {
   tags: {

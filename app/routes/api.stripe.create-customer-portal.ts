@@ -1,8 +1,8 @@
 import { json, redirect, type DataFunctionArgs } from "@remix-run/node";
 import { createStripeCustomerPortalSession } from "~/services/stripe/create-customer-portal";
 
-import { auth } from "~/blog/services/auth.server";
-import { getMemberActiveSubscriptions } from "~/blog/services/ghost.server";
+import { auth } from "~/services/auth.server";
+import { getMemberActiveSubscriptions } from "~/services/ghost.server";
 
 export async function loader({ request }: DataFunctionArgs) {
   await auth.isAuthenticated(request, {

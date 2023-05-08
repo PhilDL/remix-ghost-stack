@@ -8,10 +8,11 @@ import type { CreativeWorkSeries } from "schema-dts";
 import invariant from "tiny-invariant";
 import type { loader as rootBlogLoader } from "~/routes/_blog";
 
-import { Hero } from "~/blog/components/layout/hero";
-import { PostsList } from "~/blog/components/posts/posts-list";
+import { Hero } from "~/ui/components/layout/hero";
+import { PostsList } from "~/ui/components/posts/posts-list";
+import { Tag } from "~/ui/components/tags/tag";
 
-import { getTagPage } from "~/blog/services/ghost.server";
+import { getTagPage } from "~/services/ghost.server";
 
 export const meta: V2_MetaFunction<
   typeof loader,
@@ -124,23 +125,22 @@ export default function Index() {
   const { posts, tag, pagination } = useLoaderData<typeof loader>();
   return (
     <main className="relative flex min-h-screen flex-col gap-6">
-      <Hero
-        title={`${tag.name}!`}
-        description={tag.description ?? ""}
-        style={{
-          backgroundImage: `url(${tag.feature_image})`,
-          backgroundSize: "contain",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundColor: tag.accent_color || "",
-        }}
-        backdropBlur={true}
-      />
+      <div className="mt-16 flex w-full max-w-5xl flex-row justify-start gap-3">
+        <img
+          src={tag.feature_image || "/images/ghost-logo.png"}
+          alt={tag.name}
+          className="rounded-md sm:h-32 sm:w-32"
+        />
+        <div>
+          <h1 className="text-3xl font-semibold">{tag.name}</h1>
+          <p className="text-muted-foreground">{tag.description}</p>
+        </div>
+      </div>
       <PostsList
         posts={posts}
         pagination={pagination}
         primaryTag={tag.slug}
-        className="mx-auto max-w-5xl"
+        className="max-w-5xl"
       />
     </main>
   );

@@ -22,8 +22,8 @@ import {
   Label,
 } from "~/ui/components";
 
-import { auth } from "~/blog/services/auth.server";
-import { getSession, sessionStorage } from "~/shared/session.server";
+import { auth } from "~/services/auth.server";
+import { getSession, sessionStorage } from "~/services/session.server";
 
 export async function loader({ request }: LoaderArgs) {
   await auth.isAuthenticated(request, { successRedirect: "/account" });

@@ -1,11 +1,11 @@
 import { Link } from "@remix-run/react";
 import type { Post } from "@ts-ghost/content-api";
 
-import { Excerpt } from "~/blog/components/primitives/excerpt";
-import { PublishedAt } from "~/blog/components/primitives/published-at";
 import { Badge } from "~/ui/components";
 import { AspectRatio } from "~/ui/components/aspect-ratio";
+import { Excerpt } from "~/ui/components/excerpt";
 import { GhostImage } from "~/ui/components/ghost-image";
+import { PublishedAt } from "~/ui/components/published-at";
 
 export type TPostPreview = Pick<
   Post,
@@ -44,8 +44,8 @@ export const PostPreview = ({ post }: { post: TPostPreview }) => {
               <Badge>{post.primary_tag.name}</Badge>
             </Link>
           )}{" "}
-          •{" "}
-          <span className="text-sm text-slate-500 dark:text-slate-400">
+          –{" "}
+          <span className="text-sm italic text-slate-500 dark:text-slate-400">
             {post.reading_time} min read
           </span>
         </div>
@@ -53,7 +53,7 @@ export const PostPreview = ({ post }: { post: TPostPreview }) => {
           to={`/${post.slug}`}
           className="group mb-1 text-slate-900 dark:text-slate-100 md:mb-0"
         >
-          <h2 className="font-bold text-slate-900 group-hover:text-blue-800  dark:text-slate-100 lg:text-2xl">
+          <h2 className="font-bold text-slate-900 group-hover:text-link  dark:text-slate-100 lg:text-2xl">
             {post.title}
           </h2>
         </Link>
@@ -69,11 +69,11 @@ export const PostPreview = ({ post }: { post: TPostPreview }) => {
           >
             <img
               src={post.primary_author.profile_image || ""}
-              className="h-8 w-8 rounded-full"
+              className="h-8 w-8 rounded-md"
               alt={post.primary_author.name}
             />
             <div className="flex flex-col">
-              <span className="ml-2 text-xs font-bold text-slate-500 group-hover:text-blue-800 dark:text-slate-400">
+              <span className="ml-2 text-xs font-bold text-slate-500 group-hover:text-link dark:text-slate-400">
                 {post.primary_author.name}
               </span>
               <PublishedAt date={post.published_at || ""} className="ml-2" />

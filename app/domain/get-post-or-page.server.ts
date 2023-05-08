@@ -13,7 +13,7 @@ import {
   convertPostToMarkdown,
   membersContentParser,
   parseMarkdown,
-} from "~/markdoc/services/markdown.server";
+} from "~/services/markdoc/markdown.server";
 
 export const inputGetPostOrPage = z.object({
   transform: z.union([z.literal("html"), z.literal("markdoc")]),
@@ -40,39 +40,52 @@ export const getPostOrPage = makeDomainFunction(
     env.GHOST_ADMIN_API_KEY,
     "v5.0"
   );
-  const [postQuery, featuredPostsQuery, latestPostsQuery] = await Promise.all([
-    admin.posts
-      .read({ slug })
-      .include({ tags: true, authors: true, tiers: true })
-      .formats({ html: true })
-      .fetch(),
-    api.posts
-      .browse({ limit: 5, filter: `featured:true+slug:-${slug}` })
-      .fields({
-        title: true,
-        slug: true,
-        feature_image: true,
-        published_at: true,
-      })
-      .fetch(),
-    api.posts
-      .browse({ limit: 3, filter: `featured:false+slug:-${slug}` })
-      .fields({
-        title: true,
-        slug: true,
-        feature_image: true,
-        published_at: true,
-      })
-      .fetch(),
-  ]);
-  invariant(postQuery.success, "Failed to fetch post");
+  const [postQuery, pageQuery, featuredPostsQuery, latestPostsQuery] =
+    await Promise.all([
+      admin.posts
+        .read({ slug })
+        .include({ tags: true, authors: true, tiers: true })
+        .formats({ html: true })
+        .fetch(),
+      admin.pages
+        .read({ slug })
+        .include({ tags: true, authors: true, tiers: true })
+        .formats({ html: true })
+        .fetch(),
+      api.posts
+        .browse({ limit: 5, filter: `featured:true+slug:-${slug}` })
+        .fields({
+          title: true,
+          slug: true,
+          feature_image: true,
+          published_at: true,
+        })
+        .fetch(),
+      api.posts
+        .browse({ limit: 3, filter: `featured:false+slug:-${slug}` })
+        .fields({
+          title: true,
+          slug: true,
+          feature_image: true,
+          published_at: true,
+        })
+        .fetch(),
+    ]);
+  if (!postQuery.success && !pageQuery.success) {
+    throw new Error("Post or page not found");
+  }
+  const post = postQuery.success
+    ? postQuery.data
+    : pageQuery.success
+    ? pageQuery.data
+    : undefined;
   invariant(featuredPostsQuery.success, "Failed to fetch featured posts");
   invariant(latestPostsQuery.success, "Failed to fetch latest posts");
-  const [post, featuredPosts, latestPosts] = [
-    postQuery.data,
+  const [featuredPosts, latestPosts] = [
     featuredPostsQuery.data,
     latestPostsQuery.data,
   ];
+  invariant(post, "Post or page not found");
   let restricted = post.visibility !== "public";
 
   switch (post.visibility) {
@@ -88,7 +101,7 @@ export const getPostOrPage = makeDomainFunction(
         );
         if (
           subscriptions.length > 0 &&
-          post.tiers.filter((tier) =>
+          post.tiers?.filter((tier) =>
             subscriptions.map((s) => s.tier?.slug).includes(tier.slug)
           )
         ) {

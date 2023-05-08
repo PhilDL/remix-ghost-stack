@@ -1,15 +1,15 @@
 import { json, type LoaderArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
-import { AuthorsSection } from "~/blog/components/authors/authors-section";
-import { Hero } from "~/blog/components/layout/hero";
-import { SiteDescription } from "~/blog/components/layout/site-description";
-import { ContextualPostsList } from "~/blog/components/posts/contextual-posts-list";
-import { PostsList } from "~/blog/components/posts/posts-list";
-import { TagsSection } from "~/blog/components/tags/tags-section";
+import { AuthorsSection } from "~/ui/components/authors/authors-section";
+import { Hero } from "~/ui/components/layout/hero";
+import { SiteDescription } from "~/ui/components/layout/site-description";
+import { ContextualPostsList } from "~/ui/components/posts/contextual-posts-list";
+import { PostsList } from "~/ui/components/posts/posts-list";
+import { TagsSection } from "~/ui/components/tags/tags-section";
 
-import { auth } from "~/blog/services/auth.server";
-import { cachedGetIndexPageData } from "~/blog/services/ghost.server";
+import { auth } from "~/services/auth.server";
+import { cachedGetIndexPageData } from "~/services/ghost.server";
 
 export async function loader({ request }: LoaderArgs) {
   const user = await auth.isAuthenticated(request);
@@ -33,7 +33,7 @@ export default function Index() {
   return (
     <main className="relative flex min-h-screen flex-col gap-6">
       <Hero
-        title={`Sign up to ${settings.title}!`}
+        title={settings.title}
         description={settings.description}
         showForm={true}
         image={settings.cover_image ?? undefined}

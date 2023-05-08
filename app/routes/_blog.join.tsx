@@ -11,8 +11,8 @@ import { inputFromFormData } from "domain-functions";
 import { CheckCircle, Loader, MailIcon } from "lucide-react";
 import { AuthenticityTokenInput, verifyAuthenticityToken } from "remix-utils";
 import type { loader as rootBlogLoader } from "~/routes/_blog";
-import type { UwrapJSONLoaderData } from "~/shared/types";
-import { useMatchesData } from "~/shared/utils";
+import type { UwrapJSONLoaderData } from "~/services/types";
+import { useMatchesData } from "~/services/utils";
 
 import {
   Alert,
@@ -32,14 +32,14 @@ import {
   CardTitle,
 } from "~/ui/components/card";
 
-import { createMember } from "~/blog/domain/create-member.server";
-import { auth } from "~/blog/services/auth.server";
+import { createMember } from "~/domain/create-member.server";
+import { auth } from "~/services/auth.server";
 import {
   addFlashMessage,
   commitFlashMessageSession,
   redirectWithFlashMessage,
-} from "~/shared/flash-message.server";
-import { getSession, sessionStorage } from "~/shared/session.server";
+} from "~/services/flash-message.server";
+import { getSession, sessionStorage } from "~/services/session.server";
 
 export async function loader({ request }: LoaderArgs) {
   await auth.isAuthenticated(request, { successRedirect: "/account" });

@@ -28,7 +28,7 @@ export const BoxedContentTitle = ({
   return (
     <HeadingTag
       className={cn(
-        "rounded-t border-x border-t border-slate-100 py-3 text-center text-lg font-extrabold dark:border-slate-900 ",
+        "rounded-t border-x border-t border-slate-100 py-3 text-left px-4 text-lg font-extrabold dark:border-slate-900 ",
         className
       )}
       {...props}

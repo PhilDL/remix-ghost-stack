@@ -7,19 +7,19 @@ import {
 } from "remix-utils";
 import type { WebSite } from "schema-dts";
 
-import { Footer } from "~/blog/components/layout/footer";
-import { Navbar } from "~/blog/components/layout/navbar";
+import { Footer } from "~/ui/components/layout/footer";
+import { Navbar } from "~/ui/components/layout/navbar";
 import { ToastAction } from "~/ui/components/toast";
 import { useToast } from "~/ui/hooks/use-toast";
 
-import { auth } from "~/blog/services/auth.server";
-import { cachedGetSiteSettings } from "~/blog/services/ghost.server";
+import { auth } from "~/services/auth.server";
 import {
   commitFlashMessageSession,
   getFlashMessageSession,
   type ToastMessage,
-} from "~/shared/flash-message.server";
-import { sessionStorage } from "~/shared/session.server";
+} from "~/services/flash-message.server";
+import { cachedGetSiteSettings } from "~/services/ghost.server";
+import { sessionStorage } from "~/services/session.server";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   const settings = data.settings;

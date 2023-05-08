@@ -26,7 +26,7 @@ export const ThemeToggleIcon = ({
         colorClassName = "text-saffron-500";
         break;
       case Theme.DARK:
-        colorClassName = "text-blue-800";
+        colorClassName = "text-link";
         break;
     }
   }

@@ -48,24 +48,6 @@ export async function action({ request }: DataFunctionArgs) {
         console.log("checkout.session.completed", session);
         const customerId = String(session.customer);
         const customerEmail = String(session.customer_email);
-        const subscriptionId = String(session.subscription);
-
-        // // Get user from database.
-        // const user = await getUserByCustomerId(customerId);
-        // if (!user) throw new Error("User not found.");
-
-        // // Retrieve and update database subscription.
-        // const subscription = await retrieveStripeSubscription(subscriptionId);
-        // await updateSubscriptionByUserId(user.id, {
-        //   id: subscription.id,
-        //   planId: String(subscription.items.data[0].plan.product),
-        //   priceId: String(subscription.items.data[0].price.id),
-        //   interval: String(subscription.items.data[0].plan.interval),
-        //   status: subscription.status,
-        //   currentPeriodStart: subscription.current_period_start,
-        //   currentPeriodEnd: subscription.current_period_end,
-        //   cancelAtPeriodEnd: subscription.cancel_at_period_end,
-        // });
 
         const api = new TSGhostAdminAPI(
           env.GHOST_URL,
@@ -102,37 +84,7 @@ export async function action({ request }: DataFunctionArgs) {
       case "customer.subscription.updated": {
         const subscription = event.data.object;
         console.log("customer.subscription.updated", subscription);
-        const customerId = String(subscription.customer);
-
-        // // Get user from database.
-        // const user = await getUserByCustomerId(customerId);
-        // if (!user) throw new Error("User not found.");
-
-        // // Cancel free subscription if user has a paid one.
-        // const subscriptionsList = await stripe.subscriptions.list({ limit: 3 });
-        // const freeSubscription = subscriptionsList.data
-        //   .map((subscription) => {
-        //     return subscription.items.data.find(
-        //       (item) => item.price.product === PlanId.FREE
-        //     );
-        //   })
-        //   .filter((item) => item !== undefined);
-
-        // if (freeSubscription[0]) {
-        //   await stripe.subscriptions.del(freeSubscription[0].subscription);
-        // }
-
-        // // Update database subscription.
-        // await updateSubscriptionByUserId(user.id, {
-        //   id: subscription.id,
-        //   planId: String(subscription.items.data[0].plan.product),
-        //   priceId: String(subscription.items.data[0].price.id),
-        //   interval: String(subscription.items.data[0].plan.interval),
-        //   status: subscription.status,
-        //   currentPeriodStart: subscription.current_period_start,
-        //   currentPeriodEnd: subscription.current_period_end,
-        //   cancelAtPeriodEnd: subscription.cancel_at_period_end,
-        // });
+        // const customerId = String(subscription.customer);
 
         return json({}, { status: 200 });
       }
@@ -141,14 +93,6 @@ export async function action({ request }: DataFunctionArgs) {
       case "customer.subscription.deleted": {
         const subscription = event.data.object;
         console.log("customer.subscription.deleted", subscription);
-
-        // // Get database subscription.
-        // const dbSubscription = await getSubscriptionById(subscription.id);
-
-        // if (dbSubscription) {
-        //   // Delete database subscription.
-        //   await deleteSubscriptionById(subscription.id);
-        // }
 
         return json({}, { status: 200 });
       }

@@ -4,7 +4,7 @@ import { verifyAuthenticityToken } from "remix-utils";
 import invariant from "tiny-invariant";
 import { env } from "~/env";
 
-import { getSession } from "~/shared/session.server";
+import { getSession } from "~/services/session.server";
 
 export async function action({ request }: ActionArgs) {
   const formData = await request.clone().formData();

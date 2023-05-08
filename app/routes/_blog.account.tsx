@@ -28,15 +28,15 @@ import {
 } from "~/ui/components/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/components/tabs";
 
-import { auth } from "~/blog/services/auth.server";
+import { auth } from "~/services/auth.server";
 import {
   cachedGetGhostTiers,
   getMember,
   getMemberActiveSubscriptions,
-} from "~/blog/services/ghost.server";
+} from "~/services/ghost.server";
+import { getSession } from "~/services/session.server";
 import { createCheckoutSession } from "~/services/stripe/checkout.server";
 import { getProductAndPriceByName } from "~/services/stripe/products.server";
-import { getSession } from "~/shared/session.server";
 
 export let loader = async ({ request }: LoaderArgs) => {
   // If the user is here, it's already authenticated, if not redirect them to

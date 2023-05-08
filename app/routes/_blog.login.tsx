@@ -33,13 +33,13 @@ import {
   CardTitle,
 } from "~/ui/components/card";
 
-import { verifyMember } from "~/blog/domain/verify-member.server";
-import { auth } from "~/blog/services/auth.server";
+import { verifyMember } from "~/domain/verify-member.server";
+import { auth } from "~/services/auth.server";
 import {
   addFlashMessage,
   commitFlashMessageSession,
-} from "~/shared/flash-message.server";
-import { getSession, sessionStorage } from "~/shared/session.server";
+} from "~/services/flash-message.server";
+import { getSession, sessionStorage } from "~/services/session.server";
 
 export async function loader({ request }: LoaderArgs) {
   await auth.isAuthenticated(request, { successRedirect: "/account" });

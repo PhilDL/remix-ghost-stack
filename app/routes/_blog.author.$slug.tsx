@@ -6,10 +6,10 @@ import {
 } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
-import { Hero } from "~/blog/components/layout/hero";
-import { PostsList } from "~/blog/components/posts/posts-list";
+import { Hero } from "~/ui/components/layout/hero";
+import { PostsList } from "~/ui/components/posts/posts-list";
 
-import { getAuthorPage } from "~/blog/services/ghost.server";
+import { getAuthorPage } from "~/services/ghost.server";
 
 export async function loader({ request, params }: LoaderArgs) {
   let slug = params.slug;
@@ -26,12 +26,22 @@ export default function Index() {
   const { posts, author, pagination } = useLoaderData<typeof loader>();
   return (
     <main className="relative flex min-h-screen flex-col gap-6">
-      <Hero title={`${author.name}`} description={author.bio ?? ""} />
+      <div className="mt-16 flex w-full max-w-5xl flex-row justify-start gap-3">
+        <img
+          src={author.profile_image || "/images/ghost-logo.png"}
+          alt={author.name}
+          className="rounded-md sm:h-32 sm:w-32"
+        />
+        <div>
+          <h1 className="text-3xl font-semibold">{author.name}</h1>
+          <p className="text-muted-foreground">{author.bio}</p>
+        </div>
+      </div>
       <PostsList
         posts={posts}
         pagination={pagination}
         primaryAuthor={author.slug}
-        className="mx-auto max-w-5xl"
+        className="max-w-5xl"
       />
     </main>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { NavbarListItem } from "./navbar-list-item";
 import { NavbarListItemMobile } from "./navbar-list-item-mobile";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
@@ -49,7 +49,7 @@ import {
 import { ThemeToggle } from "~/ui/components/theme-toggle";
 import ThemeToggleIcon from "~/ui/components/theme-toggle-icon";
 
-import type { MemberSession } from "~/blog/services/auth.server";
+import type { MemberSession } from "~/services/auth.server";
 
 const themes = [Theme.LIGHT, Theme.DARK];
 
@@ -118,7 +118,7 @@ export const Navbar = ({
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                   {menus.map((menu) => (
-                    <>
+                    <Fragment key={menu.href}>
                       {menu.image ? (
                         <li className="row-span-3">
                           <NavigationMenuLink asChild>
@@ -148,35 +148,29 @@ export const Navbar = ({
                       ) : (
                         <NavbarListItem
                           to={menu.href}
-                          title="Odoo 16"
+                          title={menu.label}
                           key={menu.href}
                         >
                           {menu.description}
                         </NavbarListItem>
                       )}
-                    </>
+                    </Fragment>
                   ))}
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavLink to="/about">
-                <NavigationMenuLink
-                  className={navigationMenuTriggerStyle()}
-                  asChild
-                >
-                  <span>About</span>
-                </NavigationMenuLink>
-              </NavLink>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuLink
-                className={navigationMenuTriggerStyle()}
-                asChild
-              >
-                <NavLink to="/contact">Contact</NavLink>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
+            {settings.navigation.map((item) => (
+              <NavigationMenuItem key={item.url}>
+                <NavLink to={item.url}>
+                  <NavigationMenuLink
+                    className={navigationMenuTriggerStyle()}
+                    asChild
+                  >
+                    <span>{item.label}</span>
+                  </NavigationMenuLink>
+                </NavLink>
+              </NavigationMenuItem>
+            ))}
           </NavigationMenuList>
           <NavigationMenuViewport />
         </NavigationMenu>
@@ -200,7 +194,7 @@ export const Navbar = ({
             <ScrollArea className="h-[80%] w-full">
               <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                 {menus.map((menu) => (
-                  <>
+                  <Fragment key={menu.href}>
                     {menu.image ? (
                       <li className="row-span-3">
                         <div>
@@ -229,7 +223,7 @@ export const Navbar = ({
                         {menu.description}
                       </NavbarListItemMobile>
                     )}
-                  </>
+                  </Fragment>
                 ))}
               </ul>
             </ScrollArea>

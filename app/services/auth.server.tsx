@@ -9,9 +9,9 @@ import { SignUpEmail } from "~/emails/sign-up-email";
 import { env } from "~/env";
 
 import { getSiteSettings } from "./ghost.server";
-import { sendEmail } from "~/blog/services/email.server";
-import { prisma } from "~/shared/db.server";
-import { sessionStorage } from "~/shared/session.server";
+import { prisma } from "~/services/db.server";
+import { sendEmail } from "~/services/emails/email.server";
+import { sessionStorage } from "~/services/session.server";
 
 // This secret is used to encrypt the token sent in the magic link and the
 // session used to validate someone else is not trying to sign-in as another

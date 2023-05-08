@@ -1,7 +1,7 @@
 import React from "react";
 import { cn } from "~/ui/utils";
 
-import { Button, Input } from "~/ui/components";
+import { LinkButton } from "~/ui/components";
 
 export type HeroProps = React.HTMLAttributes<HTMLDivElement> & {
   title: string;
@@ -18,7 +18,7 @@ const Hero = React.forwardRef<HTMLDivElement, HeroProps>(
     return (
       <div
         className={cn(
-          "align-center flex flex-col items-center justify-center rounded  px-4 py-12 bg-gradient-to-br via-blue-800 from-saffron-500 to-pink-500",
+          "align-center flex flex-col items-center justify-center rounded  px-4 py-12 bg-gradient-to-br via-blue-800 from-saffron-500 to-pink-500 bg-no-repeat",
           className
         )}
         ref={ref}
@@ -39,22 +39,17 @@ const Hero = React.forwardRef<HTMLDivElement, HeroProps>(
           <h1 className="text-center text-2xl font-extrabold">{title}</h1>
           <p className="text-center">{description}</p>
           {showForm && (
-            <form className="flex flex-col justify-center gap-3 rounded bg-white p-2 sm:flex-row sm:justify-between">
-              <Input
-                type="text"
-                className="w-full rounded border-none"
-                placeholder="Your email address"
-              />
-              <Button
-                className="w-52 rounded bg-gradient-to-r from-blue-900 
-            to-teal-300 px-6 py-3 
-             text-sm font-semibold uppercase
-            text-white hover:from-teal-300 hover:to-blue-900 hover:transition-all hover:duration-300 sm:px-12"
-                type="submit"
+            <div className="flex flex-col items-center justify-center gap-3 rounded p-2">
+              <LinkButton
+                className="background-animate w-52 rounded bg-gradient-to-r 
+            from-blue-900 to-teal-300 px-6 
+             py-3 text-sm font-semibold uppercase 
+            text-white hover:border hover:border-white sm:px-12"
+                to={"/join"}
               >
-                Join Now
-              </Button>
-            </form>
+                Subscribe
+              </LinkButton>
+            </div>
           )}
         </div>
       </div>

@@ -1,7 +1,7 @@
-import { SocialLinks } from "../primitives/social-links";
 import type { Settings } from "@ts-ghost/content-api";
 
-import { BoxedContent } from "~/blog/components/primitives/boxed-content";
+import { BoxedContent } from "~/ui/components/boxed-content";
+import { SocialLinks } from "~/ui/components/social-links";
 
 export type SiteDescriptionProps = {
   className?: string;

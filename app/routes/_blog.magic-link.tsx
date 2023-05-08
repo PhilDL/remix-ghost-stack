@@ -1,6 +1,6 @@
 import type { LoaderArgs } from "@remix-run/node";
 
-import { auth } from "~/blog/services/auth.server";
+import { auth } from "~/services/auth.server";
 
 export let loader = async ({ request }: LoaderArgs) => {
   await auth.authenticate("OTP", request, {

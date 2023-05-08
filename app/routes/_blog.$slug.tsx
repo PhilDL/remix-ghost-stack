@@ -8,13 +8,13 @@ import { Star } from "lucide-react";
 import type { Article } from "schema-dts";
 import type { loader as rootBlogLoader } from "~/routes/_blog";
 
-import { ContextualPostsList } from "~/blog/components/posts/contextual-posts-list";
-import { PostSubscribeCTA } from "~/blog/components/primitives/subscribe-overlay";
-import { Markdown } from "~/markdoc/components/markdown";
+import { Markdown } from "~/services/markdoc/components/markdown";
 import { LinkButton } from "~/ui/components";
+import { ContextualPostsList } from "~/ui/components/posts/contextual-posts-list";
+import { PostSubscribeCTA } from "~/ui/components/subscribe-overlay";
 
-import { getPostOrPage } from "~/blog/domain/get-post-or-page.server";
-import { auth } from "~/blog/services/auth.server";
+import { getPostOrPage } from "~/domain/get-post-or-page.server";
+import { auth } from "~/services/auth.server";
 
 export const meta: V2_MetaFunction<
   typeof loader,
@@ -221,14 +221,15 @@ export default function PostOrPage() {
                 {post.primary_author.name}
               </div>
             )}
-
-            <div className="text-center">
-              <img
-                src={post.feature_image ?? ""}
-                className="w-full rounded-md"
-                alt={post.title}
-              />
-            </div>
+            {post.feature_image && (
+              <div className="text-center">
+                <img
+                  src={post.feature_image ?? ""}
+                  className="w-full rounded-md"
+                  alt={post.title}
+                />
+              </div>
+            )}
           </div>
           <div className="prose-md prose prose-slate relative mx-auto mt-6 break-words dark:prose-invert prose-pre:text-sm prose-pre:leading-6 dark:text-slate-300">
             {post.custom_excerpt && (

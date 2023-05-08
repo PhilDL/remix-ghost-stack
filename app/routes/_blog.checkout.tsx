@@ -14,8 +14,8 @@ import {
 } from "~/ui/components/card";
 import { useInterval } from "~/ui/hooks/use-interval";
 
-import { auth } from "~/blog/services/auth.server";
-import { getMemberActiveSubscriptions } from "~/blog/services/ghost.server";
+import { auth } from "~/services/auth.server";
+import { getMemberActiveSubscriptions } from "~/services/ghost.server";
 
 export async function loader({ request }: LoaderArgs) {
   const user = await auth.isAuthenticated(request, {
