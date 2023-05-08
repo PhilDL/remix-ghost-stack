@@ -1,21 +1,25 @@
 # Remix Ghost Stack
 
-![remix-ghost-stack](https://user-images.githubusercontent.com/4941205/235752500-4db9c24f-acae-4c61-b03d-6e46d05cfeac.png)
+![remix-ghost-stack](https://user-images.githubusercontent.com/4941205/236744969-1db408cd-7da1-4b61-95e5-d0f456816653.png)
 
-## What's in the stack
+## Tech in the stack
 
 - [Fly app deployment](https://fly.io) with [Docker](https://www.docker.com/)
 - Production-ready [SQLite Database](https://sqlite.org)
+- Database ORM with [Prisma](https://prisma.io)
 - Healthcheck endpoint for [Fly backups region fallbacks](https://fly.io/docs/reference/configuration/#services-http_checks)
 - [GitHub Actions](https://github.com/features/actions) for deploy on merge to production and staging environments
-- Email/Password Authentication with [cookie-based sessions](https://remix.run/docs/en/v1/api/remix#createcookiesessionstorage)
-- Database ORM with [Prisma](https://prisma.io)
 - Styling with [Tailwind](https://tailwindcss.com/)
 - Local third party request mocking with [MSW](https://mswjs.io)
 - Unit testing with [Vitest](https://vitest.dev) and [Testing Library](https://testing-library.com)
 - Code formatting with [Prettier](https://prettier.io)
 - Linting with [ESLint](https://eslint.org)
 - Static Types with [TypeScript](https://typescriptlang.org)
+
+## Stack Features
+
+- [Stripe Subscriptions](https://stripe.com/docs/billing/subscriptions/overview) connecte to your Ghost instance and the products you configured there.
+- Authentication Ready with [Remix-Auth](https://www.npmjs.com/package/remix-auth), [Remix Auth OTP](https://github.com/dev-xo/remix-auth-otp). Created to mimic the Ghost Membership login flow with magic link but also adding the convinience of a token Code.
 
 ## Quickstart
 
@@ -48,10 +52,6 @@ This starts your app in development mode, rebuilding assets on file changes.
 ### Relevant code:
 
 This is a pretty simple note-taking app, but it's a good example of how you can build a full stack app with Prisma and Remix. The main functionality is creating users, logging in and out, and creating and deleting notes.
-
-- creating users, and logging in and out [./app/models/user.server.ts](./app/models/user.server.ts)
-- user sessions, and verifying them [./app/session.server.ts](./app/session.server.ts)
-- creating, and deleting notes [./app/models/note.server.ts](./app/models/note.server.ts)
 
 ## Deployment
 

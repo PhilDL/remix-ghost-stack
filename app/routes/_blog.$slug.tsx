@@ -256,7 +256,7 @@ export default function PostOrPage() {
                 {user ? (
                   <LinkButton
                     to="/account"
-                    variant={"codingdodo"}
+                    variant={"primary"}
                     className="no-underline"
                   >
                     UPGRADE
@@ -265,7 +265,7 @@ export default function PostOrPage() {
                   <>
                     <LinkButton
                       to="/join"
-                      variant={"codingdodo"}
+                      variant={"primary"}
                       className="no-underline"
                     >
                       SUBSCRIBE

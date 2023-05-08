@@ -35,7 +35,7 @@ export const links: LinksFunction = () => {
     { rel: "stylesheet", href: draculaStylesheetUrl },
     {
       rel: "icon",
-      href: "https://codingdodo.com/content/images/size/w256h256/2021/04/small-logo.png",
+      href: "https://codingdodo-staging.digitalpress.blog/content/images/size/w256h256/2021/04/small-logo.png",
       type: "image/png",
     },
   ];
