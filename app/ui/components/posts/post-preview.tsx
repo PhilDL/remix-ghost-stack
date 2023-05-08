@@ -1,5 +1,12 @@
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../tooltip";
 import { Link } from "@remix-run/react";
 import type { Post } from "@ts-ghost/content-api";
+import { Gem } from "lucide-react";
 
 import { Badge } from "~/ui/components";
 import { AspectRatio } from "~/ui/components/aspect-ratio";
@@ -19,6 +26,8 @@ export type TPostPreview = Pick<
   | "excerpt"
   | "custom_excerpt"
   | "slug"
+  | "featured"
+  | "visibility"
 >;
 
 export const PostPreview = ({ post }: { post: TPostPreview }) => {
@@ -48,6 +57,20 @@ export const PostPreview = ({ post }: { post: TPostPreview }) => {
           <span className="text-sm italic text-slate-500 dark:text-slate-400">
             {post.reading_time} min read
           </span>
+          {post.visibility === "paid" && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Gem className="mb-1 ml-2 inline-flex h-4 w-4 text-saffron-400" />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>
+                    This is a premium post that requires a paid subscription
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
         </div>
         <Link
           to={`/${post.slug}`}

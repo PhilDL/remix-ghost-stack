@@ -6,6 +6,13 @@ import { env } from "~/env";
 
 import { cache } from "~/services/cache.server";
 
+// Feel free to get more aggressive with these values
+
+const SETTINGS_CACHE_DURATION = 300_000; // 5 minutes
+const FEATURED_POSTS_CACHE_DURATION = 300_000; // 5 minutes
+const HOMEPAGE_CACHE_DURATION = 300_000; // 5 minutes
+const TIERS_CACHE_DURATION = 300_000; // 5 minutes
+
 const api = new TSGhostContentAPI(
   env.GHOST_URL,
   env.GHOST_CONTENT_API_KEY,
@@ -29,7 +36,7 @@ export const cachedFeaturedPostsPreview = async () => {
     key: "featuredPostsPreview",
     cache: cache,
     getFreshValue: featuredPostsPreview,
-    ttl: 300_000, // 5 mins
+    ttl: FEATURED_POSTS_CACHE_DURATION, // 5 mins
     reporter: verboseReporter(),
   });
 };
@@ -78,7 +85,7 @@ export const cachedGetIndexPageData = async () => {
     getFreshValue: getIndexPageData,
     // 5 minutes until cache gets invalid
     // Optional, defaults to Infinity
-    ttl: 300_000,
+    ttl: HOMEPAGE_CACHE_DURATION,
     reporter: verboseReporter(),
   });
 };
@@ -153,7 +160,7 @@ export const cachedGetSiteSettings = async () => {
     key: "getSiteSettings",
     cache: cache,
     getFreshValue: getSiteSettings,
-    ttl: 300_000,
+    ttl: SETTINGS_CACHE_DURATION,
     reporter: verboseReporter(),
   });
 };
@@ -190,7 +197,7 @@ export const cachedGetGhostTiers = async () => {
     key: "getGhostTiers",
     cache: cache,
     getFreshValue: getGhostTiers,
-    ttl: 300_000,
+    ttl: TIERS_CACHE_DURATION,
     reporter: verboseReporter(),
   });
 };

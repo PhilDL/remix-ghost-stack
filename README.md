@@ -1,5 +1,8 @@
 # Remix Ghost Stack
 
+> **Warning**
+> This is still a work in progress, documentation is not ready
+
 ![remix-ghost-stack](https://user-images.githubusercontent.com/4941205/236744969-1db408cd-7da1-4b61-95e5-d0f456816653.png)
 
 ## Tech in the stack

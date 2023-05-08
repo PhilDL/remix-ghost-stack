@@ -55,6 +55,9 @@ dependencies:
   '@radix-ui/react-toast':
     specifier: ^1.1.3
     version: 1.1.3(react-dom@18.2.0)(react@18.2.0)
+  '@radix-ui/react-tooltip':
+    specifier: ^1.0.5
+    version: 1.0.5(@types/react@18.2.5)(react-dom@18.2.0)(react@18.2.0)
   '@react-email/components':
     specifier: ^0.0.6
     version: 0.0.6(ts-node@10.9.1)
@@ -3363,6 +3366,31 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
+  /@radix-ui/react-tooltip@1.0.5(@types/react@18.2.5)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-cDKVcfzyO6PpckZekODJZDe5ZxZ2fCZlzKzTmPhe4mX9qTHRfLcKgqb0OKf22xLwDequ2tVleim+ZYx3rabD5w==}
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    dependencies:
+      '@babel/runtime': 7.21.0
+      '@radix-ui/primitive': 1.0.0
+      '@radix-ui/react-compose-refs': 1.0.0(react@18.2.0)
+      '@radix-ui/react-context': 1.0.0(react@18.2.0)
+      '@radix-ui/react-dismissable-layer': 1.0.3(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-id': 1.0.0(react@18.2.0)
+      '@radix-ui/react-popper': 1.1.1(@types/react@18.2.5)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-portal': 1.0.2(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-presence': 1.0.0(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-primitive': 1.0.2(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-slot': 1.0.1(react@18.2.0)
+      '@radix-ui/react-use-controllable-state': 1.0.0(react@18.2.0)
+      '@radix-ui/react-visually-hidden': 1.0.2(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+    dev: false
+
   /@radix-ui/react-use-callback-ref@1.0.0(react@18.2.0):
     resolution: {integrity: sha512-GZtyzoHz95Rhs6S63D2t/eqvdFCm7I+yHMLVQheKM7nBD8mbZIt+ct1jz4536MDnaOGKIxynJ8eHTkVGVVkoTg==}
     peerDependencies:
@@ -3609,6 +3637,7 @@ packages:
   /@remix-run/dev@1.15.0(@remix-run/serve@1.15.0)(@types/node@20.1.0)(ts-node@10.9.1):
     resolution: {integrity: sha512-BsE1GN6WM9PhN+agZi4TqUIuYzoHYZrufEdXLg3ZEYxWXqvtRKUNfhsYSDlEhrW+D5fyVQhJrs61wQ83sEXHLQ==}
     engines: {node: '>=14'}
+    hasBin: true
     peerDependencies:
       '@remix-run/serve': ^1.15.0
     peerDependenciesMeta:
@@ -4769,6 +4798,7 @@ packages:
   /autoprefixer@10.4.14(postcss@8.4.23):
     resolution: {integrity: sha512-FQzyfOsTlwVzjHxKEqRIAdJx9niO6VCBCoEwax/VLSoQF29ggECcPuBqUMZ+u8jCZOPSy8b8/8KnuFbp0SaFZQ==}
     engines: {node: ^10 || ^12 || >=14}
+    hasBin: true
     peerDependencies:
       postcss: ^8.1.0
     dependencies:
@@ -6049,6 +6079,7 @@ packages:
 
   /eslint-config-prettier@8.8.0(eslint@8.40.0):
     resolution: {integrity: sha512-wLbQiFre3tdGgpDv67NQKnJuTlcUVYHas3k+DZCc2U2BadthoEY4B7hLPvAxaqdyOGCzuLfii2fqGph10va7oA==}
+    hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
     dependencies:
@@ -8824,6 +8855,7 @@ packages:
   /msw@1.2.1(typescript@5.0.4):
     resolution: {integrity: sha512-bF7qWJQSmKn6bwGYVPXOxhexTCGD5oJSZg8yt8IBClxvo3Dx/1W0zqE1nX9BSWmzRsCKWfeGWcB/vpqV6aclpw==}
     engines: {node: '>=14'}
+    hasBin: true
     requiresBuild: true
     peerDependencies:
       typescript: '>= 4.4.x <= 5.0.x'
@@ -10840,6 +10872,7 @@ packages:
   /tailwindcss@3.2.7(postcss@8.4.21)(ts-node@10.9.1):
     resolution: {integrity: sha512-B6DLqJzc21x7wntlH/GsZwEXTBttVSl1FtCzC8WP4oBc/NKef7kaax5jeihkkCEWc831/5NDJ9gRNDK6NEioQQ==}
     engines: {node: '>=12.13.0'}
+    hasBin: true
     peerDependencies:
       postcss: ^8.0.9
     dependencies:
@@ -11045,6 +11078,7 @@ packages:
 
   /ts-node@10.9.1(@types/node@20.1.0)(typescript@5.0.4):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
+    hasBin: true
     peerDependencies:
       '@swc/core': '>=1.2.50'
       '@swc/wasm': '>=1.2.50'
@@ -11075,6 +11109,7 @@ packages:
   /tsconfck@2.1.1(typescript@5.0.4):
     resolution: {integrity: sha512-ZPCkJBKASZBmBUNqGHmRhdhM8pJYDdOXp4nRgj/O0JwUwsMq50lCDRQP/M5GBNAA0elPrq4gAeu4dkaVCuKWww==}
     engines: {node: ^14.13.1 || ^16 || >=18}
+    hasBin: true
     peerDependencies:
       typescript: ^4.3.5 || ^5.0.0
     peerDependenciesMeta:
@@ -11336,6 +11371,7 @@ packages:
 
   /update-browserslist-db@1.0.11(browserslist@4.21.5):
     resolution: {integrity: sha512-dCwEFf0/oT85M1fHBg4F0jtLwJrutGoHSQXCh7u4o2t1drG+c0a9Flnqww6XUKSfQMPpJBRjU8d4RXB09qtvaA==}
+    hasBin: true
     peerDependencies:
       browserslist: '>= 4.21.0'
     dependencies:
@@ -11538,6 +11574,7 @@ packages:
   /vite@4.3.5(@types/node@20.1.0):
     resolution: {integrity: sha512-0gEnL9wiRFxgz40o/i/eTBwm+NEbpUeTWhzKrZDSdKm6nplj+z4lKz8ANDgildxHm47Vg8EUia0aicKbawUVVA==}
     engines: {node: ^14.18.0 || >=16.0.0}
+    hasBin: true
     peerDependencies:
       '@types/node': '>= 14'
       less: '*'
@@ -11569,6 +11606,7 @@ packages:
   /vitest@0.31.0(happy-dom@9.10.9):
     resolution: {integrity: sha512-JwWJS9p3GU9GxkG7eBSmr4Q4x4bvVBSswaCFf1PBNHiPx00obfhHRJfgHcnI0ffn+NMlIh9QGvG75FlaIBdKGA==}
     engines: {node: '>=v14.18.0'}
+    hasBin: true
     peerDependencies:
       '@edge-runtime/vm': '*'
       '@vitest/browser': '*'

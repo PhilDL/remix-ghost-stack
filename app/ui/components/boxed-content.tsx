@@ -28,7 +28,7 @@ export const BoxedContentTitle = ({
   return (
     <HeadingTag
       className={cn(
-        "rounded-t border-x border-t border-slate-100 py-3 text-left px-4 text-lg font-extrabold dark:border-slate-900 ",
+        "rounded-t  py-3 text-left px-4 text-lg font-extrabold ",
         className
       )}
       {...props}
@@ -50,7 +50,7 @@ export const BoxedContentBody = ({
   return (
     <div
       className={cn(
-        "flex flex-col divide-y divide-slate-100 rounded-b border border-slate-100 dark:divide-slate-900 dark:border-slate-900 text-muted-foreground",
+        "flex flex-col divide-y divide-slate-100 rounded-b dark:divide-slate-900 text-muted-foreground",
         className
       )}
       {...props}

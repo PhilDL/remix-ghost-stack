@@ -21,14 +21,6 @@ export const SiteDescription = ({
       </BoxedContent.BoxedContentTitle>
       <BoxedContent.BoxedContentBody className="gap-4 divide-none p-4">
         <p>{settings.description}</p>
-        <SocialLinks
-          className="flex justify-start gap-2"
-          facebook="#"
-          twitter="#"
-          linkedin="#"
-          github="#"
-          rss="#"
-        />
       </BoxedContent.BoxedContentBody>
     </BoxedContent>
   );

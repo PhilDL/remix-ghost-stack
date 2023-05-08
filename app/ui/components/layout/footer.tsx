@@ -1,3 +1,4 @@
+import { Separator } from "../separator";
 import { Form, Link, useNavigation } from "@remix-run/react";
 import type { Settings } from "@ts-ghost/content-api";
 import { CheckCircle } from "lucide-react";
@@ -32,7 +33,8 @@ export const Footer = ({
 
   return (
     <footer className="flex flex-col gap-3">
-      <div className="rounded bg-black p-3 dark:bg-slate-900 lg:p-8">
+      <Separator />
+      <div className="rounded p-3 lg:p-8">
         <div className="flex flex-col gap-4 lg:flex-row lg:justify-between">
           <div className="lg:flex lg:flex-1 lg:flex-col lg:gap-4">
             <img src={settings.logo ?? ""} alt="" className="w-40" />
@@ -47,30 +49,6 @@ export const Footer = ({
               github="#"
               rss="#"
             />
-          </div>
-
-          <div className="lg:flex lg:flex-1 lg:flex-col lg:gap-4">
-            <h3 className="font-bold text-white">Navigation</h3>
-            <div className="flex">
-              <ul className="flex-1 text-slate-400">
-                {settings.navigation.map((item) => (
-                  <li key={item.url}>
-                    <Link to={item.url} className="hover:text-link">
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <ul className="flex-1 text-slate-400">
-                {settings.secondary_navigation.map((item) => (
-                  <li key={item.url}>
-                    <Link to={item.url} className="hover:text-link">
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
           <div className="lg:flex-1">
             {!user && (
@@ -128,7 +106,7 @@ export const Footer = ({
                         }
                         className="rounded bg-gradient-to-r from-blue-900 to-teal-300 py-3 text-sm font-semibold uppercase text-white"
                       >
-                        Join now
+                        SUBSCRIBE
                       </Button>
                     </Form>
                   )}
@@ -136,6 +114,29 @@ export const Footer = ({
                 <div className="flex-1 lg:grow-0"></div>
               </div>
             )}
+          </div>
+          <div className="items-end text-right lg:flex lg:flex-1 lg:flex-col lg:gap-4">
+            <h3 className="font-bold text-white">Navigation</h3>
+            <div className="flex">
+              <ul className="flex-1 text-slate-400">
+                {settings.navigation.map((item) => (
+                  <li key={item.url}>
+                    <Link to={item.url} className="hover:text-link">
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <ul className="flex-1 text-slate-400">
+                {settings.secondary_navigation.map((item) => (
+                  <li key={item.url}>
+                    <Link to={item.url} className="hover:text-link">
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>

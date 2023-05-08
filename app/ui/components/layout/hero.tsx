@@ -18,7 +18,7 @@ const Hero = React.forwardRef<HTMLDivElement, HeroProps>(
     return (
       <div
         className={cn(
-          "align-center flex flex-col items-center justify-center rounded  px-4 py-12 bg-gradient-to-br via-blue-800 from-saffron-500 to-pink-500 bg-no-repeat",
+          "align-center flex flex-col items-center justify-center rounded  px-4 py-12 bg-gradient-to-br via-blue-800 from-saffron-500 to-pink-500 bg-no-repeat bg-cover",
           className
         )}
         ref={ref}

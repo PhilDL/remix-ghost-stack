@@ -2,10 +2,12 @@ import { json, type LoaderArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
 import { AuthorsSection } from "~/ui/components/authors/authors-section";
+import BoxedContent from "~/ui/components/boxed-content";
 import { Hero } from "~/ui/components/layout/hero";
 import { SiteDescription } from "~/ui/components/layout/site-description";
 import { ContextualPostsList } from "~/ui/components/posts/contextual-posts-list";
 import { PostsList } from "~/ui/components/posts/posts-list";
+import { SocialLinks } from "~/ui/components/social-links";
 import { TagsSection } from "~/ui/components/tags/tags-section";
 
 import { auth } from "~/services/auth.server";
@@ -40,13 +42,28 @@ export default function Index() {
       />
       <div className="flex flex-col gap-8 lg:flex lg:flex-row">
         <PostsList posts={posts} pagination={pagination} />
-        <aside className="flex flex-col gap-8 lg:min-w-[25%] lg:max-w-[25%] lg:flex-col xl:min-w-[25%]">
+        <aside className="flex flex-col gap-8 border border-card lg:min-w-[25%] lg:max-w-[25%] lg:flex-col xl:min-w-[25%]">
           <SiteDescription
             settings={settings}
             className="lg:mt-8"
             titleElement={(user && "h1") || "div"}
           />
           <ContextualPostsList posts={featuredPosts} title="Featured Posts" />
+          <BoxedContent>
+            <BoxedContent.BoxedContentTitle as={"h4"}>
+              Follow us on social media
+            </BoxedContent.BoxedContentTitle>
+            <BoxedContent.BoxedContentBody className="gap-4 divide-none p-4">
+              <SocialLinks
+                className="flex justify-start gap-2"
+                facebook="#"
+                twitter="#"
+                linkedin="#"
+                github="#"
+                rss="#"
+              />
+            </BoxedContent.BoxedContentBody>
+          </BoxedContent>
         </aside>
       </div>
 

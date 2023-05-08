@@ -192,35 +192,34 @@ export default function PostOrPage() {
     <>
       <main className="lg:container lg:mx-auto">
         <div className="relative border-t border-slate-200 py-6 dark:border-slate-800 sm:px-6 lg:px-8">
-          <div className="mx-auto flex max-w-prose flex-col gap-4 text-lg">
-            <span className="text-md flex flex-row items-center justify-center gap-2 text-center text-slate-500 dark:text-slate-400">
-              {publishedDate.toLocaleDateString("en-GB", {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-              })}{" "}
-              <span className="text-slate-300">•</span> {post.reading_time} min
-              read{" "}
-              {post.featured && (
-                <Star
-                  className="inline-flex text-saffron-400"
-                  fill={"rgb(246 203 104)"}
-                />
-              )}
-            </span>
-            <h1 className="mt-2 block text-center text-3xl font-bold leading-8 tracking-tight text-slate-900 dark:text-slate-100 sm:text-4xl">
-              {post.title}
-            </h1>
+          <div className="mx-auto flex max-w-prose flex-col gap-3 text-lg">
             {post.primary_author && (
               <div className="flex items-center justify-center gap-3 text-center text-sm font-semibold text-slate-500 dark:text-slate-400">
                 <img
                   src={post.primary_author.profile_image ?? ""}
                   alt={post.primary_author.name}
-                  className="w-8 "
+                  className="w-12 rounded-md"
                 />{" "}
-                {post.primary_author.name}
+                <div className="flex flex-col items-start gap-2">
+                  {post.primary_author.name}
+                  <span className="flex flex-row items-center justify-center gap-2 text-center text-xs text-slate-500 dark:text-slate-400">
+                    {publishedDate.toLocaleDateString("en-GB", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}{" "}
+                    <span className="text-slate-300">—</span>{" "}
+                    {post.reading_time} min read{" "}
+                    {post.featured && (
+                      <Star className="inline-flex text-saffron-400 " />
+                    )}
+                  </span>
+                </div>
               </div>
             )}
+            <h1 className="mb-3 mt-0 block text-center text-3xl font-bold leading-8 tracking-tight text-slate-900 dark:text-slate-100 sm:text-4xl">
+              {post.title}
+            </h1>
             {post.feature_image && (
               <div className="text-center">
                 <img
