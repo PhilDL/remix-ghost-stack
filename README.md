@@ -3,32 +3,30 @@
 > **Warning**
 > This is still a work in progress, documentation is not ready
 
-![remix-ghost-stack](https://user-images.githubusercontent.com/4941205/236744969-1db408cd-7da1-4b61-95e5-d0f456816653.png)
+![remix-ghost-stack](https://user-images.githubusercontent.com/4941205/236985478-47c33abb-bfda-41e7-8c41-17593ebf0ac4.png)
 
 ## Tech in the stack
 
 - [Fly app deployment](https://fly.io) with [Docker](https://www.docker.com/)
-- Production-ready [SQLite Database](https://sqlite.org)
-- Database ORM with [Prisma](https://prisma.io)
+- Fully type-safe interaction with Ghost Content and Admin API thanks to [@ts-ghost](https://github.com/PhilDL/ts-ghost)
+- Database ORM with [Prisma](https://prisma.io) and [SQLite](https://www.sqlite.org/index.html)
 - Healthcheck endpoint for [Fly backups region fallbacks](https://fly.io/docs/reference/configuration/#services-http_checks)
 - [GitHub Actions](https://github.com/features/actions) for deploy on merge to production and staging environments
 - Styling with [Tailwind](https://tailwindcss.com/)
+- Beautiful components with [shadcn ui](https://github.com/shadcn/ui)
 - Local third party request mocking with [MSW](https://mswjs.io)
 - Unit testing with [Vitest](https://vitest.dev) and [Testing Library](https://testing-library.com)
-- Code formatting with [Prettier](https://prettier.io)
+- Code formatting with [Prettier](https://prettier.io) and + Tailwind Prettier-Plugin.
 - Linting with [ESLint](https://eslint.org)
 - Static Types with [TypeScript](https://typescriptlang.org)
 
 ## Stack Features
 
-- [Stripe Subscriptions](https://stripe.com/docs/billing/subscriptions/overview) connecte to your Ghost instance and the products you configured there.
+- [Ghost](https://ghost.org/) CMS Pages, Posts, Authors, Tags
+- [Stripe Subscriptions](https://stripe.com/docs/billing/subscriptions/overview) connects to your Ghost instance and the products you configured there.
 - Authentication Ready with [Remix-Auth](https://www.npmjs.com/package/remix-auth), [Remix Auth OTP](https://github.com/dev-xo/remix-auth-otp). Created to mimic the Ghost Membership login flow with magic link but also adding the convinience of a token Code.
-
-## Quickstart
-
-Click this button to create a [Gitpod](https://gitpod.io) workspace with the project set up and Fly pre-installed
-
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/remix-run/indie-stack/tree/main)
+- Beautiful emails with [React Emails](https://github.com/resendlabs/react-email), for Signup and Signin actions
+- Domain separated logic with [domain functions](https://github.com/seasonedcc/domain-functions)
 
 ## Development
 
@@ -151,3 +149,8 @@ We use [Prettier](https://prettier.io/) for auto-formatting in this project. It'
 
 - Tailwind prettier plugin
 - Sort inports
+
+### Aknowledgements
+
+- The theme was inspired by the amazing Ghost themes from [Biron Themes](https://bironthemes.com)
+- The stripe integration was **heavily** inspired by another amazing Remix template by dev-xo, [Stripe Stack](https://github.com/dev-xo/stripe-stack)
