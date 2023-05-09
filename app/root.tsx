@@ -35,7 +35,7 @@ export const links: LinksFunction = () => {
     { rel: "stylesheet", href: nordthemeStylesheet },
     {
       rel: "icon",
-      href: "https://codingdodo-staging.digitalpress.blog/content/images/size/w256h256/2021/04/small-logo.png",
+      href: "https://digitalpress.fra1.cdn.digitaloceanspaces.com/0bwz1yk/2023/05/logo-ts-ghost.png",
       type: "image/png",
     },
   ];
