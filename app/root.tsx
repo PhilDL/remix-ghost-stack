@@ -17,7 +17,7 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import clsx from "clsx";
-import { ClientOnly, StructuredData } from "remix-utils";
+import { ClientOnly } from "remix-utils";
 import {
   NonFlashOfWrongThemeEls,
   ThemeProvider,
@@ -43,7 +43,7 @@ export const links: LinksFunction = () => {
 
 export const meta: V2_MetaFunction = () => [
   { charset: "utf-8" },
-  { title: "Coding Dodo - Odoo Developement, Python and ERP Tutorials" },
+  { title: "Remix Ghost Stack - Remix App with Ghost CMS in Headless Mode" },
   { viewport: "width=device-width,initial-scale=1" },
 ];
 
@@ -63,7 +63,6 @@ function App() {
         <Meta />
         <Links />
         <NonFlashOfWrongThemeEls ssrTheme={Boolean(data.theme)} />
-        <StructuredData />
       </head>
       <body className="h-full bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
         <Outlet />

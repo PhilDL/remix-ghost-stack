@@ -253,5 +253,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
-// http://localhost:3000/magic?token=U2FsdGVkX1%2B8hzKiMD4xuVdjjchulBhrTe%2BhihJ2jeAY%2BaOJf6gbUEV%2BWzpwOhLTb9Pfcx6NCEDbfsVO1kf7onhu6cxTfhL4QMazZo4CaQw%3D

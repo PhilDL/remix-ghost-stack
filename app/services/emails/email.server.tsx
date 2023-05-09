@@ -22,19 +22,21 @@ export let sendEmail = async ({
   subject: string;
   htmlContent: string;
 }) => {
-  invariant(env.SENDGRID_API_KEY, "SENDGRID_API_KEY is not set.");
+  if (!env.SENDGRID_API_KEY) {
+    console.warn("No SENDGRID_API_KEY set, not sending email.");
+    console.log(
+      "Mock Email from",
+      sender,
+      "Mock Email to",
+      to,
+      "with subject",
+      subject,
+      "and body",
+      htmlContent
+    );
+    return;
+  }
   sendgrid.setApiKey(env.SENDGRID_API_KEY);
-  console.log(
-    "Sending email from",
-    sender,
-    "Sending email to",
-    to,
-    "with subject",
-    subject,
-    "and body",
-    htmlContent
-  );
-
   const options = {
     from: sender,
     to,

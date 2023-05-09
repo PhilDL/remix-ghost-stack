@@ -16,5 +16,5 @@ export const env = createEnv({
     APP_URL: z.string().min(1),
   },
   client: {},
-  runtimeEnv: process.env, // or `import.meta.env`, or similar
+  runtimeEnv: process.env,
 });
