@@ -1,9 +1,12 @@
 # Remix Ghost Stack
 
-> **Warning**
-> This is still a work in progress, documentation is not ready
+> **Warning**!
 
-![remix-ghost-stack](https://user-images.githubusercontent.com/4941205/236985478-47c33abb-bfda-41e7-8c41-17593ebf0ac4.png)
+> This is still a work in progress, documentation is not ready
+> For now if you want to try you should clone that repo and use `pnpm i`
+> Some third-parties (Sendgrid, Stripe, Ghost) configuration documentation are not there yet!
+
+![remix-ghost-stack](https://github.com/PhilDL/remix-ghost-stack/assets/4941205/c68bcc1d-8bd5-48fd-94e7-3375a483a9b7)
 
 ## Tech in the stack
 
@@ -12,8 +15,7 @@
 - Database ORM with [Prisma](https://prisma.io) and [SQLite](https://www.sqlite.org/index.html)
 - Healthcheck endpoint for [Fly backups region fallbacks](https://fly.io/docs/reference/configuration/#services-http_checks)
 - [GitHub Actions](https://github.com/features/actions) for deploy on merge to production and staging environments
-- Styling with [Tailwind](https://tailwindcss.com/)
-- Beautiful components with [shadcn ui](https://github.com/shadcn/ui)
+- Styling with [Tailwind](https://tailwindcss.com/) and Beautiful components with [shadcn ui](https://github.com/shadcn/ui)
 - Local third party request mocking with [MSW](https://mswjs.io)
 - Unit testing with [Vitest](https://vitest.dev) and [Testing Library](https://testing-library.com)
 - Code formatting with [Prettier](https://prettier.io) and + Tailwind Prettier-Plugin.
@@ -28,13 +30,33 @@
 - Beautiful emails with [React Emails](https://github.com/resendlabs/react-email), for Signup and Signin actions
 - Domain separated logic with [domain functions](https://github.com/seasonedcc/domain-functions)
 
+## Ghost Features (some are currently in developement)
+
+## Built-in routes
+
+- [x] Home: Pages, Posts, Authors, Tags + "load more posts..." action
+- [x] Page // Post `$slug` + SSR Syntax Highlight with rehype prism
+- [x] Author `$slug` + related posts
+- [x] Tag `$slug` + related posts
+- [ ] All tags
+- [ ] All authors
+- [x] Join + OTP Email magic link
+- [x] Login + OTP Email magic link
+- [x] Account + Subscribe redirect Stripe
+
+### SEO Metadata (Meta tags + OG + Twitter )
+- [x] Home
+- [x] Page // Post
+- [ ] Author
+- [x] Tag
+
+### SEO JSONLD Schema
+- [x] Home
+- [x] Page // Post
+- [ ] Author
+- [x] Tag
+
 ## Development
-
-- This step only applies if you've opted out of having the CLI install dependencies for you:
-
-  ```sh
-  npx remix init
-  ```
 
 - Initial setup: _If you just generated this project, this step has been done for you._
 
@@ -52,7 +74,9 @@ This starts your app in development mode, rebuilding assets on file changes.
 
 ### Relevant code:
 
-This is a pretty simple note-taking app, but it's a good example of how you can build a full stack app with Prisma and Remix. The main functionality is creating users, logging in and out, and creating and deleting notes.
+This stack relies heavily on the `@ts-ghost` library providing full type-safe calls to the ghost Content and Admin APIs.
+
+Unfortunately the API doesn't give us all the informations necessary to have a fully smooth headless experience. For example the tiers provided by the API don't give us access to the Stripe Product ID connected so we have to do a lookup by name. Which is not ideal but works for now.
 
 ## Deployment
 
@@ -123,12 +147,23 @@ Prior to your first deployment, you'll need to do a few things:
   fly secrets set STRIPE_PUBLIC_KEY="pk_live_key" --app remix-ghost-stack
   fly secrets set STRIPE_WEBHOOK_SIGNATURE="whsec_key" --app remix-ghost-stack
   ```
+> **Warning**!
+
+> Here you should use the same Stripe account connected to your Ghost CMS !
+
+You will have to generate a stripe webhook with these listeners:
+
+[Stripe Config example](https://github.com/PhilDL/remix-ghost-stack/assets/4941205/4d55793d-7115-44f0-ae74-4a9bf9dd91cb)
+
+Then copy paste your webhook secret set it via the `fly` CLI.
 
 - Your Sendgrid API Key
 
   ```sh
   fly secrets set SENDGRID_API_KEY="SG_sendgridkey" --app remix-ghost-stack
   ```
+
+Sendgrid is used to send the Login and Signup emails.
 
 - Create a persistent volume for the sqlite database for both your staging and production environments. Run the following:
 
