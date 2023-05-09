@@ -45,12 +45,14 @@
 - [x] Account + Subscribe redirect Stripe
 
 ### SEO Metadata (Meta tags + OG + Twitter )
+
 - [x] Home
 - [x] Page // Post
 - [ ] Author
 - [x] Tag
 
 ### SEO JSONLD Schema
+
 - [x] Home
 - [x] Page // Post
 - [ ] Author
@@ -147,13 +149,16 @@ Prior to your first deployment, you'll need to do a few things:
   fly secrets set STRIPE_PUBLIC_KEY="pk_live_key" --app remix-ghost-stack
   fly secrets set STRIPE_WEBHOOK_SIGNATURE="whsec_key" --app remix-ghost-stack
   ```
-> **Warning**!
+
+  > **Warning**!
 
 > Here you should use the same Stripe account connected to your Ghost CMS !
 
 You will have to generate a stripe webhook with these listeners:
 
-[Stripe Config example](https://github.com/PhilDL/remix-ghost-stack/assets/4941205/4d55793d-7115-44f0-ae74-4a9bf9dd91cb)
+<div align="center">
+  <img src="https://github.com/PhilDL/remix-ghost-stack/assets/4941205/4d55793d-7115-44f0-ae74-4a9bf9dd91cb" height="600px">
+</div>
 
 Then copy paste your webhook secret set it via the `fly` CLI.
 
