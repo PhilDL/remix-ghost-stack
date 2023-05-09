@@ -89,23 +89,7 @@ auth.use(
             />
           );
         }
-        // Using resend.com example
-        // const resend = new Resend(env.RESEND_API_KEY);
-        // await resend.sendEmail({
-        //   from: "onboarding@resend.dev",
-        //   to: "philippe.lattention@hotmail.fr",
-        //   subject: "Hello World",
-        //   react: (
-        //     <SignInEmail
-        //       appName={settings.title}
-        //       magicLink={magicLink}
-        //       loginCode={code}
-        //       accentColor={settings.accent_color || undefined}
-        //       logo={settings.logo || ""}
-        //       appDescription={settings.description}
-        //     />
-        //   ),
-        // });
+
         await sendEmail({ sender, to, subject, htmlContent });
       },
       validateCode: async (code) => {

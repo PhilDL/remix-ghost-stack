@@ -19,7 +19,7 @@ export const SiteDescription = ({
       <BoxedContent.BoxedContentTitle as={titleElement}>
         {settings.title}
       </BoxedContent.BoxedContentTitle>
-      <BoxedContent.BoxedContentBody className="gap-4 divide-none lg:p-4">
+      <BoxedContent.BoxedContentBody className="gap-4 divide-none lg:px-4">
         <p>{settings.description}</p>
       </BoxedContent.BoxedContentBody>
     </BoxedContent>

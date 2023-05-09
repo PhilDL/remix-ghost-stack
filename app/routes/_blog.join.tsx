@@ -6,8 +6,13 @@ import {
   type Session,
   type V2_MetaFunction,
 } from "@remix-run/node";
-import { Form, useLoaderData, useNavigation } from "@remix-run/react";
-import { inputFromFormData } from "domain-functions";
+import {
+  Form,
+  useActionData,
+  useLoaderData,
+  useNavigation,
+} from "@remix-run/react";
+import { errorMessagesFor, inputFromFormData } from "domain-functions";
 import { CheckCircle, Loader, MailIcon } from "lucide-react";
 import { AuthenticityTokenInput, verifyAuthenticityToken } from "remix-utils";
 import type { loader as rootBlogLoader } from "~/routes/_blog";
@@ -63,6 +68,7 @@ export async function action({ request }: ActionArgs) {
     });
   } else {
     let flash: Session | null = null;
+    console.log(createOperation);
     if (createOperation.errors.length > 0) {
       flash = await addFlashMessage(request, {
         type: "error",
@@ -98,10 +104,15 @@ export const meta: V2_MetaFunction = () => {
 
 export default function LoginPage() {
   let { magicLinkSent, magicLinkEmail } = useLoaderData<typeof loader>();
+  const data = useActionData<typeof action>();
   const navigation = useNavigation();
   const { settings } = useMatchesData("routes/_blog") as UwrapJSONLoaderData<
     typeof rootBlogLoader
   >;
+  let emailError =
+    (data && errorMessagesFor(data.inputErrors, "email")) || undefined;
+  let nameError =
+    (data && errorMessagesFor(data.inputErrors, "name")) || undefined;
 
   return (
     <div className="flex min-h-[55%] flex-col justify-center">
@@ -136,7 +147,9 @@ export default function LoginPage() {
                   name="name"
                   type="name"
                   autoComplete="name"
-                  // aria-invalid={actionData?.errors?.name ? true : undefined}
+                  aria-invalid={
+                    nameError && nameError.length > 0 ? true : undefined
+                  }
                   aria-describedby="name-error"
                   disabled={
                     navigation.formAction === "/join" &&
@@ -147,6 +160,14 @@ export default function LoginPage() {
                     navigation.state === "submitting"
                   }
                 />
+                {nameError && (
+                  <div
+                    id="name-error"
+                    className="mt-1 text-sm text-destructive"
+                  >
+                    {nameError}
+                  </div>
+                )}
               </div>
             </div>
             <div>
@@ -158,7 +179,9 @@ export default function LoginPage() {
                   name="email"
                   type="email"
                   autoComplete="email"
-                  // aria-invalid={actionData?.errors?.email ? true : undefined}
+                  aria-invalid={
+                    emailError && emailError.length > 0 ? true : undefined
+                  }
                   aria-describedby="email-error"
                   disabled={
                     navigation.formAction === "/join" &&
@@ -169,6 +192,14 @@ export default function LoginPage() {
                     navigation.state === "submitting"
                   }
                 />
+                {emailError && (
+                  <div
+                    id="email-error"
+                    className="mt-1 text-sm text-destructive"
+                  >
+                    {emailError}
+                  </div>
+                )}
               </div>
             </div>
           </Form>

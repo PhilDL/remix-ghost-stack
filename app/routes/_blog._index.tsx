@@ -53,7 +53,7 @@ export default function Index() {
             <BoxedContent.BoxedContentTitle as={"h4"}>
               Follow us on social media
             </BoxedContent.BoxedContentTitle>
-            <BoxedContent.BoxedContentBody className="gap-4 divide-none lg:p-4">
+            <BoxedContent.BoxedContentBody className="gap-4 divide-none lg:px-4">
               <SocialLinks
                 className="flex justify-start gap-2"
                 facebook="#"

@@ -100,9 +100,35 @@ Prior to your first deployment, you'll need to do a few things:
   fly secrets set SESSION_SECRET=$(openssl rand -hex 32) --app remix-ghost-stack-staging
   fly secrets set MAGIC_LINK_SECRET=$(openssl rand -hex 32) --app remix-ghost-stack
   fly secrets set MAGIC_LINK_SECRET=$(openssl rand -hex 32) --app remix-ghost-stack-staging
+  fly secrets set APP_URL="https://remix-ghost-stack.fly.dev" --app remix-ghost-stack
+  fly secrets set APP_URL="https://remix-ghost-stack-staging.fly.dev" --app remix-ghost-stack-staging
   ```
 
   If you don't have openssl installed, you can also use [1password](https://1password.com/password-generator/) to generate a random secret, just replace `$(openssl rand -hex 32)` with the generated secret.
+
+#### Add secrets for third party services
+
+- Your Ghost Instance credentials:
+
+  ```sh
+  fly secrets set GHOST_URL="https://codingdodo-staging.digitalpress.blog" --app remix-ghost-stack
+  fly secrets set GHOST_CONTENT_API_KEY="eb5378f191161d77c929390ec3" --app remix-ghost-stack
+  fly secrets set GHOST_ADMIN_API_KEY="6409fafbc1a9d5304fd33bfe:006bb51fc482117d5d2f8f7a1445643f97875817c600aeea2bf1e9b4c3d4255e" --app remix-ghost-stack
+  ```
+
+- Your Stripe credentials:
+
+  ```sh
+  fly secrets set STRIPE_SECRET_KEY="sk_live_03ijahdiuahzdi09ADnkjazd09098AZDnkjankjdad09AD09nkjad" --app remix-ghost-stack
+  fly secrets set STRIPE_PUBLIC_KEY="pk_live_03IjdaoOIZAdjoasddVc4W8Tw8x6Wlg03CdasdjpKh3Ly8OAIJDksXatOGW4mavULAmwSrX2GqgXBK0JlU7r00xc2cASgW" --app remix-ghost-stack
+  fly secrets set STRIPE_WEBHOOK_SIGNATURE="whsec_b6b7742fakzjndkjan5alzkjdkal528f048eae63e4akzjndc7165aiozdj4e14019252ad" --app remix-ghost-stack
+  ```
+
+- Your Sendgrid API Key
+
+  ```sh
+  fly secrets set SENDGRID_API_KEY="SG.d1azdjijazaslkd2O_OiuNFSlJQ.FoJADIJZHIAHIUAZaskdjIHw8dci--SdJazjkdnuL3ORhrw" --app remix-ghost-stack
+  ```
 
 - Create a persistent volume for the sqlite database for both your staging and production environments. Run the following:
 

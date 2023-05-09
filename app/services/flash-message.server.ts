@@ -26,7 +26,7 @@ export const {
     path: "/",
     httpOnly: true,
     sameSite: "lax",
-    expires: new Date(Date.now() + ONE_YEAR),
+    // expires: new Date(Date.now() + ONE_YEAR),
     secrets: [env.SESSION_SECRET],
     secure: process.env.NODE_ENV === "production",
   },
