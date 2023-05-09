@@ -119,15 +119,15 @@ Prior to your first deployment, you'll need to do a few things:
 - Your Stripe credentials:
 
   ```sh
-  fly secrets set STRIPE_SECRET_KEY="sk_live_03ijahdiuahzdi09ADnkjazd09098AZDnkjankjdad09AD09nkjad" --app remix-ghost-stack
-  fly secrets set STRIPE_PUBLIC_KEY="pk_live_03IjdaoOIZAdjoasddVc4W8Tw8x6Wlg03CdasdjpKh3Ly8OAIJDksXatOGW4mavULAmwSrX2GqgXBK0JlU7r00xc2cASgW" --app remix-ghost-stack
-  fly secrets set STRIPE_WEBHOOK_SIGNATURE="whsec_b6b7742fakzjndkjan5alzkjdkal528f048eae63e4akzjndc7165aiozdj4e14019252ad" --app remix-ghost-stack
+  fly secrets set STRIPE_SECRET_KEY="sk_live_key" --app remix-ghost-stack
+  fly secrets set STRIPE_PUBLIC_KEY="pk_live_key" --app remix-ghost-stack
+  fly secrets set STRIPE_WEBHOOK_SIGNATURE="whsec_key" --app remix-ghost-stack
   ```
 
 - Your Sendgrid API Key
 
   ```sh
-  fly secrets set SENDGRID_API_KEY="SG.d1azdjijazaslkd2O_OiuNFSlJQ.FoJADIJZHIAHIUAZaskdjIHw8dci--SdJazjkdnuL3ORhrw" --app remix-ghost-stack
+  fly secrets set SENDGRID_API_KEY="SG_sendgridkey" --app remix-ghost-stack
   ```
 
 - Create a persistent volume for the sqlite database for both your staging and production environments. Run the following:
