@@ -15,7 +15,7 @@ export type ToastMessage = {
   actionUrl?: string;
 };
 
-const ONE_YEAR = 1000 * 60 * 60 * 24 * 365;
+// const ONE_YEAR = 1000 * 60 * 60 * 24 * 365;
 
 export const {
   commitSession: commitFlashMessageSession,

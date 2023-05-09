@@ -45,7 +45,6 @@ export async function action({ request }: DataFunctionArgs) {
       // Occurs when a Checkout Session has been successfully completed.
       case "checkout.session.completed": {
         const session = event.data.object;
-        console.log("checkout.session.completed", session);
         const customerId = String(session.customer);
         const customerEmail = String(session.customer_email);
 

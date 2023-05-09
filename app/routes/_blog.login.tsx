@@ -109,7 +109,6 @@ export default function LoginPage() {
   const navigation = useNavigation();
   const [searchParams] = useSearchParams();
   const emailRef = React.useRef<HTMLInputElement>(null);
-  console.log("navigation.formAction", navigation.formAction);
 
   return (
     <div className="flex min-h-[55%] flex-col justify-center">
@@ -193,6 +192,12 @@ export default function LoginPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
+            {error && (
+              <Alert variant={"destructive"}>
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>{error.message}</AlertDescription>
+              </Alert>
+            )}
             {magicLinkSent && (
               <Alert>
                 <CheckCircle className="h-4 w-4" />

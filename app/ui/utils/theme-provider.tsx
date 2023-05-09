@@ -58,7 +58,6 @@ function ThemeProvider({
   const mountRun = useRef(false);
 
   useEffect(() => {
-    console.log("useEffect Theme", theme);
     if (!mountRun.current) {
       mountRun.current = true;
       return;

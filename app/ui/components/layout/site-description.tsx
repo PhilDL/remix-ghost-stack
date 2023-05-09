@@ -1,7 +1,6 @@
 import type { Settings } from "@ts-ghost/content-api";
 
 import { BoxedContent } from "~/ui/components/boxed-content";
-import { SocialLinks } from "~/ui/components/social-links";
 
 export type SiteDescriptionProps = {
   className?: string;

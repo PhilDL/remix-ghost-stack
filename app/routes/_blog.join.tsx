@@ -49,10 +49,19 @@ import { getSession, sessionStorage } from "~/services/session.server";
 export async function loader({ request }: LoaderArgs) {
   await auth.isAuthenticated(request, { successRedirect: "/account" });
   let session = await sessionStorage.getSession(request.headers.get("Cookie"));
-  return json({
-    magicLinkSent: session.has("auth:otp"),
-    magicLinkEmail: session.get("auth:email"),
-  });
+  const error = session.get(auth.sessionErrorKey);
+  return json(
+    {
+      magicLinkSent: session.has("auth:otp"),
+      magicLinkEmail: session.get("auth:email"),
+      error,
+    },
+    {
+      headers: {
+        "Set-Cookie": await sessionStorage.commitSession(session),
+      },
+    }
+  );
 }
 
 export async function action({ request }: ActionArgs) {
@@ -68,7 +77,6 @@ export async function action({ request }: ActionArgs) {
     });
   } else {
     let flash: Session | null = null;
-    console.log(createOperation);
     if (createOperation.errors.length > 0) {
       flash = await addFlashMessage(request, {
         type: "error",
@@ -103,7 +111,7 @@ export const meta: V2_MetaFunction = () => {
 };
 
 export default function LoginPage() {
-  let { magicLinkSent, magicLinkEmail } = useLoaderData<typeof loader>();
+  let { magicLinkSent, magicLinkEmail, error } = useLoaderData<typeof loader>();
   const data = useActionData<typeof action>();
   const navigation = useNavigation();
   const { settings } = useMatchesData("routes/_blog") as UwrapJSONLoaderData<
@@ -124,6 +132,12 @@ export default function LoginPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
+          {error && (
+            <Alert variant={"destructive"}>
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>{error.message}</AlertDescription>
+            </Alert>
+          )}
           {magicLinkSent && (
             <Alert>
               <CheckCircle className="h-4 w-4" />

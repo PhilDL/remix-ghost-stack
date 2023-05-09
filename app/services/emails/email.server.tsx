@@ -1,6 +1,15 @@
-import sendgrid from "@sendgrid/mail";
+import sendgrid, { type ResponseError } from "@sendgrid/mail";
 import invariant from "tiny-invariant";
 import { env } from "~/env";
+
+const isSendgridReponseError = (error: unknown): error is ResponseError => {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "code" in error &&
+    "response" in error
+  );
+};
 
 export let sendEmail = async ({
   sender,
@@ -33,5 +42,12 @@ export let sendEmail = async ({
     html: htmlContent,
   };
 
-  await sendgrid.send(options);
+  try {
+    await sendgrid.send(options);
+  } catch (error: unknown) {
+    if (isSendgridReponseError(error)) {
+      console.error(error.response.body);
+      throw Error("There was an error on the server-side sending the email.");
+    }
+  }
 };

@@ -6,7 +6,6 @@ import {
 } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
-import { Hero } from "~/ui/components/layout/hero";
 import { PostsList } from "~/ui/components/posts/posts-list";
 
 import { getAuthorPage } from "~/services/ghost.server";

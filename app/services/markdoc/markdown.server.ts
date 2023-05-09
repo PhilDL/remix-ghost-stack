@@ -38,7 +38,6 @@ const config = {
 
 export function parseMarkdown(markdown: string): RenderableTreeNodes {
   let parsed = parse(markdown);
-  // console.log("parsed", parsed);
   // parsed.children = parsed.children.filter(
   //   (node) => node.tag !== "paid-content"
   // );

@@ -8,9 +8,7 @@ import type { CreativeWorkSeries } from "schema-dts";
 import invariant from "tiny-invariant";
 import type { loader as rootBlogLoader } from "~/routes/_blog";
 
-import { Hero } from "~/ui/components/layout/hero";
 import { PostsList } from "~/ui/components/posts/posts-list";
-import { Tag } from "~/ui/components/tags/tag";
 
 import { getTagPage } from "~/services/ghost.server";
 

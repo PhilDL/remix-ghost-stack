@@ -30,7 +30,6 @@ export const createMember = makeDomainFunction(inputCreateMember)(
       console.log(user.errors);
       throw new Error("User could not be created");
     }
-    console.log(`User ${user.data.name} created`, user.data);
     return {
       user,
     };

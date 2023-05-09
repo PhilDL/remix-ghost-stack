@@ -51,7 +51,7 @@ export let loader = async ({ request }: LoaderArgs) => {
       prices: Stripe.Price[];
     };
   })[] = await cachedGetGhostTiers();
-  // console.log(await getAllProductsAndPrice());
+
   for (const tier of tiers) {
     tier.stripe = await getProductAndPriceByName(tier.name);
   }
