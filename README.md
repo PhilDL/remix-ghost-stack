@@ -6,7 +6,9 @@
 > For now if you want to try you should clone that repo and use `pnpm i`
 > Some third-parties (Sendgrid, Stripe, Ghost) configuration documentation are not there yet!
 
-![remix-ghost-stack](https://github.com/PhilDL/remix-ghost-stack/assets/4941205/c68bcc1d-8bd5-48fd-94e7-3375a483a9b7)
+<div align="center">
+  <img src="https://github.com/PhilDL/remix-ghost-stack/assets/4941205/c68bcc1d-8bd5-48fd-94e7-3375a483a9b7" height="600px" alt="Remix Ghost Stack Preview" style="border-radius:10px">
+</div>
 
 ## Tech in the stack
 
@@ -134,13 +136,21 @@ Prior to your first deployment, you'll need to do a few things:
 
 #### Add secrets for third party services
 
-- Your Ghost Instance credentials:
+- From your Ghost CMS admin panel, add a new Ghost integration and copy paste the credentials:
 
-  ```sh
-  fly secrets set GHOST_URL="https://codingdodo-staging.digitalpress.blog" --app remix-ghost-stack
-  fly secrets set GHOST_CONTENT_API_KEY="eb5378f191161d77c929390ec3" --app remix-ghost-stack
-  fly secrets set GHOST_ADMIN_API_KEY="6409fafbc1a9d5304fd33bfe:006bb51fc482117d5d2f8f7a1445643f97875817c600aeea2bf1e9b4c3d4255e" --app remix-ghost-stack
-  ```
+<div align="center">
+  <img src="https://github.com/PhilDL/PhilDL/assets/4941205/2075b962-1a04-42f0-9f83-284d11529803" height="300px" style="border-radius:10px">
+</div>
+
+```sh
+fly secrets set GHOST_URL="https://codingdodo-staging.digitalpress.blog" --app remix-ghost-stack
+fly secrets set GHOST_CONTENT_API_KEY="eb5378f191161d77c929390ec3" --app remix-ghost-stack
+fly secrets set GHOST_ADMIN_API_KEY="6409fafbc1a9d5304fd33bfe:006bb51fc482117d5d2f8f7a1445643f97875817c600aeea2bf1e9b4c3d4255e" --app remix-ghost-stack
+
+fly secrets set GHOST_URL="https://codingdodo-staging.digitalpress.blog" --app remix-ghost-stack-staging
+fly secrets set GHOST_CONTENT_API_KEY="eb5378f191161d77c929390ec3" --app remix-ghost-stack-staging
+fly secrets set GHOST_ADMIN_API_KEY="6409fafbc1a9d5304fd33bfe:006bb51fc482117d5d2f8f7a1445643f97875817c600aeea2bf1e9b4c3d4255e" --app remix-ghost-stack-staging
+```
 
 - Your Stripe credentials:
 
@@ -148,6 +158,10 @@ Prior to your first deployment, you'll need to do a few things:
   fly secrets set STRIPE_SECRET_KEY="sk_live_key" --app remix-ghost-stack
   fly secrets set STRIPE_PUBLIC_KEY="pk_live_key" --app remix-ghost-stack
   fly secrets set STRIPE_WEBHOOK_SIGNATURE="whsec_key" --app remix-ghost-stack
+
+  fly secrets set STRIPE_SECRET_KEY="sk_test_key" --app remix-ghost-stack-staging
+  fly secrets set STRIPE_PUBLIC_KEY="pk_test_key" --app remix-ghost-stack-staging
+  fly secrets set STRIPE_WEBHOOK_SIGNATURE="whsec_test_key" --app remix-ghost-stack-staging
   ```
 
   > **Warning**!
@@ -157,7 +171,7 @@ Prior to your first deployment, you'll need to do a few things:
 You will have to generate a stripe webhook with these listeners:
 
 <div align="center">
-  <img src="https://github.com/PhilDL/remix-ghost-stack/assets/4941205/4d55793d-7115-44f0-ae74-4a9bf9dd91cb" height="600px">
+  <img src="https://github.com/PhilDL/PhilDL/assets/4941205/33102895-d893-4b03-ad84-57f2b3a7fda9" height="600px" style="border-radius:10px">
 </div>
 
 Then copy paste your webhook secret set it via the `fly` CLI.
@@ -166,6 +180,7 @@ Then copy paste your webhook secret set it via the `fly` CLI.
 
   ```sh
   fly secrets set SENDGRID_API_KEY="SG_sendgridkey" --app remix-ghost-stack
+  fly secrets set SENDGRID_API_KEY="SG_sendgridkey" --app remix-ghost-stack-staging
   ```
 
 Sendgrid is used to send the Login and Signup emails.
