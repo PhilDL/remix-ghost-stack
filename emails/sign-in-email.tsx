@@ -25,10 +25,10 @@ interface SignInEmailProps {
 
 export const SignInEmail = ({
   appName = "Remix Ghost Stack",
-  magicLink = "https://codingdodo-staging.digitalpress.blog",
+  magicLink = "https://remix-ghost-stack.fly.dev",
   loginCode = "GV4FQG",
   accentColor = "#c61bb2",
-  logo = "https://codingdodo-staging.digitalpress.blog/content/images/size/w300/2021/04/Coding-Dodo.png",
+  logo = "https://remix-ghost-stack.digitalpress.blog/content/images/size/w300/2021/04/Coding-Dodo.png",
   appDescription = "Remix Ghost Stack is a platform for developers to share their knowledge and connect with other developers.",
 }: SignInEmailProps) => (
   <Html>

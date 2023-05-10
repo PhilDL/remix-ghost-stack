@@ -143,13 +143,13 @@ Prior to your first deployment, you'll need to do a few things:
 </div>
 
 ```sh
-fly secrets set GHOST_URL="https://codingdodo-staging.digitalpress.blog" --app remix-ghost-stack
-fly secrets set GHOST_CONTENT_API_KEY="eb5378f191161d77c929390ec3" --app remix-ghost-stack
-fly secrets set GHOST_ADMIN_API_KEY="6409fafbc1a9d5304fd33bfe:006bb51fc482117d5d2f8f7a1445643f97875817c600aeea2bf1e9b4c3d4255e" --app remix-ghost-stack
+fly secrets set GHOST_URL="https://remix-ghost-stack.digitalpress.blog" --app remix-ghost-stack
+fly secrets set GHOST_CONTENT_API_KEY="your-content-api-key" --app remix-ghost-stack
+fly secrets set GHOST_ADMIN_API_KEY="your-admin-api-key:your-admin-api-key" --app remix-ghost-stack
 
-fly secrets set GHOST_URL="https://codingdodo-staging.digitalpress.blog" --app remix-ghost-stack-staging
-fly secrets set GHOST_CONTENT_API_KEY="eb5378f191161d77c929390ec3" --app remix-ghost-stack-staging
-fly secrets set GHOST_ADMIN_API_KEY="6409fafbc1a9d5304fd33bfe:006bb51fc482117d5d2f8f7a1445643f97875817c600aeea2bf1e9b4c3d4255e" --app remix-ghost-stack-staging
+fly secrets set GHOST_URL="https://remix-ghost-stack.digitalpress.blog" --app remix-ghost-stack-staging
+fly secrets set GHOST_CONTENT_API_KEY="your-content-api-key" --app remix-ghost-stack-staging
+fly secrets set GHOST_ADMIN_API_KEY="your-admin-api-key:your-admin-api-key" --app remix-ghost-stack-staging
 ```
 
 - Your Stripe credentials:
