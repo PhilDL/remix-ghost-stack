@@ -66,8 +66,6 @@ const main = async ({ isTypeScript, rootDirectory }) => {
     ),
     fs.rm(path.join(rootDirectory, "LICENSE.md")),
     fs.rm(path.join(rootDirectory, "CONTRIBUTING.md")),
-    // fs.rm(path.join(rootDirectory, "decisions"), { recursive: true }),
-    // fs.rm(path.join(rootDirectory, "docs"), { recursive: true }),
   ];
 
   await Promise.all(fileOperationPromises);
