@@ -1,5 +1,4 @@
 import sendgrid, { type ResponseError } from "@sendgrid/mail";
-import invariant from "tiny-invariant";
 import { env } from "~/env";
 
 const isSendgridReponseError = (error: unknown): error is ResponseError => {

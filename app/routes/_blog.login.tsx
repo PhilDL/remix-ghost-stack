@@ -12,7 +12,7 @@ import {
   useNavigation,
   useSearchParams,
 } from "@remix-run/react";
-import { CheckCircle, Loader, Lock, MailCheck, StarsIcon } from "lucide-react";
+import { CheckCircle, Loader, Lock, MailCheck, Stars } from "lucide-react";
 import { AuthenticityTokenInput, verifyAuthenticityToken } from "remix-utils";
 
 import {
@@ -272,7 +272,7 @@ export default function LoginPage() {
               navigation.state === "submitting" ? (
                 <Loader className="mr-2 h-4 w-4 animate-spin" />
               ) : (
-                <StarsIcon className="mr-2 h-4 w-4" />
+                <Stars className="mr-2 h-4 w-4" />
               )}{" "}
               Send Magic link
             </Button>

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { renderers, type RenderableTreeNodes } from "@markdoc/markdoc";
 // import { Fence } from "./fence";
-import Highlight, { defaultProps, type Language } from "prism-react-renderer";
+import { Highlight, themes } from "prism-react-renderer";
 
 // import dracula from "prism-react-renderer/themes/dracula";
 
@@ -10,17 +10,12 @@ export function Fence({
   language,
 }: {
   children: string;
-  language: Language;
+  language: string;
 }) {
   return (
-    <Highlight
-      {...defaultProps}
-      theme={undefined}
-      code={children}
-      language={language}
-    >
-      {({ className, tokens, getLineProps, getTokenProps }) => (
-        <pre className={`${className}`}>
+    <Highlight theme={undefined} code={children} language={language}>
+      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        <pre className={`${className}`} style={style}>
           {tokens.map((line, i) => (
             <div
               key={i}

@@ -5,12 +5,13 @@ module.exports = {
   cacheDirectory: "./node_modules/.cache/remix",
   ignoredRouteFiles: ["**/.*", "**/*.css", "**/*.test.{js,jsx,ts,tsx}"],
   future: {
-    unstable_tailwind: true,
+    tailwind: true,
     v2_routeConvention: true,
     v2_normalizeFormMethod: true,
     v2_meta: true,
     v2_errorBoundary: true,
   },
+  serverModuleFormat: "cjs",
   // the whole rehype universe is there to support syntax highlighting
   // and it's all ESM so we need to bundle it... 🥲
   serverDependenciesToBundle: [

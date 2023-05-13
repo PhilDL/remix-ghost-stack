@@ -1,9 +1,6 @@
-/**
- * Nord Theme Originally by Arctic Ice Studio
- * https://nordtheme.com
- *
- * Ported for PrismJS by Zane Hitchcoxc (@zwhitchcox) and Gabriel Ramos (@gabrieluizramos)
- */
+/* Nord Theme Originally by Arctic Ice Studio */
+/* https://nordtheme.com */
+/* Ported for PrismJS by Zane Hitchcoxc (@zwhitchcox) and Gabriel Ramos (@gabrieluizramos) */
 
 code[class*="language-"],
 pre[class*="language-"] {
@@ -26,7 +23,6 @@ pre[class*="language-"] {
   hyphens: none;
 }
 
-/* Code blocks */
 pre[class*="language-"] {
   padding: 1em;
   margin: 0.5em 0;
@@ -39,7 +35,6 @@ pre[class*="language-"] {
   background: #324155;
 }
 
-/* Inline code */
 :not(pre) > code[class*="language-"] {
   padding: 0.1em;
   border-radius: 0.3em;
@@ -124,18 +119,12 @@ pre[class*="language-"] {
   cursor: help;
 }
 
-/**
- * Inspired by gatsby remark prism - https://www.gatsbyjs.com/plugins/gatsby-remark-prismjs/
- * 1. Make the element just wide enough to fit its content.
- * 2. Always fill the visible space in .code-highlight.
- */
-// Line Numbers
 pre {
   overflow-x: auto;
 }
 .code-highlight {
-  float: left; /* 1 */
-  min-width: 100%; /* 2 */
+  float: left;
+  min-width: 100%;
 }
 
 .code-line {
@@ -144,22 +133,22 @@ pre {
   padding-right: 16px;
   margin-left: -16px;
   margin-right: -16px;
-  border-left: 4px solid rgba(0, 0, 0, 0); /* Set placeholder for highlight accent border color to transparent */
+  border-left: 4px solid rgba(0, 0, 0, 0);
 }
 
 .code-line.inserted {
-  background-color: rgba(16, 185, 129, 0.2); /* Set inserted line (+) color */
+  background-color: rgba(16, 185, 129, 0.2);
 }
 
 .code-line.deleted {
-  background-color: rgba(239, 68, 68, 0.2); /* Set deleted line (-) color */
+  background-color: rgba(239, 68, 68, 0.2);
 }
 
 .highlight-line {
   margin-left: -16px;
   margin-right: -16px;
-  background-color: rgba(55, 65, 81, 0.5); /* Set highlight bg color */
-  border-left: 4px solid rgb(59, 130, 246); /* Set highlight accent border color */
+  background-color: rgba(55, 65, 81, 0.5);
+  border-left: 4px solid rgb(59, 130, 246);
 }
 
 .line-number::before {
@@ -168,6 +157,6 @@ pre {
   text-align: right;
   margin-right: 16px;
   margin-left: -8px;
-  color: rgb(156, 163, 175); /* Line number color */
+  color: rgb(156, 163, 175);
   content: attr(line);
 }
