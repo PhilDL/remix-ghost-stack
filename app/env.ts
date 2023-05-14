@@ -13,6 +13,8 @@ export const env = createEnv({
     STRIPE_SECRET_KEY: z.string().min(1),
     STRIPE_WEBHOOK_SIGNATURE: z.string().min(1),
     SENDGRID_API_KEY: z.string().optional(),
+    MAILGUN_API_KEY: z.string().optional(),
+    MAILGUN_DOMAIN: z.string().optional(),
     APP_URL: z.string().min(1),
   },
   client: {},
