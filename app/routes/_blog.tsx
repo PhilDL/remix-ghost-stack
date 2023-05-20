@@ -22,6 +22,9 @@ import { cachedGetSiteSettings } from "~/services/ghost.server";
 import { sessionStorage } from "~/services/session.server";
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
+  if (!data) {
+    return [];
+  }
   const settings = data.settings;
   const WebsitechemaLDJSON: WebSite = {
     "@type": "WebSite",

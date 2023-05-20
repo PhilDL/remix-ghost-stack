@@ -1,0 +1,10 @@
+.history
+.husky
+.vscode
+coverage
+dist
+node_modules
+vite.config.ts
+test-report
+test-results
+playwright-report
