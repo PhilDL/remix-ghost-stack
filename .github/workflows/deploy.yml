@@ -104,16 +104,21 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7
+
       - name: ⎔ Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16
+          cache: "pnpm"
 
       - name: Copy Environment Variables
         run: cp .env.example .env
 
       - name: 📥 Download deps
-        uses: bahmutov/npm-install@v1
+        run: pnpm install --frozen-lockfile false
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
@@ -122,7 +127,7 @@ jobs:
         run: npx prisma migrate reset --force --skip-seed
 
       - name: Build
-        run: npm run build
+        run: pnpm run build
 
       - name: Run Playwright Tests
         run: npx playwright test
