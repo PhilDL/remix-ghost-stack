@@ -16,14 +16,14 @@ export const Author = ({ author }: { author: TAuthor }) => {
         )}
       </div> */}
       <CardHeader className="flex flex-row justify-start gap-2">
-        <Link to={`/authors/${author.slug}`}>
+        <Link to={`/author/${author.slug}`}>
           <img
             src={author.profile_image ?? ""}
             alt={author.name}
             className="w-16 rounded-md"
           />
         </Link>
-        <Link to={author.slug} className="hover:text-link">
+        <Link to={`/author/${author.slug}`} className="hover:text-link">
           <h3 className="text-center text-lg  font-bold">{author.name}</h3>
           <span className="font-semibold text-slate-500 dark:text-slate-400">
             {author.count?.posts} posts

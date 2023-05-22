@@ -228,3 +228,45 @@ export const getMember = async (memberId: string) => {
   invariant(membersQuery.success, "Failed to fetch membersQuery");
   return membersQuery.data;
 };
+
+export const getAllTags = async () => {
+  const api = new TSGhostContentAPI(
+    env.GHOST_URL,
+    env.GHOST_CONTENT_API_KEY,
+    "v5.0"
+  );
+  const tags = await api.tags
+    .browse({
+      filter: "visibility:public",
+    })
+    .include({ "count.posts": true })
+    .fetch();
+  if (!tags.success) {
+    console.log(tags);
+  }
+  invariant(tags.success, "Failed to fetch tags");
+  return {
+    tags: tags.data.filter((t) => (t.count?.posts || 0) > 0),
+  };
+};
+
+export const getAllAuthors = async () => {
+  const api = new TSGhostContentAPI(
+    env.GHOST_URL,
+    env.GHOST_CONTENT_API_KEY,
+    "v5.0"
+  );
+  const authors = await api.authors
+    .browse({
+      limit: "all",
+    })
+    .include({ "count.posts": true })
+    .fetch();
+  if (!authors.success) {
+    console.log(authors);
+  }
+  invariant(authors.success, "Failed to fetch authors");
+  return {
+    authors: authors.data.filter((t) => (t.count?.posts || 0) > 0),
+  };
+};

@@ -12,3 +12,4 @@ ingest
 /app/styles/tailwind.css
 
 /playwright-report
+/test-results
