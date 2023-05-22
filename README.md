@@ -40,8 +40,8 @@
 - [x] Page // Post `$slug` + SSR Syntax Highlight with rehype prism
 - [x] Author `$slug` + related posts
 - [x] Tag `$slug` + related posts
-- [ ] All tags
-- [ ] All authors
+- [x] All tags
+- [x] All authors
 - [x] Join + OTP Email magic link
 - [x] Login + OTP Email magic link
 - [x] Account + Subscribe redirect Stripe
