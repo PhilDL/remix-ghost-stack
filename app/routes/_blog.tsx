@@ -1,6 +1,11 @@
 import { useEffect } from "react";
 import { json, type LoaderArgs, type V2_MetaFunction } from "@remix-run/node";
-import { Link, Outlet, useLoaderData } from "@remix-run/react";
+import {
+  Link,
+  Outlet,
+  ShouldRevalidateFunction,
+  useLoaderData,
+} from "@remix-run/react";
 import {
   AuthenticityTokenProvider,
   createAuthenticityToken,
@@ -190,3 +195,14 @@ export default function BlogLayout() {
     </AuthenticityTokenProvider>
   );
 }
+
+export const shouldRevalidate: ShouldRevalidateFunction = ({
+  formAction,
+  formMethod,
+  defaultShouldRevalidate,
+}) => {
+  if (formMethod === "POST" && formAction?.startsWith("/action/")) {
+    return false;
+  }
+  return defaultShouldRevalidate;
+};

@@ -4,31 +4,50 @@ import {
   type ActionFunction,
   type LoaderFunction,
 } from "@remix-run/node";
-import { isTheme } from "~/ui/utils/theme-provider";
 
-import { getAllTags } from "~/services/ghost.server";
-import { getThemeSession } from "~/ui/utils/theme.server";
+import {
+  cachedCmdAllAuthors,
+  cachedCmdAllPosts,
+  cachedCmdAllTags,
+} from "~/services/ghost.server";
 
+/**
+ * action routes prefixed by action like this one are excluded from
+ * revalidation.
+ */
 export const action: ActionFunction = async ({ request }) => {
-  const themeSession = await getThemeSession(request);
-  const requestText = await request.text();
-  const form = new URLSearchParams(requestText);
+  const form = await request.formData();
   const search = form.get("search");
   switch (search) {
     case "tags":
-      const { tags } = await getAllTags();
-      return json({
-        success: true,
-        tags: tags.map((tag) => ({
-          id: tag.id,
-          name: tag.name,
-          slug: tag.slug,
-        })),
-      });
-    case "default":
+      const tags = await cachedCmdAllTags();
+      return json(
+        {
+          success: true,
+          tags,
+        },
+        200
+      );
+    case "authors":
+      const authors = await cachedCmdAllAuthors();
+      return json(
+        {
+          success: true,
+          authors,
+        },
+        200
+      );
+    case "posts":
+      const posts = await cachedCmdAllPosts();
+      return json(
+        {
+          success: true,
+          posts,
+        },
+        200
+      );
+    default:
       break;
   }
-  return json({ success: true });
+  return json({ success: true }, 200);
 };
-
-export const loader: LoaderFunction = () => redirect("/", { status: 404 });

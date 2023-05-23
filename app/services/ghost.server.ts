@@ -12,6 +12,7 @@ const SETTINGS_CACHE_DURATION = 300_000; // 5 minutes
 const FEATURED_POSTS_CACHE_DURATION = 300_000; // 5 minutes
 const HOMEPAGE_CACHE_DURATION = 300_000; // 5 minutes
 const TIERS_CACHE_DURATION = 300_000; // 5 minutes
+const CMD_DATA_CACHE_DURATION = 300_000; // 5 minutes
 
 const api = new TSGhostContentAPI(
   env.GHOST_URL,
@@ -279,4 +280,83 @@ export const getAllAuthors = async () => {
   return {
     authors: authors.data.filter((t) => (t.count?.posts || 0) > 0),
   };
+};
+
+export const cmdAllTags = async () => {
+  const api = new TSGhostContentAPI(
+    env.GHOST_URL,
+    env.GHOST_CONTENT_API_KEY,
+    "v5.0"
+  );
+  const tags = await api.tags
+    .browse({
+      filter: "visibility:public",
+      limit: "all",
+    })
+    .fields({ name: true, slug: true, description: true })
+    .fetch();
+  invariant(tags.success, "Failed to fetch tags");
+  return tags.data;
+};
+
+export const cmdAllAuthors = async () => {
+  const api = new TSGhostContentAPI(
+    env.GHOST_URL,
+    env.GHOST_CONTENT_API_KEY,
+    "v5.0"
+  );
+  const authors = await api.authors
+    .browse({
+      limit: "all",
+    })
+    .fields({ name: true, slug: true })
+    .fetch();
+  invariant(authors.success, "Failed to fetch authors");
+  return authors.data;
+};
+
+export const cmdAllPosts = async () => {
+  const api = new TSGhostContentAPI(
+    env.GHOST_URL,
+    env.GHOST_CONTENT_API_KEY,
+    "v5.0"
+  );
+  const posts = await api.posts
+    .browse({
+      limit: "all",
+    })
+    .fields({ title: true, slug: true, excerpt: true, custom_excerpt: true })
+    .fetch();
+  invariant(posts.success, "Failed to fetch posts");
+  return posts.data;
+};
+
+export const cachedCmdAllTags = async () => {
+  return cachified({
+    key: "cmdAllTags",
+    cache: cache,
+    getFreshValue: cmdAllTags,
+    ttl: CMD_DATA_CACHE_DURATION,
+    reporter: verboseReporter(),
+  });
+};
+
+export const cachedCmdAllAuthors = async () => {
+  return cachified({
+    key: "cmdAllAuthors",
+    cache: cache,
+    getFreshValue: cmdAllAuthors,
+    ttl: CMD_DATA_CACHE_DURATION,
+    reporter: verboseReporter(),
+  });
+};
+
+export const cachedCmdAllPosts = async () => {
+  return cachified({
+    key: "cmdAllPosts",
+    cache: cache,
+    getFreshValue: cmdAllPosts,
+    ttl: CMD_DATA_CACHE_DURATION,
+    reporter: verboseReporter(),
+  });
 };

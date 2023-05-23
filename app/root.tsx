@@ -14,6 +14,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  ShouldRevalidateFunction,
   useLoaderData,
 } from "@remix-run/react";
 import clsx from "clsx";
@@ -84,3 +85,14 @@ export default function AppWithProviders() {
     </ThemeProvider>
   );
 }
+
+export const shouldRevalidate: ShouldRevalidateFunction = ({
+  formAction,
+  formMethod,
+  defaultShouldRevalidate,
+}) => {
+  if (formMethod === "POST" && formAction?.startsWith("/action/")) {
+    return false;
+  }
+  return defaultShouldRevalidate;
+};

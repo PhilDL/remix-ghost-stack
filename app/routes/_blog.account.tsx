@@ -6,6 +6,7 @@ import {
 } from "@remix-run/node";
 import {
   Form,
+  ShouldRevalidateFunction,
   useFetcher,
   useLoaderData,
   useNavigation,
@@ -245,3 +246,14 @@ export default function Account() {
     </div>
   );
 }
+
+export const shouldRevalidate: ShouldRevalidateFunction = ({
+  formAction,
+  formMethod,
+  defaultShouldRevalidate,
+}) => {
+  if (formMethod === "POST" && formAction?.startsWith("/action/")) {
+    return false;
+  }
+  return defaultShouldRevalidate;
+};
