@@ -1,17 +1,31 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { NavbarListItem } from "./navbar-list-item";
 import { NavbarListItemMobile } from "./navbar-list-item-mobile";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
-import { Link, NavLink, useNavigation } from "@remix-run/react";
-import type { Settings } from "@ts-ghost/content-api";
 import {
+  Link,
+  NavLink,
+  useFetcher,
+  useNavigate,
+  useNavigation,
+} from "@remix-run/react";
+import type { Settings, Tag } from "@ts-ghost/content-api";
+import {
+  Calculator,
+  Calendar,
   CreditCard,
+  Loader2Icon,
   LogIn,
   LogOut,
   Menu,
   Search,
+  Settings as SettingsIcon,
+  Smile,
+  TagIcon,
+  Tags,
   User,
+  UserCircle,
   UserPlus,
 } from "lucide-react";
 import { nameInitials } from "~/ui/utils";
@@ -19,6 +33,18 @@ import { Theme, useTheme } from "~/ui/utils/theme-provider";
 
 import { Button } from "~/ui/components";
 import { Avatar, AvatarFallback, AvatarImage } from "~/ui/components/avatar";
+import {
+  Command,
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandLoading,
+  CommandSeparator,
+  CommandShortcut,
+} from "~/ui/components/command";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -87,13 +113,42 @@ export const Navbar = ({
 }) => {
   const [theme, setTheme] = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const commandRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
+  const navigation = useNavigation();
+  const command = useFetcher();
+  const [pages, setPages] = useState<string[]>([]);
+  const page = pages[pages.length - 1];
   const transition = useNavigation();
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     if (transition.state === "idle") {
       setMobileMenuOpen(false);
     }
   }, [transition.state]);
+
+  useEffect(() => {
+    if (command.state === "idle") {
+      setSearch("");
+      commandRef.current?.focus();
+    }
+  }, [command.state]);
+
+  useEffect(() => {
+    if (navigation.state === "idle") {
+      setPages([]);
+      setSearch("");
+      setOpen(false);
+    }
+  }, [navigation.state]);
+
+  useEffect(() => {
+    if (command.submission?.formData?.get("search")) {
+      setPages([...pages, command.submission.formData.get("search") as string]);
+    }
+  }, [command.submission]);
 
   function handleChange() {
     setTheme((prevTheme) =>
@@ -102,7 +157,16 @@ export const Navbar = ({
   }
 
   return (
-    <nav className="flex items-center bg-white py-4 dark:bg-slate-950">
+    <nav
+      className="flex items-center bg-white py-4 dark:bg-slate-950"
+      onKeyDown={(e) => {
+        // Backspace goes to previous page when search is empty
+        if (e.key === "Backspace" && !search) {
+          e.preventDefault();
+          setPages((pages) => pages.slice(0, -1));
+        }
+      }}
+    >
       <div className="flex flex-1 flex-row justify-start gap-4">
         <Link to="/">
           <img
@@ -176,7 +240,7 @@ export const Navbar = ({
         </NavigationMenu>
       </div>
       <div className="flex flex-1 items-center justify-end gap-1 text-slate-700 opacity-100 dark:text-slate-100 lg:gap-0.5">
-        <Button variant={"ghost"} size={"sm"}>
+        <Button variant={"ghost"} size={"sm"} onClick={(e) => setOpen(true)}>
           <Search className="h-6 w-6 " />
         </Button>
         <ThemeToggle className="hidden lg:flex" />
@@ -318,6 +382,82 @@ export const Navbar = ({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+      <CommandDialog open={open} onOpenChange={setOpen}>
+        <CommandInput
+          placeholder="Type a command or search..."
+          value={search}
+          onValueChange={setSearch}
+          disabled={command.state !== "idle" || navigation.state !== "idle"}
+          aria-disabled={
+            command.state !== "idle" || navigation.state !== "idle"
+          }
+          ref={commandRef}
+        />
+        <CommandList>
+          {command.state === "idle" && (
+            <CommandEmpty>No results found.</CommandEmpty>
+          )}
+          {!page && (
+            <>
+              <CommandGroup heading="Suggestions">
+                <CommandItem
+                  onSelect={() => {
+                    command.submit(
+                      { search: "tags" },
+                      { action: "action/command", method: "post" }
+                    );
+                  }}
+                >
+                  <Tags className="mr-2 h-4 w-4" />
+                  <span>Search Tags</span>
+                </CommandItem>
+                <CommandItem>
+                  <UserCircle className="mr-2 h-4 w-4" />
+                  <span>Search Authors</span>
+                </CommandItem>
+              </CommandGroup>
+              <CommandSeparator />
+              <CommandGroup heading="Settings">
+                <CommandItem
+                  onSelect={() => {
+                    navigate(`/account`);
+                  }}
+                  disabled={navigation.state !== "idle"}
+                >
+                  <User className="mr-2 h-4 w-4" />
+                  <span>Profile</span>
+                  <CommandShortcut>⌘P</CommandShortcut>
+                </CommandItem>
+              </CommandGroup>
+            </>
+          )}
+          {page === "tags" && (
+            <>
+              {command.state !== "idle" ? (
+                <CommandLoading>
+                  <Loader2Icon className="mr-2 h-4 w-4 animate-spin" />
+                  <span>Loading...</span>
+                </CommandLoading>
+              ) : (
+                <>
+                  {command.data?.tags.map((tag: Tag) => (
+                    <CommandItem
+                      key={tag.slug}
+                      onSelect={() => {
+                        navigate(`/tag/${tag.slug}`);
+                      }}
+                      disabled={navigation.state !== "idle"}
+                    >
+                      <TagIcon className="mr-2 h-4 w-4" />
+                      <span>{tag.name}</span>
+                    </CommandItem>
+                  ))}
+                </>
+              )}
+            </>
+          )}
+        </CommandList>
+      </CommandDialog>
     </nav>
   );
 };

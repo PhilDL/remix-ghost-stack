@@ -67,6 +67,7 @@
     "cachified": "^3.5.4",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
+    "cmdk": "^0.2.0",
     "domain-functions": "^1.7.1",
     "dotenv": "^16.0.3",
     "isbot": "^3.6.10",

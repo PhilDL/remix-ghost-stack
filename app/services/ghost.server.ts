@@ -135,8 +135,18 @@ export const getTagPage = async (slug: string) => {
       .include({ "count.posts": true })
       .fetch(),
   ]);
-  invariant(posts.success, "Failed to fetch posts");
-  invariant(tag.success, "Failed to fetch tag");
+  if (!tag.success) {
+    throw new Response(tag.errors.map((m) => m.message).join(","), {
+      status: 404,
+      statusText: "Not Found",
+    });
+  }
+  if (!posts.success) {
+    throw new Response(posts.errors.map((m) => m.message).join(","), {
+      status: 404,
+      statusText: "Not Found",
+    });
+  }
   return {
     posts: posts.data,
     postsMeta: posts.meta,

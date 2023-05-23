@@ -142,6 +142,8 @@ export default function LoginPage() {
                   placeholder="Insert code .."
                   required
                   autoFocus={true}
+                  disabled={navigation.state !== "idle"}
+                  aria-disabled={navigation.state !== "idle"}
                 />
               </div>
             </Form>
@@ -166,15 +168,8 @@ export default function LoginPage() {
                   : "Request a new code ?"}
               </Button>
             </Form>
-            <Button
-              form="otpCode"
-              disabled={
-                navigation.formAction === "/login" &&
-                navigation.state === "submitting"
-              }
-            >
-              {navigation.formAction === "/login" &&
-              navigation.state === "submitting" ? (
+            <Button form="otpCode" disabled={navigation.state !== "idle"}>
+              {navigation.state !== "idle" ? (
                 <Loader className="mr-2 h-4 w-4 animate-spin" />
               ) : (
                 <Lock className="mr-2 h-4 w-4" />
@@ -235,14 +230,8 @@ export default function LoginPage() {
                     autoComplete="email"
                     // aria-invalid={actionData?.errors?.email ? true : undefined}
                     aria-describedby="email-error"
-                    disabled={
-                      navigation.formAction === "/login" &&
-                      navigation.state === "submitting"
-                    }
-                    aria-disabled={
-                      navigation.formAction === "/login" &&
-                      navigation.state === "submitting"
-                    }
+                    disabled={navigation.state !== "idle"}
+                    aria-disabled={navigation.state !== "idle"}
                   />
                 </div>
               </div>
@@ -268,8 +257,7 @@ export default function LoginPage() {
                 navigation.state === "submitting"
               }
             >
-              {navigation.formAction === "/login" &&
-              navigation.state === "submitting" ? (
+              {navigation.state !== "idle" ? (
                 <Loader className="mr-2 h-4 w-4 animate-spin" />
               ) : (
                 <Stars className="mr-2 h-4 w-4" />

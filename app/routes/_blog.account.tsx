@@ -16,7 +16,7 @@ import { AuthenticityTokenInput, verifyAuthenticityToken } from "remix-utils";
 import type Stripe from "stripe";
 import invariant from "tiny-invariant";
 
-import { Badge, Button } from "~/ui/components";
+import { Badge, Button, LinkButton } from "~/ui/components";
 import { Avatar, AvatarFallback, AvatarImage } from "~/ui/components/avatar";
 import {
   Card,
@@ -221,9 +221,8 @@ export default function Account() {
         </CardContent>
         <CardFooter className="flex justify-between">
           <form action="/logout">
-            <Button variant="ghost">Logout</Button>
+            <Button variant="outline">Logout</Button>
           </form>
-          <Button>View courses</Button>
         </CardFooter>
       </Card>
 

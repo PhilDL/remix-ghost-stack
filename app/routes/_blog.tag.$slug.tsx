@@ -4,10 +4,12 @@ import {
   useLoaderData,
   useRouteError,
 } from "@remix-run/react";
+import { ArrowLeft } from "lucide-react";
 import type { CreativeWorkSeries } from "schema-dts";
 import invariant from "tiny-invariant";
 import type { loader as rootBlogLoader } from "~/routes/_blog";
 
+import { LinkButton } from "~/ui/components";
 import { PostsList } from "~/ui/components/posts/posts-list";
 
 import { getTagPage } from "~/services/ghost.server";
@@ -150,21 +152,24 @@ export function ErrorBoundary() {
   // when true, this is what used to go to `CatchBoundary`
   if (isRouteErrorResponse(error)) {
     return (
-      <div className="relative overflow-hidden bg-white py-16">
+      <div className="relative overflow-hidden py-16">
         <div className="relative px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-prose text-lg">
             <h1>
-              <span className="block text-center text-lg font-semibold text-cornflower-600">
+              <span className="block text-lg font-semibold text-muted-foreground">
                 Error
               </span>
-              <span className="mt-2 block text-center text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">
-                {error.status}
+              <span className="mt-2 block text-3xl font-bold leading-8 tracking-tight text-primary sm:text-4xl">
+                {error.status} {error.statusText}
               </span>
             </h1>
 
-            <pre className="mt-8 overflow-auto rounded-md border-2 border-gray-400 bg-white text-sm leading-8 text-gray-800">
-              <code>{error.data.message}</code>
+            <pre className="mt-8 p-8 overflow-auto rounded-md border-2 border-gray-400 text-sm leading-8 text-muted-foreground">
+              <code>{error.data}</code>
             </pre>
+            <LinkButton to="/tags" variant={"outline"} className="mt-8">
+              <ArrowLeft className="h-4 w-4 mr-2" /> All tags
+            </LinkButton>
           </div>
         </div>
       </div>
@@ -179,18 +184,18 @@ export function ErrorBoundary() {
   }
 
   return (
-    <div className="relative overflow-hidden bg-white py-16">
+    <div className="relative overflow-hidden py-16">
       <div className="relative px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-prose text-lg">
           <h1>
-            <span className="block text-center text-lg font-semibold text-cornflower-600">
+            <span className="block text-center text-lg font-semibold text-primary">
               Uh oh...
             </span>
           </h1>
-
-          <pre className="mt-8 overflow-auto rounded-md border-2 border-gray-400 bg-white text-sm leading-8 text-gray-800">
+          <pre className="mt-8 overflow-auto rounded-md border-2 border-input text-sm leading-8 text-muted-foreground">
             <code>{errorMessage}</code>
           </pre>
+          Butt
         </div>
       </div>
     </div>
