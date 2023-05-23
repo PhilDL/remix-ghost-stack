@@ -283,7 +283,7 @@ export const Navbar = ({
                     onSelect={() => {
                       command.submit(
                         { search: "tags" },
-                        { action: "/action/command", method: "post" }
+                        { action: "/action/command", method: "get" }
                       );
                     }}
                   >
@@ -294,7 +294,7 @@ export const Navbar = ({
                     onSelect={() => {
                       command.submit(
                         { search: "authors" },
-                        { action: "/action/command", method: "post" }
+                        { action: "/action/command", method: "get" }
                       );
                     }}
                   >
@@ -305,7 +305,7 @@ export const Navbar = ({
                     onSelect={() => {
                       command.submit(
                         { search: "posts" },
-                        { action: "/action/command", method: "post" }
+                        { action: "/action/command", method: "get" }
                       );
                     }}
                   >

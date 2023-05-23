@@ -3,7 +3,6 @@ import {
   isRouteErrorResponse,
   useLoaderData,
   useRouteError,
-  type ShouldRevalidateFunction,
 } from "@remix-run/react";
 import { Star } from "lucide-react";
 import type { Article } from "schema-dts";
@@ -346,14 +345,3 @@ export function ErrorBoundary() {
     </div>
   );
 }
-
-export const shouldRevalidate: ShouldRevalidateFunction = ({
-  formAction,
-  formMethod,
-  defaultShouldRevalidate,
-}) => {
-  if (formMethod === "POST" && formAction?.startsWith("/action/")) {
-    return false;
-  }
-  return defaultShouldRevalidate;
-};

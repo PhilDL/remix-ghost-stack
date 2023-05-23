@@ -11,13 +11,9 @@ import {
   cachedCmdAllTags,
 } from "~/services/ghost.server";
 
-/**
- * action routes prefixed by action like this one are excluded from
- * revalidation.
- */
-export const action: ActionFunction = async ({ request }) => {
-  const form = await request.formData();
-  const search = form.get("search");
+export const loader: LoaderFunction = async ({ request }) => {
+  const url = new URL(request.url);
+  const search = url.searchParams.get("search");
   switch (search) {
     case "tags":
       const tags = await cachedCmdAllTags();
