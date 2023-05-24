@@ -37,12 +37,23 @@ const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
   );
 };
 
+export type CommandInputProps = React.ComponentPropsWithoutRef<
+  typeof CommandPrimitive.Input
+> & {
+  currentPage?: string;
+};
+
 const CommandInput = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Input>,
-  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
->(({ className, ...props }, ref) => (
+  CommandInputProps
+>(({ className, currentPage, ...props }, ref) => (
   <div className="flex items-center border-b px-3" cmdk-input-wrapper="">
     <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+    {currentPage && (
+      <span className="pointer-events-none mr-1 h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
+        {currentPage}
+      </span>
+    )}
     <CommandPrimitive.Input
       ref={ref}
       className={cn(

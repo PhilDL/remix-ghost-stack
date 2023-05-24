@@ -61,14 +61,17 @@ export const CommandBar = () => {
 
   useEffect(() => {
     if (command.formData?.get("search")) {
-      setPages([...pages, command.formData.get("search") as string]);
+      setPages((p) => [...p, command.formData.get("search") as string]);
     }
-  }, [command.formData, pages]);
+  }, [command.formData]);
+
   return (
     <div
       onKeyDown={(e) => {
         // Backspace goes to previous page when search is empty
+        console.log(search);
         if (e.key === "Backspace" && !search) {
+          console.log("backspace");
           e.preventDefault();
           setPages((pages) => pages.slice(0, -1));
         }
@@ -92,6 +95,7 @@ export const CommandBar = () => {
           placeholder={
             page ? `Search ${page}...` : "Type a command or search..."
           }
+          currentPage={page || undefined}
           value={search}
           onValueChange={setSearch}
           disabled={command.state !== "idle" || navigation.state !== "idle"}
