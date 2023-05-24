@@ -8,3 +8,4 @@ vite.config.ts
 test-report
 test-results
 playwright-report
+build

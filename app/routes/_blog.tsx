@@ -3,8 +3,8 @@ import { json, type LoaderArgs, type V2_MetaFunction } from "@remix-run/node";
 import {
   Link,
   Outlet,
-  ShouldRevalidateFunction,
   useLoaderData,
+  type ShouldRevalidateFunction,
 } from "@remix-run/react";
 import {
   AuthenticityTokenProvider,
@@ -182,7 +182,7 @@ export default function BlogLayout() {
 
   return (
     <AuthenticityTokenProvider token={csrf}>
-      <div className="h-full min-h-full bg-white px-4 lg:container dark:bg-slate-950 lg:mx-auto lg:max-w-7xl">
+      <div className="flex h-full min-h-full flex-col justify-between bg-white px-4 lg:container dark:bg-slate-950 lg:mx-auto lg:max-w-7xl">
         <Navbar settings={settings} user={user} />
         <Outlet />
         <Footer

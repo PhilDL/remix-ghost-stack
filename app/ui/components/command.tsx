@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { DialogProps } from "@radix-ui/react-dialog";
+import type { DialogProps } from "@radix-ui/react-dialog";
 import { Command as CommandPrimitive } from "cmdk";
 import { Search } from "lucide-react";
 import { cn } from "~/ui/utils";
@@ -135,6 +135,7 @@ const CommandLoading = React.forwardRef<
     </div>
   </CommandPrimitive.Loading>
 ));
+CommandLoading.displayName = CommandPrimitive.Loading.displayName;
 
 CommandItem.displayName = CommandPrimitive.Item.displayName;
 

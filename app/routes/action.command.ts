@@ -1,9 +1,4 @@
-import {
-  json,
-  redirect,
-  type ActionFunction,
-  type LoaderFunction,
-} from "@remix-run/node";
+import { json, type LoaderFunction } from "@remix-run/node";
 
 import {
   cachedCmdAllAuthors,

@@ -14,8 +14,8 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  ShouldRevalidateFunction,
   useLoaderData,
+  type ShouldRevalidateFunction,
 } from "@remix-run/react";
 import clsx from "clsx";
 import { ClientOnly } from "remix-utils";

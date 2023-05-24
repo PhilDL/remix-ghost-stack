@@ -1,7 +1,7 @@
 import * as React from "react";
 import { renderers, type RenderableTreeNodes } from "@markdoc/markdoc";
 // import { Fence } from "./fence";
-import { Highlight, themes } from "prism-react-renderer";
+import { Highlight } from "prism-react-renderer";
 
 // import dracula from "prism-react-renderer/themes/dracula";
 

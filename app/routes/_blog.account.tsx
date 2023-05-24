@@ -16,7 +16,7 @@ import { AuthenticityTokenInput, verifyAuthenticityToken } from "remix-utils";
 import type Stripe from "stripe";
 import invariant from "tiny-invariant";
 
-import { Badge, Button, LinkButton } from "~/ui/components";
+import { Badge, Button } from "~/ui/components";
 import { Avatar, AvatarFallback, AvatarImage } from "~/ui/components/avatar";
 import {
   Card,

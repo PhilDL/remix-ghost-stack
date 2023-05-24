@@ -164,11 +164,11 @@ export function ErrorBoundary() {
               </span>
             </h1>
 
-            <pre className="mt-8 p-8 overflow-auto rounded-md border-2 border-gray-400 text-sm leading-8 text-muted-foreground">
+            <pre className="mt-8 overflow-auto rounded-md border-2 border-gray-400 p-8 text-sm leading-8 text-muted-foreground">
               <code>{error.data}</code>
             </pre>
             <LinkButton to="/tags" variant={"outline"} className="mt-8">
-              <ArrowLeft className="h-4 w-4 mr-2" /> All tags
+              <ArrowLeft className="mr-2 h-4 w-4" /> All tags
             </LinkButton>
           </div>
         </div>

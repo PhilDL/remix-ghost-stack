@@ -17,7 +17,6 @@ export async function getSession(request: Request) {
   return sessionStorage.getSession(cookie);
 }
 
-
 export async function logout(request: Request) {
   const session = await getSession(request);
   return redirect("/", {

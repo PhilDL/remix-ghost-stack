@@ -6,4 +6,5 @@ node_modules
 
 /app/styles/tailwind.css
 .react-email
-playwright-report
+/playwright-report
+build
