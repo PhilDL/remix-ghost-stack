@@ -182,7 +182,7 @@ export default function BlogLayout() {
 
   return (
     <AuthenticityTokenProvider token={csrf}>
-      <div className="flex h-full min-h-full flex-col justify-between bg-white px-4 lg:container dark:bg-slate-950 lg:mx-auto lg:max-w-7xl">
+      <div className="flex min-h-full flex-col justify-between bg-white px-4 lg:container dark:bg-slate-950 lg:mx-auto lg:max-w-7xl">
         <Navbar settings={settings} user={user} />
         <Outlet />
         <Footer
