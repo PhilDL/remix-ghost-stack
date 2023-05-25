@@ -91,7 +91,7 @@ export default function Contact() {
           )}
         </div>
         <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Button type="submit" variant="primary">
+          <Button type="submit" variant="default">
             Submit
           </Button>
         </div>

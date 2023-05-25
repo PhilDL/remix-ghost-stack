@@ -56,10 +56,10 @@ export default function Index() {
             <BoxedContent.BoxedContentBody className="gap-4 divide-none lg:px-4">
               <SocialLinks
                 className="flex justify-start gap-2"
-                facebook="#"
-                twitter="#"
+                facebook={settings.facebook || undefined}
+                twitter={settings.twitter || undefined}
                 linkedin="#"
-                github="#"
+                github={"https://github.com/PhilDL"}
                 rss="#"
               />
             </BoxedContent.BoxedContentBody>

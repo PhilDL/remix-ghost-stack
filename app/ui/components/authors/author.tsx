@@ -9,7 +9,7 @@ export const Author = ({ author }: { author: TAuthor }) => {
   // you have access to the author's cover_image also if you want to display it
   // in this preview
   return (
-    <Card className="">
+    <Card className="flex flex-col justify-around">
       {/* <div className="w-full px-6 py-24">
         {author.cover_image && (
           <img src={author.cover_image ?? ""} alt={author.name} />
@@ -30,7 +30,7 @@ export const Author = ({ author }: { author: TAuthor }) => {
           </span>
         </Link>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-1">
         <Excerpt excerpt={author.bio || ""} />
       </CardContent>
       <CardFooter>

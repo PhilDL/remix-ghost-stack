@@ -43,10 +43,10 @@ export const Footer = ({
             </p>
             <SocialLinks
               className="flex justify-start gap-2"
-              facebook="#"
-              twitter="#"
+              facebook={settings.facebook || undefined}
+              twitter={settings.twitter || undefined}
               linkedin="#"
-              github="#"
+              github={"https://github.com/PhilDL"}
               rss="#"
             />
           </div>

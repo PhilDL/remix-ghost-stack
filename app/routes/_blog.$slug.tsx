@@ -1,6 +1,7 @@
 import { json, type LoaderArgs, type V2_MetaFunction } from "@remix-run/node";
 import {
   isRouteErrorResponse,
+  Link,
   useLoaderData,
   useRouteError,
 } from "@remix-run/react";
@@ -200,7 +201,10 @@ export default function PostOrPage() {
                   alt={post.primary_author.name}
                   className="w-12 rounded-md"
                 />{" "}
-                <div className="flex flex-col items-start gap-2">
+                <Link
+                  to={`/author/${post.primary_author.slug}`}
+                  className="flex flex-col items-start gap-2"
+                >
                   {post.primary_author.name}
                   <span className="flex flex-row items-center justify-center gap-2 text-center text-xs text-slate-500 dark:text-slate-400">
                     {publishedDate.toLocaleDateString("en-GB", {
@@ -214,7 +218,7 @@ export default function PostOrPage() {
                       <Star className="inline-flex text-saffron-400 " />
                     )}
                   </span>
-                </div>
+                </Link>
               </div>
             )}
             <h1 className="mb-3 mt-0 block text-center text-3xl font-bold leading-8 tracking-tight text-slate-900 dark:text-slate-100 sm:text-4xl">
