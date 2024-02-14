@@ -4,10 +4,10 @@ import {
   useLoaderData,
   useRouteError,
 } from "@remix-run/react";
+import type { loader as rootBlogLoader } from "~/routes/_blog";
 import { ArrowLeft } from "lucide-react";
 import type { CreativeWorkSeries } from "schema-dts";
 import invariant from "tiny-invariant";
-import type { loader as rootBlogLoader } from "~/routes/_blog";
 
 import { LinkButton } from "~/ui/components";
 import { PostsList } from "~/ui/components/posts/posts-list";
@@ -49,14 +49,12 @@ export const meta: V2_MetaFunction<
   };
 
   return [
-    { charset: "utf-8" },
     { title: tag.meta_title || tag.og_title || tag.name },
     {
       tagName: "link",
       rel: "canonical",
       href: tag.url || "",
     },
-    { name: "viewport", content: "width=device-width,initial-scale=1" },
     {
       name: "description",
       content: tag.meta_description || tag.og_description || tag.description,

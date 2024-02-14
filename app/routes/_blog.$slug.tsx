@@ -5,9 +5,9 @@ import {
   useLoaderData,
   useRouteError,
 } from "@remix-run/react";
+import type { loader as rootBlogLoader } from "~/routes/_blog";
 import { Star } from "lucide-react";
 import type { Article } from "schema-dts";
-import type { loader as rootBlogLoader } from "~/routes/_blog";
 
 import { Markdown } from "~/services/markdoc/components/markdown";
 import { LinkButton } from "~/ui/components";
@@ -80,14 +80,12 @@ export const meta: V2_MetaFunction<
   };
 
   return [
-    { charset: "utf-8" },
     { title: post.meta_title || post.title },
     {
       tagName: "link",
       rel: "canonical",
       href: post.url || "",
     },
-    { name: "viewport", content: "width=device-width,initial-scale=1" },
     {
       name: "description",
       content: post.meta_description || post.excerpt,

@@ -43,9 +43,7 @@ export const links: LinksFunction = () => {
 };
 
 export const meta: V2_MetaFunction = () => [
-  { charset: "utf-8" },
   { title: "Remix Ghost Stack - Remix App with Ghost CMS in Headless Mode" },
-  { name: "viewport", content: "width=device-width,initial-scale=1" },
 ];
 
 export async function loader({ request }: LoaderArgs) {
@@ -61,6 +59,8 @@ function App() {
   return (
     <html lang="en" className={clsx("h-full", theme)}>
       <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
         <NonFlashOfWrongThemeEls ssrTheme={Boolean(data.theme)} />
