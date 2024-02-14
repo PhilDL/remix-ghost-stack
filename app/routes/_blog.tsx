@@ -47,9 +47,7 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
     description: settings.description,
   };
   return [
-    { charset: "utf-8" },
     { title: settings.title },
-    { name: "viewport", content: "width=device-width,initial-scale=1" },
     {
       name: "description",
       content: settings.meta_description || settings.description,
