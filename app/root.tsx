@@ -17,13 +17,13 @@ import {
   useLoaderData,
   type ShouldRevalidateFunction,
 } from "@remix-run/react";
-import clsx from "clsx";
-import { ClientOnly } from "remix-utils";
 import {
   NonFlashOfWrongThemeEls,
   ThemeProvider,
   useTheme,
 } from "~/ui/utils/theme-provider";
+import clsx from "clsx";
+import { ClientOnly } from "remix-utils";
 
 import { Toaster } from "~/ui/components/toaster";
 
@@ -45,7 +45,7 @@ export const links: LinksFunction = () => {
 export const meta: V2_MetaFunction = () => [
   { charset: "utf-8" },
   { title: "Remix Ghost Stack - Remix App with Ghost CMS in Headless Mode" },
-  { viewport: "width=device-width,initial-scale=1" },
+  { name: "viewport", content: "width=device-width,initial-scale=1" },
 ];
 
 export async function loader({ request }: LoaderArgs) {
