@@ -1,4 +1,4 @@
-import { json, type LoaderArgs, type V2_MetaFunction } from "@remix-run/node";
+import { json, type LoaderFunctionArgs, type MetaFunction } from "@remix-run/node";
 import {
   isRouteErrorResponse,
   Link,
@@ -17,7 +17,7 @@ import { PostSubscribeCTA } from "~/ui/components/subscribe-overlay";
 import { getPostOrPage } from "~/domain/get-post-or-page.server";
 import { auth } from "~/services/auth.server";
 
-export const meta: V2_MetaFunction<
+export const meta: MetaFunction<
   typeof loader,
   { "routes/_blog": typeof rootBlogLoader }
 > = ({ data, matches, location, params }) => {
@@ -154,7 +154,7 @@ export const meta: V2_MetaFunction<
   ];
 };
 
-export async function loader({ request, params }: LoaderArgs) {
+export async function loader({ request, params }: LoaderFunctionArgs) {
   const res = await getPostOrPage(
     {
       slug: params.slug,

@@ -1,4 +1,4 @@
-import { json, type LoaderFunction } from "@remix-run/node";
+import { json, type LoaderFunctionArgs } from "@remix-run/node";
 
 import {
   cachedCmdAllAuthors,
@@ -6,7 +6,7 @@ import {
   cachedCmdAllTags,
 } from "~/services/ghost.server";
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const search = url.searchParams.get("search");
   switch (search) {

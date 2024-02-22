@@ -8,6 +8,7 @@ export const env = createEnv({
     GHOST_CONTENT_API_KEY: z.string().min(1),
     GHOST_ADMIN_API_KEY: z.string().min(1),
     MAGIC_LINK_SECRET: z.string().min(1),
+    ADMIN_SESSION_SECRET: z.string().min(1),
     SESSION_SECRET: z.string().min(1),
     STRIPE_PUBLIC_KEY: z.string().optional(),
     STRIPE_SECRET_KEY: z.string().min(1),

@@ -58,10 +58,10 @@ const sheetVariants = cva(
   {
     variants: {
       position: {
-        top: "w-full animate-in slide-in-from-top duration-300",
-        bottom: "w-full animate-in slide-in-from-bottom duration-300",
-        left: "h-full animate-in slide-in-from-left duration-300",
-        right: "h-full animate-in slide-in-from-right duration-300",
+        top: "w-full duration-300 animate-in slide-in-from-top",
+        bottom: "w-full duration-300 animate-in slide-in-from-bottom",
+        left: "h-full duration-300 animate-in slide-in-from-left",
+        right: "h-full duration-300 animate-in slide-in-from-right",
       },
       size: {
         content: "",
@@ -158,7 +158,7 @@ const SheetContent = React.forwardRef<
     >
       {children}
       <SheetPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
-        <X className="h-4 w-4" />
+        <X className="size-4" />
         <span className="sr-only">Close</span>
       </SheetPrimitive.Close>
     </SheetPrimitive.Content>

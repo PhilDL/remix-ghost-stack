@@ -2,8 +2,7 @@ import { Separator } from "../separator";
 import { Form, Link, useNavigation } from "@remix-run/react";
 import type { Settings } from "@ts-ghost/content-api";
 import { CheckCircle } from "lucide-react";
-import { AuthenticityTokenInput } from "remix-utils";
-
+import { AuthenticityTokenInput } from "remix-utils/csrf/react";
 import {
   Alert,
   AlertDescription,
@@ -14,7 +13,7 @@ import {
 } from "~/ui/components";
 import { SocialLinks } from "~/ui/components/social-links";
 
-import type { MemberSession } from "~/services/auth.server";
+import type { MemberSession } from "~/services/auth.server";;
 
 export type FooterProps = {
   settings: Settings;
@@ -80,7 +79,7 @@ export const Footer = ({
                   <h3 className="font-bold text-white">Subscribe</h3>
                   {magicLinkSent ? (
                     <Alert>
-                      <CheckCircle className="h-4 w-4" />
+                      <CheckCircle className="size-4" />
                       <AlertTitle>Thank you for subscribing</AlertTitle>
                       <AlertDescription>
                         Please check your inbox to confirm your email.

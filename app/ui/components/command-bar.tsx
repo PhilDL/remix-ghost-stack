@@ -20,7 +20,6 @@ import {
   CommandList,
   CommandLoading,
   CommandSeparator,
-  CommandShortcut,
 } from "~/ui/components/command";
 
 export const CommandBar = () => {
@@ -61,7 +60,7 @@ export const CommandBar = () => {
 
   useEffect(() => {
     if (command.formData?.get("search")) {
-      setPages((p) => [...p, command.formData.get("search") as string]);
+      setPages((p) => [...p, command.formData?.get("search") as string]);
     }
   }, [command.formData]);
 
@@ -119,7 +118,7 @@ export const CommandBar = () => {
                     );
                   }}
                 >
-                  <Tags className="mr-2 h-4 w-4" />
+                  <Tags className="mr-2 size-4" />
                   <span>Search Tags</span>
                 </CommandItem>
                 <CommandItem
@@ -130,7 +129,7 @@ export const CommandBar = () => {
                     );
                   }}
                 >
-                  <UserCircle className="mr-2 h-4 w-4" />
+                  <UserCircle className="mr-2 size-4" />
                   <span>Search Authors</span>
                 </CommandItem>
                 <CommandItem
@@ -141,7 +140,7 @@ export const CommandBar = () => {
                     );
                   }}
                 >
-                  <Book className="mr-2 h-4 w-4" />
+                  <Book className="mr-2 size-4" />
                   <span>Search Posts</span>
                 </CommandItem>
               </CommandGroup>
@@ -153,7 +152,7 @@ export const CommandBar = () => {
                   }}
                   disabled={navigation.state !== "idle"}
                 >
-                  <User className="mr-2 h-4 w-4" />
+                  <User className="mr-2 size-4" />
                   <span>Profile</span>
                 </CommandItem>
               </CommandGroup>
@@ -163,7 +162,7 @@ export const CommandBar = () => {
             <>
               {command.state !== "idle" ? (
                 <CommandLoading>
-                  <Loader2Icon className="mr-2 h-4 w-4 animate-spin text-muted-foreground" />
+                  <Loader2Icon className="mr-2 size-4 animate-spin text-muted-foreground" />
                   <span className="text-muted-foreground">Loading...</span>
                 </CommandLoading>
               ) : (
@@ -176,7 +175,7 @@ export const CommandBar = () => {
                       }}
                       disabled={navigation.state !== "idle"}
                     >
-                      <TagIcon className="mr-2 h-4 w-4" />
+                      <TagIcon className="mr-2 size-4" />
                       <span>{tag.name}</span>
                     </CommandItem>
                   ))}
@@ -188,7 +187,7 @@ export const CommandBar = () => {
             <>
               {command.state !== "idle" ? (
                 <CommandLoading>
-                  <Loader2Icon className="mr-2 h-4 w-4 animate-spin text-muted-foreground" />
+                  <Loader2Icon className="mr-2 size-4 animate-spin text-muted-foreground" />
                   <span className="text-muted-foreground">Loading...</span>
                 </CommandLoading>
               ) : (
@@ -201,7 +200,7 @@ export const CommandBar = () => {
                       }}
                       disabled={navigation.state !== "idle"}
                     >
-                      <UserCircle className="mr-2 h-4 w-4" />
+                      <UserCircle className="mr-2 size-4" />
                       <span>{author.name}</span>
                     </CommandItem>
                   ))}
@@ -213,7 +212,7 @@ export const CommandBar = () => {
             <>
               {command.state !== "idle" ? (
                 <CommandLoading>
-                  <Loader2Icon className="mr-2 h-4 w-4 animate-spin text-muted-foreground" />
+                  <Loader2Icon className="mr-2 size-4 animate-spin text-muted-foreground" />
                   <span className="text-muted-foreground">Loading...</span>
                 </CommandLoading>
               ) : (

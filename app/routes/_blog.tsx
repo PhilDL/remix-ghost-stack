@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { json, type LoaderArgs, type V2_MetaFunction } from "@remix-run/node";
+import { json, type LoaderFunctionArgs, type MetaFunction } from "@remix-run/node";
 import {
   Link,
   Outlet,
@@ -8,9 +8,9 @@ import {
 } from "@remix-run/react";
 import {
   AuthenticityTokenProvider,
-  createAuthenticityToken,
-} from "remix-utils";
+} from "remix-utils/csrf/react";
 import type { WebSite } from "schema-dts";
+import { csrf } from "~/services/csrf.server";
 
 import { Footer } from "~/ui/components/layout/footer";
 import { Navbar } from "~/ui/components/layout/navbar";
@@ -26,7 +26,7 @@ import {
 import { cachedGetSiteSettings } from "~/services/ghost.server";
 import { sessionStorage } from "~/services/session.server";
 
-export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   if (!data) {
     return [];
   }
@@ -99,7 +99,7 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   ];
 };
 
-export async function loader({ request }: LoaderArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
   const settings = await cachedGetSiteSettings();
   let user = await auth.isAuthenticated(request);
   const toastSession = await getFlashMessageSession(
@@ -107,10 +107,11 @@ export async function loader({ request }: LoaderArgs) {
   );
   const toastMessage = toastSession.get("toastMessage") as ToastMessage;
   let session = await sessionStorage.getSession(request.headers.get("Cookie"));
-  let csrf = createAuthenticityToken(session);
+  let [token, cookieHeader] = await csrf.commitToken();
 
   const headers = new Headers();
   headers.append("Set-Cookie", await sessionStorage.commitSession(session));
+  if (cookieHeader) headers.append("Set-Cookie", cookieHeader);
 
   if (!toastMessage) {
     return json(
@@ -120,7 +121,7 @@ export async function loader({ request }: LoaderArgs) {
         toastMessage: null,
         magicLinkSent: session.has("auth:otp"),
         magicLinkEmail: session.get("auth:email"),
-        csrf,
+        csrf: token,
       },
       {
         headers,
@@ -135,7 +136,7 @@ export async function loader({ request }: LoaderArgs) {
       toastMessage,
       magicLinkSent: session.has("auth:otp"),
       magicLinkEmail: session.get("auth:email"),
-      csrf,
+      csrf: token,
     },
     {
       headers,

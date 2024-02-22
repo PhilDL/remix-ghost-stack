@@ -1,4 +1,4 @@
-import { json, type LoaderArgs, type V2_MetaFunction } from "@remix-run/node";
+import { json, type LoaderFunctionArgs, type MetaFunction } from "@remix-run/node";
 import {
   isRouteErrorResponse,
   useLoaderData,
@@ -14,7 +14,7 @@ import { PostsList } from "~/ui/components/posts/posts-list";
 
 import { getTagPage } from "~/services/ghost.server";
 
-export const meta: V2_MetaFunction<
+export const meta: MetaFunction<
   typeof loader,
   { "routes/_blog": typeof rootBlogLoader }
 > = ({ data, matches, location, params }) => {
@@ -108,7 +108,7 @@ export const meta: V2_MetaFunction<
   ];
 };
 
-export async function loader({ request, params }: LoaderArgs) {
+export async function loader({ request, params }: LoaderFunctionArgs) {
   let slug = params.slug;
   invariant(slug, "Slug is required");
   const { posts, tag, postsMeta } = await getTagPage(slug);
@@ -127,7 +127,7 @@ export default function Index() {
         <img
           src={tag.feature_image || "/images/ghost-logo.png"}
           alt={tag.name}
-          className="rounded-md sm:h-32 sm:w-32"
+          className="rounded-md sm:size-32"
         />
         <div>
           <h1 className="text-3xl font-semibold">{tag.name}</h1>
@@ -166,7 +166,7 @@ export function ErrorBoundary() {
               <code>{error.data}</code>
             </pre>
             <LinkButton to="/tags" variant={"outline"} className="mt-8">
-              <ArrowLeft className="mr-2 h-4 w-4" /> All tags
+              <ArrowLeft className="mr-2 size-4" /> All tags
             </LinkButton>
           </div>
         </div>

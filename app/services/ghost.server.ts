@@ -1,6 +1,6 @@
 import { TSGhostAdminAPI } from "@ts-ghost/admin-api";
 import { TSGhostContentAPI } from "@ts-ghost/content-api";
-import { cachified, verboseReporter } from "cachified";
+import { cachified, verboseReporter } from "@epic-web/cachified";
 import invariant from "tiny-invariant";
 import { env } from "~/env";
 

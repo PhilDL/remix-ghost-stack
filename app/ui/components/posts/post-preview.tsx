@@ -61,7 +61,7 @@ export const PostPreview = ({ post }: { post: TPostPreview }) => {
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
-                  <Gem className="mb-1 ml-2 inline-flex h-4 w-4 text-saffron-400" />
+                  <Gem className="mb-1 ml-2 inline-flex size-4 text-saffron-400" />
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>
@@ -92,7 +92,7 @@ export const PostPreview = ({ post }: { post: TPostPreview }) => {
           >
             <img
               src={post.primary_author.profile_image || ""}
-              className="h-8 w-8 rounded-md"
+              className="size-8 rounded-md"
               alt={post.primary_author.name}
             />
             <div className="flex flex-col">

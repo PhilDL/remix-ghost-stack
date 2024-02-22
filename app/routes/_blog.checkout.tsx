@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { json, type LoaderArgs } from "@remix-run/node";
+import { json, type LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData, useSubmit } from "@remix-run/react";
 import { Loader } from "lucide-react";
 
@@ -17,7 +17,7 @@ import { useInterval } from "~/ui/hooks/use-interval";
 import { auth } from "~/services/auth.server";
 import { getMemberActiveSubscriptions } from "~/services/ghost.server";
 
-export async function loader({ request }: LoaderArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
   const user = await auth.isAuthenticated(request, {
     failureRedirect: "/login",
   });

@@ -1,17 +1,17 @@
-import { json, redirect, type DataFunctionArgs } from "@remix-run/node";
+import { json, redirect, type ActionFunctionArgs, type LoaderFunctionArgs } from "@remix-run/node";
 import { createStripeCustomerPortalSession } from "~/services/stripe/create-customer-portal";
 
 import { auth } from "~/services/auth.server";
 import { getMemberActiveSubscriptions } from "~/services/ghost.server";
 
-export async function loader({ request }: DataFunctionArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
   await auth.isAuthenticated(request, {
     failureRedirect: "/",
   });
   return redirect("/account");
 }
 
-export async function action({ request }: DataFunctionArgs) {
+export async function action({ request }: ActionFunctionArgs) {
   const user = await auth.isAuthenticated(request, {
     failureRedirect: "/",
   });

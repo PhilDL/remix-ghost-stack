@@ -1,11 +1,11 @@
 import { Form, useLoaderData, useNavigation } from "@remix-run/react";
 import {
   json,
-  type ActionArgs,
-  type LoaderArgs,
+  type ActionFunctionArgs,
+  type LoaderFunctionArgs,
 } from "@remix-run/server-runtime";
 import { Loader, Lock } from "lucide-react";
-import { AuthenticityTokenInput, verifyAuthenticityToken } from "remix-utils";
+import { AuthenticityTokenInput } from "remix-utils/csrf/react";
 
 import {
   Alert,
@@ -23,9 +23,10 @@ import {
 } from "~/ui/components";
 
 import { auth } from "~/services/auth.server";
-import { getSession, sessionStorage } from "~/services/session.server";
+import { sessionStorage } from "~/services/session.server";
+import { csrf } from "~/services/csrf.server";
 
-export async function loader({ request }: LoaderArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
   await auth.isAuthenticated(request, { successRedirect: "/account" });
   let session = await sessionStorage.getSession(request.headers.get("Cookie"));
   const error = session.get(auth.sessionErrorKey);
@@ -45,11 +46,10 @@ export async function loader({ request }: LoaderArgs) {
   );
 }
 
-export async function action({ request }: ActionArgs) {
+export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.clone().formData();
-  const session = await getSession(request);
   // CSRF Protection
-  await verifyAuthenticityToken(formData, session);
+  await csrf.validate(formData, request.headers);
 
   await auth.authenticate("OTP", request, {
     successRedirect: "/account",
@@ -119,9 +119,9 @@ export default function Welcome() {
             aria-disabled={navigation.formAction === "/welcome"}
           >
             {navigation.formAction === "/welcome" ? (
-              <Loader className="mr-2 h-4 w-4 animate-spin" />
+              <Loader className="mr-2 size-4 animate-spin" />
             ) : (
-              <Lock className="mr-2 h-4 w-4" />
+              <Lock className="mr-2 size-4" />
             )}{" "}
             Continue
           </Button>

@@ -25,9 +25,9 @@ export const SocialLinks = ({
           href={`https://facebook.com/${facebook.replace(/^\//, "")}`}
           rel="noopener noreferrer"
           target="_blank"
-          className="flex h-8 w-8 items-center justify-center rounded bg-blue-800 hover:bg-blue-600"
+          className="flex size-8 items-center justify-center rounded bg-blue-800 hover:bg-blue-600"
         >
-          <Facebook className="h-4 w-4 text-white" />
+          <Facebook className="size-4 text-white" />
           <span className="sr-only">Facebook Profile</span>
         </a>
       )}
@@ -36,9 +36,9 @@ export const SocialLinks = ({
           href={`https://twitter.com/${twitter.replace(/^@/, "")}`}
           rel="noopener noreferrer"
           target="_blank"
-          className="flex h-8 w-8 items-center justify-center rounded bg-cyan-500 hover:bg-cyan-300"
+          className="flex size-8 items-center justify-center rounded bg-cyan-500 hover:bg-cyan-300"
         >
-          <Twitter className="h-4 w-4 text-white" />
+          <Twitter className="size-4 text-white" />
           <span className="sr-only">Twitter Profile</span>
         </a>
       )}
@@ -47,9 +47,9 @@ export const SocialLinks = ({
           href={linkedin}
           rel="noopener noreferrer"
           target="_blank"
-          className="flex h-8 w-8 items-center justify-center rounded bg-blue-500 hover:bg-blue-300"
+          className="flex size-8 items-center justify-center rounded bg-blue-500 hover:bg-blue-300"
         >
-          <Linkedin className="h-4 w-4 text-white" />
+          <Linkedin className="size-4 text-white" />
           <span className="sr-only">LinkedIn Profile</span>
         </a>
       )}
@@ -58,18 +58,18 @@ export const SocialLinks = ({
           href={github}
           rel="noopener noreferrer"
           target="_blank"
-          className="flex h-8 w-8 items-center justify-center rounded bg-gray-800 hover:bg-gray-600"
+          className="flex size-8 items-center justify-center rounded bg-gray-800 hover:bg-gray-600"
         >
-          <Github className="h-4 w-4 text-white" />
+          <Github className="size-4 text-white" />
           <span className="sr-only">GitHub Organization</span>
         </a>
       )}
       {rss && (
         <Link
           to={rss}
-          className="flex h-8 w-8 items-center justify-center rounded bg-red-500 hover:bg-red-300"
+          className="flex size-8 items-center justify-center rounded bg-red-500 hover:bg-red-300"
         >
-          <Rss className="h-4 w-4 text-white" />
+          <Rss className="size-4 text-white" />
           <span className="sr-only">RSS Feed</span>
         </Link>
       )}

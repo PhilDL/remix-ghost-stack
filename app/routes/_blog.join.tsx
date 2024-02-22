@@ -1,10 +1,10 @@
 import * as React from "react";
 import {
   json,
-  type ActionArgs,
-  type LoaderArgs,
+  type ActionFunctionArgs,
+  type LoaderFunctionArgs,
   type Session,
-  type V2_MetaFunction,
+  type MetaFunction,
 } from "@remix-run/node";
 import {
   Form,
@@ -14,7 +14,7 @@ import {
 } from "@remix-run/react";
 import { errorMessagesFor, inputFromFormData } from "domain-functions";
 import { CheckCircle, Loader, MailIcon } from "lucide-react";
-import { AuthenticityTokenInput, verifyAuthenticityToken } from "remix-utils";
+import { AuthenticityTokenInput } from "remix-utils/csrf/react";
 import type { loader as rootBlogLoader } from "~/routes/_blog";
 import type { UwrapJSONLoaderData } from "~/services/types";
 import { useMatchesData } from "~/services/utils";
@@ -44,9 +44,10 @@ import {
   commitFlashMessageSession,
   redirectWithFlashMessage,
 } from "~/services/flash-message.server";
-import { getSession, sessionStorage } from "~/services/session.server";
+import { sessionStorage } from "~/services/session.server";
+import { csrf } from "~/services/csrf.server";
 
-export async function loader({ request }: LoaderArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
   await auth.isAuthenticated(request, { successRedirect: "/account" });
   let session = await sessionStorage.getSession(request.headers.get("Cookie"));
   const error = session.get(auth.sessionErrorKey);
@@ -64,10 +65,10 @@ export async function loader({ request }: LoaderArgs) {
   );
 }
 
-export async function action({ request }: ActionArgs) {
+export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.clone().formData();
   // CSRF Protection
-  await verifyAuthenticityToken(formData, await getSession(request));
+  await csrf.validate(formData, request.headers);
 
   const createOperation = await createMember(inputFromFormData(formData));
   if (createOperation.success) {
@@ -102,7 +103,7 @@ export async function action({ request }: ActionArgs) {
   return redirectWithFlashMessage(`/join`, flash);
 }
 
-export const meta: V2_MetaFunction = () => {
+export const meta: MetaFunction = () => {
   return [
     {
       title: "Join",
@@ -140,7 +141,7 @@ export default function LoginPage() {
           )}
           {magicLinkSent && (
             <Alert>
-              <CheckCircle className="h-4 w-4" />
+              <CheckCircle className="size-4" />
               <AlertTitle>Check your Inbox</AlertTitle>
               <AlertDescription>
                 Successfully sent magic link{" "}
@@ -241,9 +242,9 @@ export default function LoginPage() {
             >
               {navigation.formAction === "/join" &&
               navigation.state === "submitting" ? (
-                <Loader className="mr-2 h-4 w-4 animate-spin" />
+                <Loader className="mr-2 size-4 animate-spin" />
               ) : (
-                <MailIcon className="mr-2 h-4 w-4" />
+                <MailIcon className="mr-2 size-4" />
               )}{" "}
               Subscribe
             </Button>

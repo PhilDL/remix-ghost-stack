@@ -7,10 +7,10 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
+  css: { postcss: { plugins: [] } },
   test: {
-    globals: true,
-    environment: "happy-dom",
     include: ["./app/**/*.test.{ts,tsx}"],
     setupFiles: ["./test/setup-test-env.ts"],
+    globals: true,
   },
 });

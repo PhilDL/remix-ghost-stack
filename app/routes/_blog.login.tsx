@@ -1,10 +1,10 @@
 import * as React from "react";
 import {
   json,
-  type ActionArgs,
-  type LoaderArgs,
+  type ActionFunctionArgs,
+  type LoaderFunctionArgs,
   type Session,
-  type V2_MetaFunction,
+  type MetaFunction,
 } from "@remix-run/node";
 import {
   Form,
@@ -13,7 +13,7 @@ import {
   useSearchParams,
 } from "@remix-run/react";
 import { CheckCircle, Loader, Lock, MailCheck, Stars } from "lucide-react";
-import { AuthenticityTokenInput, verifyAuthenticityToken } from "remix-utils";
+import { AuthenticityTokenInput } from "remix-utils/csrf/react";
 
 import {
   Alert,
@@ -40,8 +40,9 @@ import {
   commitFlashMessageSession,
 } from "~/services/flash-message.server";
 import { getSession, sessionStorage } from "~/services/session.server";
+import { csrf } from "~/services/csrf.server";
 
-export async function loader({ request }: LoaderArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
   await auth.isAuthenticated(request, { successRedirect: "/account" });
   let session = await getSession(request);
   const error = session.get(auth.sessionErrorKey);
@@ -59,11 +60,11 @@ export async function loader({ request }: LoaderArgs) {
   );
 }
 
-export async function action({ request }: ActionArgs) {
+export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.clone().formData();
   const session = await getSession(request);
   // CSRF Protection
-  await verifyAuthenticityToken(formData, session);
+  await csrf.validate(formData, request.headers);
 
   const email = session.get("auth:email") || formData.get("email");
 
@@ -96,7 +97,7 @@ export async function action({ request }: ActionArgs) {
   });
 }
 
-export const meta: V2_MetaFunction = () => {
+export const meta: MetaFunction = () => {
   return [
     {
       title: "Login",
@@ -116,7 +117,7 @@ export default function LoginPage() {
         <Card className="mx-auto w-full max-w-md px-8">
           <CardHeader>
             <CardTitle className="flex">
-              <MailCheck className="mr-2 h-4 w-4" /> Check your Inbox
+              <MailCheck className="mr-2 size-4" /> Check your Inbox
             </CardTitle>
             <CardDescription>
               We sent a one-time code to{" "}
@@ -170,9 +171,9 @@ export default function LoginPage() {
             </Form>
             <Button form="otpCode" disabled={navigation.state !== "idle"}>
               {navigation.state !== "idle" ? (
-                <Loader className="mr-2 h-4 w-4 animate-spin" />
+                <Loader className="mr-2 size-4 animate-spin" />
               ) : (
-                <Lock className="mr-2 h-4 w-4" />
+                <Lock className="mr-2 size-4" />
               )}{" "}
               Continue
             </Button>
@@ -195,7 +196,7 @@ export default function LoginPage() {
             )}
             {magicLinkSent && (
               <Alert>
-                <CheckCircle className="h-4 w-4" />
+                <CheckCircle className="size-4" />
                 <AlertTitle>Check your Inbox</AlertTitle>
                 <AlertDescription className="text-muted-foreground">
                   We already sent a code to{" "}
@@ -258,9 +259,9 @@ export default function LoginPage() {
               }
             >
               {navigation.state !== "idle" ? (
-                <Loader className="mr-2 h-4 w-4 animate-spin" />
+                <Loader className="mr-2 size-4 animate-spin" />
               ) : (
-                <Stars className="mr-2 h-4 w-4" />
+                <Stars className="mr-2 size-4" />
               )}{" "}
               Send Magic link
             </Button>

@@ -23,7 +23,7 @@ export const Tag = ({ tag }: TagProps) => {
       <img
         src={tag.feature_image || "/images/ghost-logo.png"}
         alt={tag.name}
-        className="max-h-32 sm:h-32 sm:w-32"
+        className="max-h-32 sm:size-32"
       />
     </Link>
   );

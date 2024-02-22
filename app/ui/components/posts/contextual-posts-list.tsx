@@ -33,7 +33,7 @@ export const ContextualPostsList = ({
             className="group flex flex-row gap-2 py-4 hover:bg-slate-50 dark:hover:bg-slate-900 lg:px-4"
           >
             <div
-              className="h-20 w-20 rounded bg-cover bg-center"
+              className="size-20 rounded bg-cover bg-center"
               style={{
                 backgroundImage: `url("${ghostImage(
                   post.feature_image || "",

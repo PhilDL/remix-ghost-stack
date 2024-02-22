@@ -1,25 +1,24 @@
 import { Form, useActionData } from "@remix-run/react";
 import { type ActionFunction } from "@remix-run/server-runtime";
-import { errorMessagesForSchema, inputFromFormData } from "domain-functions";
-import { AuthenticityTokenInput, verifyAuthenticityToken } from "remix-utils";
+import { errorMessagesFor, inputFromFormData } from "domain-functions";
+import { AuthenticityTokenInput } from "remix-utils/csrf/react";
 
 import { Button, Input, Label } from "~/ui/components";
 import { Textarea } from "~/ui/components/textarea";
 
 import {
   contactFormHandler,
-  inputContactForm,
 } from "~/domain/contact-form-handler.server";
 import {
   addFlashMessage,
   redirectWithFlashMessage,
 } from "~/services/flash-message.server";
-import { getSession } from "~/services/session.server";
+import { csrf } from "~/services/csrf.server";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.clone().formData();
   // CSRF Protection
-  await verifyAuthenticityToken(formData, await getSession(request));
+  await csrf.validate(formData, request.headers);
 
   const contactOperation = await contactFormHandler(
     inputFromFormData(formData)
@@ -38,10 +37,10 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function Contact() {
   const data = useActionData<typeof action>();
-  const errors = errorMessagesForSchema(
-    data?.inputErrors ?? [],
-    inputContactForm
-  );
+
+  const nameErrors = errorMessagesFor(data?.inputErrors ?? [], "name");
+  const emailErrors = errorMessagesFor(data?.inputErrors ?? [], "email");
+  const messageErrors = errorMessagesFor(data?.inputErrors ?? [], "message");
 
   return (
     <div className="container mx-auto mt-16 max-w-7xl flex-1">
@@ -62,8 +61,8 @@ export default function Contact() {
             placeholder="Your name"
             required={true}
           />
-          {errors && errors.name && (
-            <p className="text-sm text-red-600">{errors.name}</p>
+          {nameErrors && (
+            <p className="text-sm text-red-600">{nameErrors}</p>
           )}
         </div>
         <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -74,8 +73,8 @@ export default function Contact() {
             className="col-span-3"
             required={true}
           />
-          {errors && errors.email && (
-            <p className="text-sm text-red-600">{errors.email}</p>
+          {emailErrors && (
+            <p className="text-sm text-red-600">{emailErrors}</p>
           )}
         </div>
         <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -86,8 +85,8 @@ export default function Contact() {
             className="col-span-3"
             required={true}
           />
-          {errors && errors.message && (
-            <p className="text-sm text-red-600">{errors.message}</p>
+          {messageErrors && (
+            <p className="text-sm text-red-600">{messageErrors}</p>
           )}
         </div>
         <div className="grid w-full max-w-sm items-center gap-1.5">

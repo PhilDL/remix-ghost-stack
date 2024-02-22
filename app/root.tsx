@@ -1,15 +1,14 @@
-import fontStylesheet from "./styles/fonts.css";
-import nordthemeStylesheet from "./styles/nordtheme.css";
-import tailwindStylesheetUrl from "./styles/tailwind.css";
+import fontStylesheet from "./styles/fonts.css?url";
+import nordthemeStylesheet from "./styles/nordtheme.css?url";
+import tailwindStylesheetUrl from "./styles/tailwind.css?url";
 import {
   json,
   type LinksFunction,
-  type LoaderArgs,
-  type V2_MetaFunction,
+  type LoaderFunctionArgs,
+  type MetaFunction,
 } from "@remix-run/node";
 import {
   Links,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
@@ -23,7 +22,7 @@ import {
   useTheme,
 } from "~/ui/utils/theme-provider";
 import clsx from "clsx";
-import { ClientOnly } from "remix-utils";
+import { ClientOnly } from "remix-utils/client-only";
 
 import { Toaster } from "~/ui/components/toaster";
 
@@ -42,11 +41,11 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const meta: V2_MetaFunction = () => [
+export const meta: MetaFunction = () => [
   { title: "Remix Ghost Stack - Remix App with Ghost CMS in Headless Mode" },
 ];
 
-export async function loader({ request }: LoaderArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
   const themeSession = await getThemeSession(request);
   return json({
     theme: themeSession.getTheme(),
@@ -70,7 +69,6 @@ function App() {
         <ScrollRestoration />
         <Scripts />
         <ClientOnly>{() => <Toaster />}</ClientOnly>
-        <LiveReload />
       </body>
     </html>
   );

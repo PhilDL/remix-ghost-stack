@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { PostPreview, type TPostPreview } from "./post-preview";
 import { useFetcher } from "@remix-run/react";
-import { AuthenticityTokenInput } from "remix-utils";
+import { AuthenticityTokenInput } from "remix-utils/csrf/react";
 import { cn } from "~/ui/utils";
 
-import { Button } from "~/ui/components";
+import { Button } from "~/ui/components";;
 
 export type PostsListProps = {
   posts: TPostPreview[];

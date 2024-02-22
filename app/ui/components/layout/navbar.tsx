@@ -116,7 +116,7 @@ export const Navbar = ({
                         <li className="row-span-3">
                           <NavigationMenuLink asChild>
                             <NavLink
-                              className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                              className="flex size-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                               to={menu.href}
                             >
                               <AspectRatio
@@ -174,7 +174,7 @@ export const Navbar = ({
         <Sheet onOpenChange={setMobileMenuOpen} open={mobileMenuOpen}>
           <SheetTrigger asChild>
             <Button variant={"ghost"} size={"sm"} className="lg:hidden">
-              <Menu className="h-6 w-6" />
+              <Menu className="size-6" />
             </Button>
           </SheetTrigger>
           <SheetContent position="right" size={"xl"}>
@@ -226,14 +226,14 @@ export const Navbar = ({
           <DropdownMenuTrigger asChild>
             <Button variant={"ghost"} size={"sm"}>
               {user ? (
-                <Avatar className="h-8 w-8 hover:cursor-pointer">
+                <Avatar className="size-8 hover:cursor-pointer">
                   <AvatarImage src={user.avatar_image} />
                   <AvatarFallback>
                     {nameInitials(user.name || user.email)}
                   </AvatarFallback>
                 </Avatar>
               ) : (
-                <User className="h-6 w-6 hover:cursor-pointer hover:text-slate-800 dark:hover:text-slate-200" />
+                <User className="size-6 hover:cursor-pointer hover:text-slate-800 dark:hover:text-slate-200" />
               )}
             </Button>
           </DropdownMenuTrigger>
@@ -245,12 +245,12 @@ export const Navbar = ({
               <DropdownMenuGroup>
                 <DropdownMenuItem asChild>
                   <Link to="/account">
-                    <User className="mr-2 h-4 w-4" />
+                    <User className="mr-2 size-4" />
                     <span>Profile</span>
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <CreditCard className="mr-2 h-4 w-4" />
+                  <CreditCard className="mr-2 size-4" />
                   <span>Billing</span>
                 </DropdownMenuItem>
               </DropdownMenuGroup>
@@ -258,13 +258,13 @@ export const Navbar = ({
               <DropdownMenuGroup>
                 <DropdownMenuItem asChild>
                   <Link to="/login">
-                    <LogIn className="mr-2 h-4 w-4" />
+                    <LogIn className="mr-2 size-4" />
                     <span>Sign-In</span>
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link to="/join">
-                    <UserPlus className="mr-2 h-4 w-4" />
+                    <UserPlus className="mr-2 size-4" />
                     <span>Join</span>
                   </Link>
                 </DropdownMenuItem>
@@ -278,7 +278,7 @@ export const Navbar = ({
                     <ThemeToggleIcon
                       theme={t}
                       checked={theme === t}
-                      className="mr-2 h-4 w-4"
+                      className="mr-2 size-4"
                     />
                     <span>{t === "light" ? "Light" : "Dark"}</span>
                     <input
@@ -300,7 +300,7 @@ export const Navbar = ({
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                   <Link to="/logout">
-                    <LogOut className="mr-2 h-4 w-4" />
+                    <LogOut className="mr-2 size-4" />
                     <span>Log out</span>
                   </Link>
                 </DropdownMenuItem>

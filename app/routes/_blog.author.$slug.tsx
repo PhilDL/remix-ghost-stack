@@ -1,4 +1,4 @@
-import { json, type LoaderArgs } from "@remix-run/node";
+import { json, type LoaderFunctionArgs } from "@remix-run/node";
 import {
   isRouteErrorResponse,
   useLoaderData,
@@ -10,7 +10,7 @@ import { PostsList } from "~/ui/components/posts/posts-list";
 
 import { getAuthorPage } from "~/services/ghost.server";
 
-export async function loader({ request, params }: LoaderArgs) {
+export async function loader({ request, params }: LoaderFunctionArgs) {
   let slug = params.slug;
   invariant(slug, "Slug is required");
   const { posts, author, postsMeta } = await getAuthorPage(slug);
@@ -29,7 +29,7 @@ export default function Index() {
         <img
           src={author.profile_image || "/images/ghost-logo.png"}
           alt={author.name}
-          className="rounded-md sm:h-32 sm:w-32"
+          className="rounded-md sm:size-32"
         />
         <div>
           <h1 className="text-3xl font-semibold">{author.name}</h1>

@@ -2,7 +2,7 @@ import {
   json,
   redirect,
   type ActionFunction,
-  type LoaderArgs,
+  type LoaderFunctionArgs,
 } from "@remix-run/node";
 import {
   Form,
@@ -12,7 +12,7 @@ import {
 } from "@remix-run/react";
 import type { Tier } from "@ts-ghost/content-api";
 import { CheckCircle, GemIcon } from "lucide-react";
-import { AuthenticityTokenInput, verifyAuthenticityToken } from "remix-utils";
+import { AuthenticityTokenInput } from "remix-utils/csrf/react";
 import type Stripe from "stripe";
 import invariant from "tiny-invariant";
 
@@ -34,11 +34,11 @@ import {
   getMember,
   getMemberActiveSubscriptions,
 } from "~/services/ghost.server";
-import { getSession } from "~/services/session.server";
 import { createCheckoutSession } from "~/services/stripe/checkout.server";
 import { getProductAndPriceByName } from "~/services/stripe/products.server";
+import { csrf } from "~/services/csrf.server";
 
-export let loader = async ({ request }: LoaderArgs) => {
+export let loader = async ({ request }: LoaderFunctionArgs) => {
   // If the user is here, it's already authenticated, if not redirect them to
   // the login page.
   const userSession = await auth.isAuthenticated(request, {
@@ -61,7 +61,7 @@ export let loader = async ({ request }: LoaderArgs) => {
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.clone().formData();
   // CSRF Protection
-  await verifyAuthenticityToken(formData, await getSession(request));
+  await csrf.validate(formData, request.headers);
 
   const user = await auth.isAuthenticated(request, {
     failureRedirect: "/login",
@@ -119,7 +119,7 @@ export const TierCard = ({
           <ul className="ml-4 mt-3 text-sm">
             {tier.benefits.map((benefit, index) => (
               <li key={index} className="flex flex-row items-center">
-                <CheckCircle className="mr-2 h-3 w-3 " />
+                <CheckCircle className="mr-2 size-3 " />
                 {benefit}
               </li>
             ))}
@@ -136,7 +136,7 @@ export const TierCard = ({
                   <Form
                     method="post"
                     key={price.id}
-                    className="flex h-full w-full flex-col items-end justify-between gap-3"
+                    className="flex size-full flex-col items-end justify-between gap-3"
                   >
                     <AuthenticityTokenInput />
                     <input type="hidden" name="priceId" value={price.id} />
@@ -197,7 +197,7 @@ export default function Account() {
                         .filter((sub) => sub.status === "active")
                         .map((sub) => (
                           <Badge key={sub.id}>
-                            <GemIcon className="mr-1 h-3 w-3" />
+                            <GemIcon className="mr-1 size-3" />
                             {sub.tier?.name}
                           </Badge>
                         ))}

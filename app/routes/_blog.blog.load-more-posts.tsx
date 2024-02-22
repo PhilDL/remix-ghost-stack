@@ -1,15 +1,13 @@
-import { json, type ActionArgs } from "@remix-run/node";
+import { json, type ActionFunctionArgs } from "@remix-run/node";
 import { TSGhostContentAPI } from "@ts-ghost/content-api";
-import { verifyAuthenticityToken } from "remix-utils";
 import invariant from "tiny-invariant";
 import { env } from "~/env";
+import { csrf } from "~/services/csrf.server";
 
-import { getSession } from "~/services/session.server";
-
-export async function action({ request }: ActionArgs) {
+export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.clone().formData();
   // CSRF Protection
-  await verifyAuthenticityToken(formData, await getSession(request));
+  await csrf.validate(formData, request.headers);
   const page = parseInt(formData.get("page") as string);
   const next = parseInt(formData.get("next") as string);
   const pages = parseInt(formData.get("pages") as string);

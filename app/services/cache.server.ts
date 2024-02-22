@@ -1,4 +1,8 @@
-import { lruCacheAdapter, type Cache, type CacheEntry } from "cachified";
+import {
+  lruCacheAdapter,
+  type Cache,
+  type CacheEntry,
+} from "@epic-web/cachified";
 import { LRUCache } from "lru-cache";
 
 let cache: Cache;
