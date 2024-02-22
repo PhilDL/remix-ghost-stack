@@ -22,12 +22,18 @@ import {
   CommandSeparator,
 } from "~/ui/components/command";
 
-export const CommandBar = () => {
+export function CommandBar<
+  TData extends {
+    tags: Tag[];
+    authors: Author[];
+    posts: Post[]
+  },
+>() {
   const [open, setOpen] = useState(false);
   const commandRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const navigation = useNavigation();
-  const command = useFetcher();
+  const command = useFetcher<TData>();
   const [pages, setPages] = useState<string[]>([]);
   const page = pages[pages.length - 1];
   const [search, setSearch] = useState("");

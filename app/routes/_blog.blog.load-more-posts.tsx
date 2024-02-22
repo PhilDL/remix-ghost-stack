@@ -69,5 +69,5 @@ export async function action({ request }: ActionFunctionArgs) {
       }
       break;
   }
-  return json({});
+  
 }

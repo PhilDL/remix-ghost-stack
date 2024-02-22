@@ -4,7 +4,8 @@ import { useFetcher } from "@remix-run/react";
 import { AuthenticityTokenInput } from "remix-utils/csrf/react";
 import { cn } from "~/ui/utils";
 
-import { Button } from "~/ui/components";;
+import { Button } from "~/ui/components";
+import { type SerializeFrom } from "@remix-run/server-runtime";
 
 export type PostsListProps = {
   posts: TPostPreview[];
@@ -13,6 +14,11 @@ export type PostsListProps = {
   primaryTag?: string;
   className?: string;
 };
+
+export type TT = SerializeFrom<{
+  posts: TPostPreview[];
+  pagination?: { page: number; pages: number; next: number | null }
+}>
 
 export const PostsList = ({
   posts,
@@ -24,13 +30,13 @@ export const PostsList = ({
   const [page, setPage] = useState<number>(pagination.page);
   const [next, setNext] = useState<number | null>(pagination.next);
   const [morePosts, setMorePosts] = useState<TPostPreview[]>([]);
-  const paginate = useFetcher();
+  const paginate = useFetcher<TT>();
 
   useEffect(() => {
     if (paginate.state === "idle" && paginate.data && paginate.data.posts) {
-      setMorePosts((prev) => [...prev, ...paginate.data.posts]);
-      setPage(paginate.data.pagination.page);
-      setNext(paginate.data.pagination.next);
+      setMorePosts((prev) => [...prev, ...paginate.data?.posts ?? []]);
+      setPage(paginate.data.pagination?.page ?? 0);
+      setNext(paginate.data.pagination?.next ?? null);
     }
   }, [paginate.state, paginate.data]);
 

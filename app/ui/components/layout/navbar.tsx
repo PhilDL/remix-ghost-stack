@@ -177,7 +177,7 @@ export const Navbar = ({
               <Menu className="size-6" />
             </Button>
           </SheetTrigger>
-          <SheetContent position="right" size={"xl"}>
+          <SheetContent side="right">
             <SheetHeader>
               <SheetTitle>{settings.title}</SheetTitle>
               <SheetDescription>{settings.description}</SheetDescription>

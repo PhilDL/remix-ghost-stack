@@ -1,7 +1,5 @@
-import type { LoaderFunction } from "@remix-run/server-runtime";
+import type { LoaderFunction, SerializeFrom } from "@remix-run/server-runtime";
 
-export type UwrapJSONLoaderData<T extends LoaderFunction> = Awaited<
-  ReturnType<Awaited<ReturnType<T>>["json"]>
->;
+export type UwrapJSONLoaderData<T extends LoaderFunction> = SerializeFrom<T>;
 
 export type UwrapLoaderData<T extends LoaderFunction> = Awaited<ReturnType<T>>;
