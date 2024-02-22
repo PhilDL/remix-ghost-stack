@@ -13,7 +13,7 @@
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "setup": "prisma generate && prisma migrate deploy && prisma db seed",
     "start": "NODE_ENV=production remix-serve ./build/server/index.js",
-    "start:mocks": "binode --require ./mocks -- @remix-run/serve:remix-serve ./build/server/index.js",
+    "start:mocks": "NODE_ENV=production MOCKS=true remix-serve ./build/server/index.js",
     "test": "vitest",
     "test:e2e:dev": "playwright test",
     "test:e2e:install": "npx playwright install chromium --with-deps",
