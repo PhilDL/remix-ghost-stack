@@ -1,6 +1,6 @@
 import fontStylesheet from "./styles/fonts.css?url";
 import nordthemeStylesheet from "./styles/nordtheme.css?url";
-import tailwindStylesheetUrl from "./styles/tailwind.css?url";
+import tailwindStylesheetUrl from "./tailwind.css?url";
 import {
   json,
   type LinksFunction,
